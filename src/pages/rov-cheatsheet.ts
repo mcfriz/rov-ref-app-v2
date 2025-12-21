@@ -123,10 +123,8 @@ const frame = document.querySelector<HTMLIFrameElement>('#pdf-frame');
 const sourceLink = document.querySelector<HTMLAnchorElement>('#source-link');
 
 let sheets: Sheet[] = [];
-let currentSheet: Sheet | null = null;
 
 function setSheet(sheet: Sheet) {
-  currentSheet = sheet;
   const pdfUrl = buildPdfUrl(sheet.pdf);
 
   if (selectEl) selectEl.value = sheet.id;
