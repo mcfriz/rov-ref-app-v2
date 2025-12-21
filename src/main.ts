@@ -9,7 +9,6 @@ type ImgTile = {
   subtitle: string;
   href: string;
   img: string;
-  pill?: string;
 };
 
 // GitHub Pages often serves the site from a sub-path. BASE_URL accounts for that.
@@ -52,43 +51,37 @@ const tiles: ImgTile[] = [
     title: 'Fitting Finder',
     subtitle: 'Caliper-friendly lookup for fittings, OD/ID + thread tips.',
     href: buildHref('fitting-finder'),
-    img: buildAsset('assets/img/tiles/fitting-finder.png'),
-    pill: 'Tier 3',
+    img: buildAsset('assets/images/tiles/fitting-finder.png'),
   },
   {
     title: 'ROV Cheatsheets',
     subtitle: 'Pick an ROV and open its PDF quick ref.',
     href: buildHref('rov-cheatsheet'),
-    img: buildAsset('assets/img/tiles/rov-cheatsheet.png'),
-    pill: 'Tier 3',
+    img: buildAsset('assets/images/tiles/rov-cheatsheet.png'),
   },
   {
     title: 'Cable List',
     subtitle: 'Catalog of cables with friendly identifiers.',
     href: buildHref('cable-list'),
-    img: buildAsset('assets/img/tiles/cable-list.png'),
-    pill: 'Tier 2',
+    img: buildAsset('assets/images/tiles/cable-list.png'),
   },
   {
     title: 'T4 Torque',
     subtitle: 'Open the T4 torque PDF cheat sheet.',
     href: buildHref('t4-torque'),
-    img: buildAsset('assets/img/tiles/t4-torque.png'),
-    pill: 'Tier 1',
+    img: buildAsset('assets/images/tiles/T4-Torque.png'),
   },
   {
     title: 'T4 Slave Arm Drawing',
     subtitle: 'PDF-first drawing reference for the T4 slave arm.',
     href: buildHref('t4-slave-arm-drawing'),
-    img: buildAsset('assets/img/tiles/t4-slave-arm-drawing.png'),
-    pill: 'Tier 1',
+    img: buildAsset('assets/images/tiles/t4-slave-arm-drawing.png'),
   },
   {
     title: 'ROV Pod',
     subtitle: 'Configuration notes and filterable part lookups.',
     href: buildHref('rov-pod'),
-    img: buildAsset('assets/img/tiles/rov-pod.png'),
-    pill: 'Tier 2',
+    img: buildAsset('assets/images/tiles/rov-pod.png'),
   },
 ];
 
@@ -191,7 +184,6 @@ app.innerHTML = `
         <div class="tile-overlay"></div>
         <img class="tile-bg" src="${tile.img}" alt="" loading="lazy" onerror="this.style.display='none';" />
         <div class="tile-content">
-          ${tile.pill ? `<span class="pill subtle">${tile.pill}</span>` : ''}
           <h3>${tile.title}</h3>
           <p>${tile.subtitle}</p>
         </div>
