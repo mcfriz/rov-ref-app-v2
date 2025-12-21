@@ -159,7 +159,8 @@
        * Keep asset links working on GitHub Pages subpaths.
        * When BASE_URL is set, use it; otherwise fall back to the relative path.
        */
-      const base = (import.meta as any).env?.BASE_URL ?? '../';
+      const base =
+        (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) || '../';
       const baseWithSlash = base.endsWith('/') ? base : `${base}/`;
       const pdfPath = `${baseWithSlash}assets/pdfs/T4_Torque_CheatSheet.pdf`;
 
