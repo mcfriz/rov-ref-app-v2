@@ -1,6 +1,28 @@
 import { defineConfig } from "vite";
+import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-export default defineConfig(() => ({
-  // Makes Vite work locally AND on GitHub Pages
-  base: process.env.BASE_PATH ?? "/",
-}));
+const rootDir = fileURLToPath(new URL(".", import.meta.url));
+
+export default defineConfig(() => {
+  const base = process.env.BASE_PATH ?? "/";
+  const fromRoot = (path: string) => resolve(rootDir, path);
+
+  return {
+    // Keeps local dev and GitHub Pages in sync
+    base,
+    build: {
+      rollupOptions: {
+        // Multi-page build: include dashboard and all mini-app HTML entry points
+        input: {
+          main: fromRoot("index.html"),
+          fittingFinder: fromRoot("apps/fitting-finder.html"),
+          rovCheatsheet: fromRoot("apps/rov-cheatsheet.html"),
+          rovPod: fromRoot("apps/rov-pod.html"),
+          cableList: fromRoot("apps/cable-list.html"),
+          t4Torque: fromRoot("apps/t4-torque.html"),
+        },
+      },
+    },
+  };
+});

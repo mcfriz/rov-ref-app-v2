@@ -1,4 +1,4 @@
-<!-- Tier 1 -->
+<!-- Tier 1: Static PDF-first page for the T4 Torque cheat sheet. -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -6,23 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>T4 Torque | ROV Reference</title>
     <style>
+      /* Inline styles keep this single HTML self-contained (Tier 1, no bundling). */
       :root {
         color: #0f172a;
         background-color: #f8fafc;
         font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
         line-height: 1.5;
       }
+      * {
+        box-sizing: border-box;
+      }
       body {
         margin: 0;
         min-height: 100vh;
-        background: #f8fafc;
-        padding: 1.5rem;
+        background: radial-gradient(circle at 10% 20%, #e2e8f0 0, #f8fafc 35%, #eef2ff 100%);
+        padding: 2.25rem 1.5rem 3rem;
       }
       a {
-        color: #0f172a;
+        color: inherit;
+        text-decoration: none;
       }
-      .page {
-        max-width: 820px;
+      main.page {
+        max-width: 980px;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
@@ -44,37 +49,129 @@
         padding: 1rem;
         box-shadow: 0 12px 26px rgba(15, 23, 42, 0.06);
       }
+      .page-header {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        margin-bottom: 0.25rem;
+      }
       h1 {
         margin: 0;
+        font-size: clamp(2rem, 2vw + 1.4rem, 2.5rem);
       }
-      .purpose {
+      .lead {
         margin: 0;
         color: #475569;
       }
-      ul {
-        padding-left: 1.1rem;
+      .pill {
+        display: inline-block;
+        padding: 0.2rem 0.6rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        background: #e2e8f0;
+        border: 1px solid #cbd5e1;
+        color: #475569;
+      }
+      .pdf-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        margin: 0.5rem 0 0;
+      }
+      .btn {
+        border: 1px solid transparent;
+        border-radius: 10px;
+        padding: 0.6rem 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+        background: #2563eb;
+        border-color: #1d4ed8;
+        color: #f8fafc;
+        box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
+      }
+      .btn:hover,
+      .btn:focus-visible {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
+      }
+      .helper-text {
+        margin: 0.25rem 0 0;
+        color: #475569;
+      }
+      .pdf-frame {
+        width: 100%;
+        min-height: 620px;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
+      }
+      .note {
+        color: #475569;
+        margin: 0.35rem 0 0;
+      }
+      @media (max-width: 640px) {
+        body {
+          padding: 1.5rem 1.1rem 2rem;
+        }
+        .pdf-frame {
+          min-height: 420px;
+        }
       }
     </style>
   </head>
   <body>
     <main class="page">
-      <p class="back"><a href="../">← Back to dashboard</a></p>
-      <h1>T4 Torque</h1>
-      <p class="purpose">Purpose: Provide quick torque reminders and links to detailed torque specs.</p>
+      <p class="back"><a href="../">&larr; Back to dashboard</a></p>
+
+      <header class="page-header">
+        <div class="pill">Tier 1</div>
+        <h1>T4 Torque Cheat Sheet</h1>
+        <p class="lead">Quick torque reference for T4 tasks. Open the PDF for the full checklist and values.</p>
+      </header>
 
       <section class="card">
         <h2>Source material</h2>
-        <ul>
-          <li><a href="#">Placeholder: Torque spec sheet</a></li>
-          <li><a href="#">Placeholder: Tooling reference</a></li>
-          <li><a href="#">Placeholder: Drive link to full torque tables</a></li>
-        </ul>
+        <p class="helper-text">Primary reference lives in a local PDF so it still works offline on vessels.</p>
+        <div class="pdf-actions">
+          <a class="btn" id="open-pdf" href="../assets/pdfs/T4_Torque_CheatSheet.pdf" target="_blank" rel="noopener">Open PDF (new tab)</a>
+          <span class="helper-text">If the embed below is slow on mobile, use the button instead.</span>
+        </div>
       </section>
 
       <section class="card">
-        <h2>What this page will do</h2>
-        <p>Tier 1 static reference with key torque values and links to detailed tables. Designed for quick on-deck lookup.</p>
+        <h2>Embedded viewer</h2>
+        <p class="helper-text">Desktop users can scroll the PDF below. Mobile browsers sometimes block inline PDFs.</p>
+        <iframe
+          title="T4 Torque Cheat Sheet PDF"
+          id="pdf-frame"
+          class="pdf-frame"
+          src="../assets/pdfs/T4_Torque_CheatSheet.pdf"
+        >
+        </iframe>
+        <p class="note">Cannot see it? Tap "Open PDF (new tab)" above to view it directly.</p>
       </section>
     </main>
+
+    <script type="module">
+      /**
+       * Keep asset links working on GitHub Pages subpaths.
+       * When BASE_URL is set, use it; otherwise fall back to the relative path.
+       */
+      const base = (import.meta as any).env?.BASE_URL ?? '../';
+      const baseWithSlash = base.endsWith('/') ? base : `${base}/`;
+      const pdfPath = `${baseWithSlash}assets/pdfs/T4_Torque_CheatSheet.pdf`;
+
+      const link = document.getElementById('open-pdf');
+      const frame = document.getElementById('pdf-frame');
+
+      if (link instanceof HTMLAnchorElement) {
+        link.href = pdfPath;
+      }
+      if (frame) {
+        frame.src = pdfPath;
+      }
+    </script>
   </body>
 </html>

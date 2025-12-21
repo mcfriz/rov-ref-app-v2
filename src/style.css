@@ -28,11 +28,28 @@ a {
   padding: 2.5rem 1.5rem 3rem;
 }
 
+main.page {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.narrow-page {
+  max-width: 900px;
+}
+
 header {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   margin-bottom: 1.5rem;
+}
+
+.page-header h1 {
+  margin: 0 0 0.25rem;
 }
 
 h1 {
@@ -50,6 +67,18 @@ p.lead {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1rem;
+}
+
+.back {
+  margin: 0;
+}
+
+.back a {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #0f172a;
 }
 
 .tile {
@@ -90,6 +119,12 @@ p.lead {
   border: 1px solid #bae6fd;
 }
 
+.pill.subtle {
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+  color: #475569;
+}
+
 .tile p {
   margin: 0;
   color: #475569;
@@ -97,6 +132,211 @@ p.lead {
 
 .tile small {
   color: #64748b;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.06);
+}
+
+.finder-card {
+  position: relative;
+}
+
+.finder-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem 1rem;
+  align-items: end;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field label {
+  font-weight: 600;
+}
+
+.field input,
+.field select {
+  padding: 0.65rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  font-size: 1rem;
+}
+
+.field input:focus,
+.field select:focus {
+  outline: 2px solid #bfdbfe;
+  border-color: #3b82f6;
+  background: #fff;
+}
+
+.button-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 0.6rem 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.btn.primary {
+  background: #2563eb;
+  border-color: #1d4ed8;
+  color: #f8fafc;
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
+}
+
+.btn.ghost {
+  background: transparent;
+  border-color: #cbd5e1;
+}
+
+.btn.link {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #2563eb;
+  box-shadow: none;
+}
+
+.btn.small {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.9rem;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
+}
+
+.btn.link:hover,
+.btn.link:focus-visible {
+  transform: none;
+  box-shadow: none;
+}
+
+.helper-text {
+  color: #475569;
+  margin: 0.35rem 0 0;
+  font-size: 0.95rem;
+}
+
+.card-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 520px;
+}
+
+.result-table th,
+.result-table td {
+  text-align: left;
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.result-table tr.highlight {
+  background: #e0f2fe;
+  font-weight: 700;
+}
+
+.fit-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.9rem;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.06);
+}
+
+.fit-card.highlight {
+  border-color: #38bdf8;
+  box-shadow: 0 12px 30px rgba(56, 189, 248, 0.25);
+}
+
+.fit-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.fit-row .label {
+  color: #475569;
+}
+
+.fit-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.accordion-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.2rem 0.75rem;
+  background: #f8fafc;
+}
+
+.accordion-item summary {
+  cursor: pointer;
+  font-weight: 700;
+  padding: 0.6rem 0.2rem;
+  list-style: none;
+}
+
+.accordion-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion-body {
+  padding: 0 0.2rem 0.8rem;
+  color: #475569;
+}
+
+.accordion-body ul {
+  margin: 0.4rem 0;
+  padding-left: 1.1rem;
+}
+
+.accordion-body ol {
+  margin: 0.4rem 0;
+  padding-left: 1.1rem;
 }
 
 @media (max-width: 600px) {
