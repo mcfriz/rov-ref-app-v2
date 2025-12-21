@@ -598,13 +598,12 @@ p.lead {
 
 .img-tile {
   position: relative;
-  min-height: 170px;
+  min-height: 190px;
   border-radius: 16px;
   overflow: hidden;
   display: flex;
   align-items: flex-end;
-  background-size: cover;
-  background-position: center;
+  background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
   box-shadow: 0 14px 28px rgba(12, 31, 58, 0.18);
   transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -616,26 +615,57 @@ p.lead {
   box-shadow: 0 20px 38px rgba(12, 31, 58, 0.24);
 }
 
-.img-tile__overlay {
+.tile-bg {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  padding: 1rem;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.38) 100%);
-  color: #f8fafc;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.tile-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(9, 12, 20, 0.12) 20%, rgba(9, 12, 20, 0.68) 100%);
+  z-index: 1;
+}
+
+.tile-content {
+  position: relative;
+  z-index: 2;
   display: flex;
-  justify-content: space-between;
-  gap: 0.5rem;
-  align-items: flex-end;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem;
+  color: #f8fafc;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
-.img-tile__text h3 {
+.tile-content h3 {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
-.img-tile__text p {
-  margin: 0.2rem 0 0;
+.tile-content p {
+  margin: 0;
   color: #e2e8f0;
   font-size: 0.95rem;
+}
+
+.tile-arrow {
+  position: absolute;
+  right: 0.85rem;
+  bottom: 0.8rem;
+  color: #f8fafc;
+  font-size: 1.4rem;
+  z-index: 2;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.img-tile:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .pdf-frame {

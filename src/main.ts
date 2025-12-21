@@ -4,7 +4,13 @@ import './style.css';
 
 type NavLink = { label: string; href: string };
 type HeroSlide = { title: string; subtitle: string; href: string; background: string };
-type ImgTile = { title: string; note: string; href: string; background: string };
+type ImgTile = {
+  title: string;
+  subtitle: string;
+  href: string;
+  img: string;
+  pill?: string;
+};
 
 // GitHub Pages often serves the site from a sub-path. BASE_URL accounts for that.
 const base = import.meta.env.BASE_URL ?? '/';
@@ -44,39 +50,45 @@ const heroSlides: HeroSlide[] = [
 const tiles: ImgTile[] = [
   {
     title: 'Fitting Finder',
-    note: 'Caliper-friendly lookup for fittings, OD/ID + thread tips.',
+    subtitle: 'Caliper-friendly lookup for fittings, OD/ID + thread tips.',
     href: buildHref('fitting-finder'),
-    background: 'linear-gradient(160deg, rgba(14,165,233,0.18), rgba(8,42,69,0.6))',
+    img: buildAsset('assets/img/tiles/fitting-finder.png'),
+    pill: 'Tier 3',
   },
   {
     title: 'ROV Cheatsheets',
-    note: 'Pick an ROV and open its PDF quick ref.',
+    subtitle: 'Pick an ROV and open its PDF quick ref.',
     href: buildHref('rov-cheatsheet'),
-    background: 'linear-gradient(160deg, rgba(249,115,22,0.24), rgba(124,45,18,0.55))',
+    img: buildAsset('assets/img/tiles/rov-cheatsheet.png'),
+    pill: 'Tier 3',
   },
   {
     title: 'Cable List',
-    note: 'Catalog of cables with friendly identifiers.',
+    subtitle: 'Catalog of cables with friendly identifiers.',
     href: buildHref('cable-list'),
-    background: 'linear-gradient(160deg, rgba(34,197,94,0.2), rgba(6,78,59,0.55))',
+    img: buildAsset('assets/img/tiles/cable-list.png'),
+    pill: 'Tier 2',
   },
   {
     title: 'T4 Torque',
-    note: 'Open the T4 torque PDF cheat sheet.',
+    subtitle: 'Open the T4 torque PDF cheat sheet.',
     href: buildHref('t4-torque'),
-    background: 'linear-gradient(160deg, rgba(15,118,110,0.22), rgba(8,42,69,0.55))',
+    img: buildAsset('assets/img/tiles/t4-torque.png'),
+    pill: 'Tier 1',
   },
   {
     title: 'T4 Slave Arm Drawing',
-    note: 'PDF-first drawing reference for the T4 slave arm.',
+    subtitle: 'PDF-first drawing reference for the T4 slave arm.',
     href: buildHref('t4-slave-arm-drawing'),
-    background: 'linear-gradient(160deg, rgba(168,85,247,0.2), rgba(76,29,149,0.55))',
+    img: buildAsset('assets/img/tiles/t4-slave-arm-drawing.png'),
+    pill: 'Tier 1',
   },
   {
     title: 'ROV Pod',
-    note: 'Configuration notes and filterable part lookups.',
+    subtitle: 'Configuration notes and filterable part lookups.',
     href: buildHref('rov-pod'),
-    background: 'linear-gradient(160deg, rgba(99,102,241,0.2), rgba(49,46,129,0.55))',
+    img: buildAsset('assets/img/tiles/rov-pod.png'),
+    pill: 'Tier 2',
   },
 ];
 
@@ -138,7 +150,6 @@ app.innerHTML = `
           (slide, index) => `
             <a class="hero-slide" href="${slide.href}" data-index="${index}" style="background: ${slide.background}">
               <div class="slide-overlay">
-                <p class="pill subtle">Featured</p>
                 <h2>${slide.title}</h2>
                 <p class="slide-sub">${slide.subtitle}</p>
               </div>
@@ -176,14 +187,15 @@ app.innerHTML = `
     ${tiles
       .map(
         (tile) => `
-      <a class="img-tile" href="${tile.href}" style="background-image: ${tile.background}">
-        <div class="img-tile__overlay">
-          <div class="img-tile__text">
-            <h3>${tile.title}</h3>
-            <p>${tile.note}</p>
-          </div>
-          <span class="pill subtle">Open</span>
+      <a class="img-tile" href="${tile.href}">
+        <div class="tile-overlay"></div>
+        <img class="tile-bg" src="${tile.img}" alt="" loading="lazy" onerror="this.style.display='none';" />
+        <div class="tile-content">
+          ${tile.pill ? `<span class="pill subtle">${tile.pill}</span>` : ''}
+          <h3>${tile.title}</h3>
+          <p>${tile.subtitle}</p>
         </div>
+        <span class="tile-arrow" aria-hidden="true">›</span>
       </a>
     `
       )
