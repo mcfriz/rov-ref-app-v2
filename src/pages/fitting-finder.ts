@@ -28,9 +28,51 @@ if (!app) {
 const base = import.meta.env.BASE_URL ?? '/';
 const baseWithSlash = base.endsWith('/') ? base : `${base}/`;
 const dataUrl = `${baseWithSlash}data/fittings.json`;
+const logoSrc = `${baseWithSlash}assets/images/ROV_REF_Logo_black_on_transparent.png`;
+const fittingPdfUrl = `${baseWithSlash}assets/pdfs/Hyd_Fitting_Finder.pdf`;
 const INITIAL_MESSAGE = 'Enter a diameter and pick OD or ID to see matches.';
 
+const topbar = `
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="icon-btn" id="burger-btn" aria-label="Open menu">
+        <span aria-hidden="true">&#9776;</span>
+      </button>
+      <img class="brand-mark" src="${logoSrc}" alt="ROV Reference App logo" />
+    </div>
+    <div class="topbar-center">
+      <nav class="nav-links" aria-label="Primary">
+        <a class="nav-link" href="${baseWithSlash}">Home</a>
+        <a class="nav-link" href="${baseWithSlash}apps/rov-cheatsheet.html">Cheatsheets</a>
+        <a class="nav-link" href="${baseWithSlash}apps/fitting-finder.html">Fitting Finder</a>
+      </nav>
+    </div>
+    <div class="topbar-right">
+      <form class="search-form desktop-search" role="search">
+        <label class="sr-only" for="desktop-search-input">Search</label>
+        <input id="desktop-search-input" type="search" name="q" placeholder="Search" />
+        <button type="submit" class="icon-btn" aria-label="Search">
+          <span aria-hidden="true">🔍</span>
+        </button>
+      </form>
+      <button class="icon-btn mobile-search-btn" id="search-toggle" aria-label="Open search" aria-expanded="false" aria-controls="search-panel">
+        <span aria-hidden="true">🔍</span>
+      </button>
+    </div>
+  </header>
+  <div id="search-panel" class="search-panel" hidden>
+    <form class="search-form" role="search">
+      <label class="sr-only" for="mobile-search-input">Search</label>
+      <input id="mobile-search-input" type="search" name="q" placeholder="Search the app" />
+      <button type="submit" class="icon-btn" aria-label="Search">
+        <span aria-hidden="true">🔍</span>
+      </button>
+    </form>
+  </div>
+`;
+
 app.innerHTML = `
+  ${topbar}
   <main class="page narrow-page">
     <p class="back"><a href="../">&larr; Back to dashboard</a></p>
     <header class="page-header">
@@ -69,10 +111,10 @@ app.innerHTML = `
 
     <section class="card guide-card">
       <div class="card-header-row">
-        <h2>Fitting Guide</h2>
-        <a class="btn link" href="#" aria-label="Open the fitting guide (placeholder link)">Open guide</a>
+        <h2>Fitting Guide PDF</h2>
+        <a class="btn link" href="${fittingPdfUrl}" target="_blank" rel="noopener">Open PDF (new tab)</a>
       </div>
-      <p class="helper-text">Link this to your PDF or Drive folder so technicians can dive deeper.</p>
+      <p class="helper-text">Need the full reference sheet? Open the Hyd_Fitting_Finder.pdf used by this tool.</p>
     </section>
 
     <section class="card accordion">
@@ -320,3 +362,20 @@ diameterInput?.addEventListener('keydown', (event) => {
 
 // Initial data load
 loadFittings();
+
+// Reuse the same search toggle behavior as the dashboard.
+const searchToggle = document.querySelector<HTMLButtonElement>('#search-toggle');
+const searchPanel = document.querySelector<HTMLDivElement>('#search-panel');
+const mobileSearchInput = document.querySelector<HTMLInputElement>('#mobile-search-input');
+
+searchToggle?.addEventListener('click', () => {
+  const isOpen = searchPanel?.hasAttribute('hidden') === false;
+  if (isOpen) {
+    searchPanel?.setAttribute('hidden', '');
+    searchToggle.setAttribute('aria-expanded', 'false');
+  } else {
+    searchPanel?.removeAttribute('hidden');
+    searchToggle.setAttribute('aria-expanded', 'true');
+    mobileSearchInput?.focus();
+  }
+});
