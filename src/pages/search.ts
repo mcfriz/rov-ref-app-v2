@@ -1,11 +1,12 @@
 // Global search across app JSON sources.
-// Aggregates cables, T4 parts, fittings, and T4 videos; ranks by simple relevance.
+// Aggregates cables, T4 parts, fittings, and T4 videos; ranks by simple relevance with source filtering.
 import '../style.css';
 
 type Result = {
   title: string;
   detail: string;
   source: string;
+  kind: 'cable' | 'part' | 'fitting' | 'video';
   url?: string;
   score: number;
 };
@@ -38,38 +39,64 @@ function normalize(text: string) {
   return text.toLowerCase();
 }
 
+function normalizeLoose(text: string) {
+  return text.toLowerCase().replace(/[\s_\-\/]+/g, '');
+}
+
 function tokenScore(queryTokens: string[], hay: string) {
   const hayNorm = hay.toLowerCase();
   return queryTokens.reduce((score, token) => (hayNorm.includes(token) ? score + 6 : score), 0);
 }
 
+function editDistance(a: string, b: string) {
+  const dp = Array.from({ length: a.length + 1 }, () => new Array(b.length + 1).fill(0));
+  for (let i = 0; i <= a.length; i++) dp[i][0] = i;
+  for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      dp[i][j] = Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + cost);
+    }
+  }
+  return dp[a.length][b.length];
+}
+
 function scoreText(query: string, text: string) {
   const qNorm = normalize(query);
   const rawTokens = qNorm.split(/\s+/).filter(Boolean);
+  const textNorm = text.toLowerCase();
+  const qLoose = normalizeLoose(query);
+  const textLoose = normalizeLoose(text);
   let score = 0;
   if (!qNorm) return score;
-  if (text.toLowerCase().includes(qNorm)) score += 30;
+  if (textNorm.includes(qNorm)) score += 30;
   score += tokenScore(rawTokens, text);
+
+  if (qLoose && textLoose) {
+    if (textLoose.includes(qLoose)) score += 40;
+    const dist = editDistance(qLoose, textLoose);
+    if (dist === 1) score += 25;
+    else if (dist === 2) score += 15;
+  }
   return score;
 }
 
-function mapCables(data: any, query: string): Result[] {
+function mapCables(data: any): Result[] {
   const items: Cable[] = Array.isArray(data) ? data : Array.isArray((data as CableData)?.cables) ? (data as CableData).cables : [];
   return items.map((cable) => {
     const detailParts = [cable.name, cable.system, cable.rov?.join(', '), cable.tags?.join(', '), cable.notes].filter(Boolean).join(' • ');
-    const text = `${cable.cableNo} ${detailParts}`;
-    const score = scoreText(query, text);
     return {
       title: cable.cableNo,
       detail: detailParts || cable.name || '',
       source: 'Cable',
+      kind: 'cable',
       url: cable.link,
-      score,
+      score: 0,
     };
   });
 }
 
-function mapParts(data: any, query: string): Result[] {
+function mapParts(data: any): Result[] {
   const list: Part[] = (Array.isArray(data) ? data : data?.cables ?? data ?? []).map((raw: PartRaw) => ({
     partNumber: raw['Part Number'],
     description: raw['Description'],
@@ -79,50 +106,44 @@ function mapParts(data: any, query: string): Result[] {
 
   return list
     .filter((p) => p.partNumber && p.description)
-    .map((part) => {
-      const detail = [part.description, part.expanded].filter(Boolean).join(' • ');
-      const text = `${part.partNumber} ${detail}`;
-      const score = scoreText(query, text);
-      return {
-        title: part.partNumber,
-        detail,
-        source: 'T4 Part',
-        url: part.link,
-        score,
-      };
-    });
+    .map((part) => ({
+      title: part.partNumber,
+      detail: [part.description, part.expanded].filter(Boolean).join(' • '),
+      source: 'T4 Part',
+      kind: 'part',
+      url: part.link,
+      score: 0,
+    }));
 }
 
-function mapFittings(data: any, query: string): Result[] {
+function mapFittings(data: any): Result[] {
   const list: Fitting[] = Array.isArray(data) ? data : [];
   return list.map((f) => {
     const dims = [f.od ? `OD ${f.od}mm` : '', f.id ? `ID ${f.id}mm` : ''].filter(Boolean).join(' / ');
     const detail = [dims, f.thread, f.type, f.tips || undefined].filter(Boolean).join(' • ');
-    const text = detail;
-    const score = scoreText(query, text);
     return {
       title: f.thread || f.type || 'Fitting',
       detail,
       source: 'Fitting',
+      kind: 'fitting',
       url: undefined,
-      score,
+      score: 0,
     };
   });
 }
 
-function mapVideos(data: any, query: string): Result[] {
+function mapVideos(data: any): Result[] {
   const groups: VideoGroup[] = Array.isArray(data) ? data : Array.isArray(data?.groups) ? data.groups : [];
   const results: Result[] = [];
   groups.forEach((group) => {
     group.videos.forEach((video) => {
-      const text = `${group.name} ${video.label}`;
-      const score = scoreText(query, text);
       results.push({
         title: video.label,
         detail: group.name,
         source: 'T4 Video',
+        kind: 'video',
         url: video.url,
-        score,
+        score: 0,
       });
     });
   });
@@ -156,13 +177,13 @@ app.innerHTML = `
         <label class="sr-only" for="desktop-search-input">Search</label>
         <input id="desktop-search-input" type="search" name="q" placeholder="Search everything" value="${initialQuery}" />
         <button type="submit" class="icon-btn" aria-label="Search">
-          <span aria-hidden="true">🔍</span>
+          <span aria-hidden="true">&#128269;</span>
         </button>
       </form>
     </div>
     <div class="topbar-right">
       <button class="icon-btn mobile-search-btn" id="search-toggle" aria-label="Open search" aria-expanded="false" aria-controls="search-panel">
-        <span aria-hidden="true">🔍</span>
+        <span aria-hidden="true">&#128269;</span>
       </button>
     </div>
   </header>
@@ -171,7 +192,7 @@ app.innerHTML = `
       <label class="sr-only" for="mobile-search-input">Search</label>
       <input id="mobile-search-input" type="search" name="q" placeholder="Search everything" value="${initialQuery}" />
       <button type="submit" class="icon-btn" aria-label="Search">
-        <span aria-hidden="true">🔍</span>
+        <span aria-hidden="true">&#128269;</span>
       </button>
     </form>
   </div>
@@ -187,6 +208,16 @@ app.innerHTML = `
         <div class="field">
           <label for="query">Search everything</label>
           <input type="search" id="query" name="q" placeholder="e.g., resolver, CBL-1023, O-ring, yaw" value="${initialQuery}" autocomplete="off" />
+        </div>
+        <div class="field">
+          <label for="source-filter">Source</label>
+          <select id="source-filter" name="source">
+            <option value="all">Global (all sources)</option>
+            <option value="cable">Cables only</option>
+            <option value="part">T4 parts only</option>
+            <option value="fitting">Fittings only</option>
+            <option value="video">T4 videos only</option>
+          </select>
         </div>
         <div class="button-row">
           <button type="submit" class="btn primary">Find</button>
@@ -208,6 +239,7 @@ app.innerHTML = `
 
 const form = document.querySelector<HTMLFormElement>('#finder-form');
 const queryInput = document.querySelector<HTMLInputElement>('#query');
+const sourceSelect = document.querySelector<HTMLSelectElement>('#source-filter');
 const resultsContainer = document.querySelector<HTMLDivElement>('#results');
 const resultCount = document.querySelector<HTMLSpanElement>('#result-count');
 const clearButton = document.querySelector<HTMLButtonElement>('#clear-btn');
@@ -292,13 +324,18 @@ function render(list: Result[]) {
 function search(event?: Event) {
   event?.preventDefault();
   const query = (queryInput?.value || '').trim();
+  const filter = sourceSelect?.value ?? 'all';
   if (!query) {
     renderEmpty('Enter a term to search all data.');
     return;
   }
-  const results = allResults
-    .map((r) => ({ ...r, score: scoreText(query, `${r.title} ${r.detail} ${r.source}`) || r.score }))
+
+  const filtered = filter === 'all' ? allResults : allResults.filter((r) => r.kind === filter);
+
+  const results = filtered
+    .map((r) => ({ ...r, score: scoreText(query, `${r.title} ${r.detail} ${r.source}`) }))
     .sort((a, b) => b.score - a.score);
+
   render(results);
 }
 
@@ -311,12 +348,7 @@ async function loadAll() {
     fetchJson(endpoints.videos),
   ]);
 
-  const fromCables = mapCables(cables, initialQuery);
-  const fromParts = mapParts(parts, initialQuery);
-  const fromFittings = mapFittings(fittings, initialQuery);
-  const fromVideos = mapVideos(videos, initialQuery);
-
-  allResults = [...fromCables, ...fromParts, ...fromFittings, ...fromVideos];
+  allResults = [...mapCables(cables), ...mapParts(parts), ...mapFittings(fittings), ...mapVideos(videos)];
   if (!allResults.length) {
     renderEmpty('No data loaded.');
     return;
@@ -331,6 +363,7 @@ async function loadAll() {
 form?.addEventListener('submit', search);
 clearButton?.addEventListener('click', () => {
   if (queryInput) queryInput.value = '';
+  if (sourceSelect) sourceSelect.value = 'all';
   renderEmpty('Enter a term to search all data.');
 });
 

@@ -185,7 +185,7 @@ h1 {
 
 p.lead {
   margin: 0;
-  color: var(--muted);
+  color: white;
   max-width: 640px;
 }
 
@@ -720,6 +720,34 @@ p.lead {
   box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
+.form-status {
+  margin: 0.5rem 0 0;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #0b192f;
+}
+
+.form-status.status-success {
+  border-color: #16a34a;
+  background: #ecfdf3;
+  color: #166534;
+}
+
+.form-status.status-error {
+  border-color: #ef4444;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.checkbox-field label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
 .quick-nav {
   display: flex;
   flex-direction: column;
@@ -779,6 +807,54 @@ p.lead {
   .pdf-frame {
     min-height: 420px;
   }
+}
+
+.app-footer {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+}
+
+.footer-left {
+  max-width: 620px;
+}
+
+.footer-title {
+  margin: 0 0 0.25rem;
+  font-weight: 700;
+}
+
+.footer-note {
+  margin: 0;
+  color: #475569;
+}
+
+.footer-links {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.footer-links a {
+  color: #0f172a;
+  font-weight: 600;
+  padding: 0.35rem 0.55rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+  outline: none;
 }
 
 @media (max-width: 800px) {

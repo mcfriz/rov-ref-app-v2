@@ -23,26 +23,21 @@ const navLinks: NavLink[] = [
   { label: 'Operations', href: '#' },
   { label: 'Maintenance', href: '#' },
   { label: 'Files', href: '#' },
+  { label: 'Contact', href: buildHref('contact') },
 ];
 
 const heroSlides: HeroSlide[] = [
   {
-    title: 'Fitting Finder',
-    subtitle: 'Match hydraulic fittings by OD/ID in seconds.',
-    href: buildHref('fitting-finder'),
-    background: `url(${buildAsset('assets/images/tiles/fitting-finder.png')}) center/cover`,
-  },
-  {
-    title: 'ROV Cheatsheets',
-    subtitle: 'Offline PDFs for ops, maintenance, and readiness.',
-    href: buildHref('rov-cheatsheet'),
-    background: `url(${buildAsset('assets/images/tiles/rov-cheatsheet.png')}) center/cover`,
+    title: 'Contact',
+    subtitle: 'Send feedback, feature ideas, or bug reports.',
+    href: buildHref('contact'),
+    background: `url(${buildAsset('assets/images/tiles/contact_form.png')}) center/cover`,
   },
   {
     title: 'Global Search',
-    subtitle: 'One search across fittings, cables, parts, and videos.',
+    subtitle: 'One search across drawings, cables, parts, and videos.',
     href: buildHref('search'),
-    background: `url(${buildAsset('assets/images/tiles/global_search.png')}) center/cover`,
+    background: `url(${buildAsset('assets/images/tiles/Global_search.png')}) center/cover`,
   },
 ];
 
@@ -174,17 +169,16 @@ app.innerHTML = `
   </section>
 
   <section class="hero hero-desktop">
-    <div class="hero-banner">
+    <div class="hero-banner" style="background-image: url('${buildAsset('assets/images/Logo_background.png')}'); background-size: cover; background-position: center;">
       <div class="hero-copy">
-        <p class="eyebrow">ROV Reference</p>
+        <p class="eyebrow">ROV Reference App</p>
         <h1>Stay ready offshore</h1>
-        <p class="lead">Quick-launch helpers, offline PDFs, and selectors tuned for fast deck-side use.</p>
+        <p class="lead">T4 cheatsheets, offline PDFs, and quick use tools to assist ROV operations and maintenance.</p>
         <div class="hero-actions">
-          <a class="btn primary" href="${buildHref('fitting-finder')}">Open Fitting Finder</a>
-          <a class="btn ghost" href="${buildHref('rov-cheatsheet')}">Open Cheatsheets</a>
+          <a class="btn primary" href="${buildHref('search')}">Global Search</a>
+          <a class="btn primary" href="${buildHref('contact')}">Contact</a>
         </div>
       </div>
-      <img class="hero-logo" src="${buildAsset('assets/images/ROV_ref_logo.png')}" alt="ROV Reference logo" />
     </div>
   </section>
 
@@ -205,6 +199,18 @@ app.innerHTML = `
       )
       .join('')}
   </section>
+
+  <footer class="app-footer">
+    <div class="footer-left">
+      <p class="footer-title">ROV Reference App</p>
+      <p class="footer-note">Information may not be fully correct and some content may be AI-generated. Please verify before use.</p>
+    </div>
+    <div class="footer-links">
+      <a href="${buildHref('contact')}">Contact</a>
+      <a href="${buildHref('rov-cheatsheet')}">Cheatsheets</a>
+      <a href="${buildHref('search')}">Global search</a>
+    </div>
+  </footer>
 `;
 
 // Behavior: toggle mobile search panel.

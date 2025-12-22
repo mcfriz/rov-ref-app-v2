@@ -1,80 +1,15 @@
-<!-- Tier 2 -->
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ROV Pod | ROV Reference</title>
-    <style>
-      :root {
-        color: #0f172a;
-        background-color: #f8fafc;
-        font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-        line-height: 1.5;
-      }
-      body {
-        margin: 0;
-        min-height: 100vh;
-        background: #f8fafc;
-        padding: 1.5rem;
-      }
-      a {
-        color: #0f172a;
-      }
-      .page {
-        max-width: 820px;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-      .back {
-        margin: 0;
-      }
-      .back a {
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-      }
-      .card {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 14px;
-        padding: 1rem;
-        box-shadow: 0 12px 26px rgba(15, 23, 42, 0.06);
-      }
-      h1 {
-        margin: 0;
-      }
-      .purpose {
-        margin: 0;
-        color: #475569;
-      }
-      ul {
-        padding-left: 1.1rem;
-      }
-    </style>
   </head>
   <body>
-    <main class="page">
-      <p class="back"><a href="../">← Back to dashboard</a></p>
-      <h1>ROV Pod</h1>
-      <p class="purpose">Purpose: Keep pod configurations, spares, and filterable lookup tables in one spot.</p>
-
-      <section class="card">
-        <h2>Source material</h2>
-        <ul>
-          <li><a href="#">Placeholder: Pod BOM (spreadsheet)</a></li>
-          <li><a href="#">Placeholder: Pod wiring diagrams</a></li>
-          <li><a href="#">Placeholder: Drive link to pod maintenance logs</a></li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h2>What this page will do</h2>
-        <p>Tier 2 table-driven reference with filters (by pod, part number, status) and quick links to drawings.</p>
-      </section>
-    </main>
+    <div id="site-header"></div>
+    <div id="app"></div>
+    <div id="site-footer"></div>
+    <script type="module" src="../src/ui/shell-init.ts"></script>
+    <script type="module" src="../src/pages/rov-pod.ts"></script>
   </body>
 </html>
