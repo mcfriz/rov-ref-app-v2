@@ -42,8 +42,10 @@ export function initShell(options: ShellOptions) {
 
   if (options.pageType === 'app') {
     document.body.classList.add('app-page');
+    document.documentElement.style.setProperty('--appbar-h', '44px');
   } else {
     document.body.classList.remove('app-page');
+    document.documentElement.style.setProperty('--appbar-h', '0px');
   }
 
   if (siteHeader) {
@@ -191,7 +193,13 @@ export function initShell(options: ShellOptions) {
         <button class="icon-btn appbar-btn" id="appbar-back" aria-label="Go back">&#8592;</button>
         <div class="appbar-title">${pageTitle}</div>
         <div class="appbar-actions">
-          <button class="icon-btn appbar-btn" id="appbar-share" aria-label="Share">&#128279;</button>
+          <button class="icon-btn appbar-btn" id="appbar-share" aria-label="Share">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 16v-9"></path>
+              <path d="M8 7l4-4 4 4"></path>
+              <path d="M4 14v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"></path>
+            </svg>
+          </button>
           <a class="icon-btn appbar-btn" id="appbar-close" aria-label="Close" href="${homeHref}">&#10005;</a>
         </div>
       `;

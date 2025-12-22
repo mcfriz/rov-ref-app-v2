@@ -21,13 +21,13 @@ const heroSlides: HeroSlide[] = [
     title: 'Contact',
     subtitle: 'Send feedback, feature ideas, or bug reports.',
     href: buildHref('contact'),
-    background: `url(${buildAsset('assets/images/tiles/contact_form.png')}) center/cover`,
+    background: `url(${buildAsset('assets/images/tiles/contact_form_portrait.png')}) center/cover`,
   },
   {
     title: 'Global Search',
     subtitle: 'One search across drawings, cables, parts, and videos.',
     href: buildHref('search'),
-    background: `url(${buildAsset('assets/images/tiles/Global_search.png')}) center/cover`,
+    background: `url(${buildAsset('assets/images/tiles/global_search_portrait.png')}) center/cover`,
   },
 ];
 
