@@ -184,7 +184,7 @@ function renderResults(results: RankedCable[]) {
           <td>${entry.cable.rov?.join(', ') ?? ''}</td>
           <td>${entry.cable.tags?.join(', ') ?? ''}</td>
           <td class="actions">
-            <a class="btn small" href="${entry.cable.link}" target="_blank" rel="noopener">Open drawing</a>
+            <a class="btn small" href="${entry.cable.link}" target="_blank" rel="noopener noreferrer">Open drawing</a>
             <button class="btn small ghost copy-btn" data-copy="${entry.cable.cableNo}">Copy cable no</button>
           </td>
         </tr>
@@ -227,7 +227,7 @@ function renderResults(results: RankedCable[]) {
           ${entry.cable.tags?.length ? `<div class="fit-row"><span class="label">Tags</span><span>${entry.cable.tags.join(', ')}</span></div>` : ''}
           ${entry.cable.notes ? `<div class="fit-row"><span class="label">Notes</span><span>${entry.cable.notes}</span></div>` : ''}
           <div class="fit-actions" style="gap: 0.5rem; flex-wrap: wrap; justify-content: flex-start;">
-            <a class="btn small" href="${entry.cable.link}" target="_blank" rel="noopener">Open drawing</a>
+            <a class="btn small" href="${entry.cable.link}" target="_blank" rel="noopener noreferrer">Open drawing</a>
             <button class="btn small ghost copy-btn" data-copy="${entry.cable.cableNo}">Copy cable no</button>
           </div>
         </article>

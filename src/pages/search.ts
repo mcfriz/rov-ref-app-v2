@@ -237,12 +237,12 @@ function render(list: Result[]) {
     const rows = top
       .map(
         (entry, index) => `
-        <tr class="${index === 0 ? 'highlight' : ''}">
-          <td>${entry.title}</td>
-          <td>${entry.detail}</td>
-          <td>${entry.source}</td>
-          <td class="actions">
-            ${entry.url ? `<a class="btn small" href="${entry.url}" target="_blank" rel="noopener">Open</a>` : ''}
+            <tr class="${index === 0 ? 'highlight' : ''}">
+              <td>${entry.title}</td>
+              <td>${entry.detail}</td>
+              <td>${entry.source}</td>
+              <td class="actions">
+            ${entry.url ? `<a class="btn small" href="${entry.url}" target="_blank" rel="noopener noreferrer">Open</a>` : ''}
           </td>
         </tr>
       `
@@ -281,7 +281,7 @@ function render(list: Result[]) {
             <span>${entry.source}</span>
           </div>
           <div class="fit-actions" style="gap:0.5rem; flex-wrap: wrap; justify-content: flex-start;">
-            ${entry.url ? `<a class="btn small" href="${entry.url}" target="_blank" rel="noopener">Open</a>` : ''}
+            ${entry.url ? `<a class="btn small" href="${entry.url}" target="_blank" rel="noopener noreferrer">Open</a>` : ''}
           </div>
         </article>
       `

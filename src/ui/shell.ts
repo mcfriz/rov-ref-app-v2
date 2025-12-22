@@ -38,6 +38,13 @@ export function initShell(options: ShellOptions) {
 
   const homeHref = options.pageType === 'app' ? '../index.html' : 'index.html';
   const logoSrc = buildAsset('assets/images/ROV_REF_Logo_black_on_transparent.png');
+  const pageTitle = document.title.replace(' | ROV Reference', '');
+
+  if (options.pageType === 'app') {
+    document.body.classList.add('app-page');
+  } else {
+    document.body.classList.remove('app-page');
+  }
 
   if (siteHeader) {
     siteHeader.innerHTML = `
@@ -88,6 +95,7 @@ export function initShell(options: ShellOptions) {
     const searchToggle = siteHeader.querySelector<HTMLButtonElement>('#search-toggle');
     const searchPanel = siteHeader.querySelector<HTMLDivElement>('#search-panel');
     const mobileSearchInput = siteHeader.querySelector<HTMLInputElement>('#mobile-search-input');
+    const burgerBtn = siteHeader.querySelector<HTMLButtonElement>('#burger-btn');
 
     searchToggle?.addEventListener('click', () => {
       const isOpen = searchPanel?.hasAttribute('hidden') === false;
@@ -100,6 +108,134 @@ export function initShell(options: ShellOptions) {
         mobileSearchInput?.focus();
       }
     });
+
+    // Drawer
+    const drawer = document.createElement('div');
+    drawer.className = 'drawer';
+    drawer.innerHTML = `
+      <div class="drawer-backdrop" aria-hidden="true"></div>
+      <nav class="drawer-panel" aria-label="Navigation menu" tabindex="-1">
+        <button class="icon-btn close-drawer" aria-label="Close menu">&times;</button>
+        <ul class="drawer-list">
+          <li><a href="${homeHref}">Home</a></li>
+          <li>
+            <button class="drawer-parent" aria-expanded="false">ROV</button>
+            <ul class="drawer-nested" hidden>
+              <li><a href="${buildHref('rov-pod')}">ROV Pod</a></li>
+              <li><a href="${buildHref('cable-list')}">Cables</a></li>
+              <li><a href="${buildHref('rov-cheatsheet')}">ROV Cheat Sheets</a></li>
+            </ul>
+          </li>
+          <li>
+            <button class="drawer-parent" aria-expanded="false">T4</button>
+            <ul class="drawer-nested" hidden>
+              <li><a href="${buildHref('t4-torque')}">T4 Torque</a></li>
+              <li><a href="${buildHref('t4-slave-arm-drawing')}">T4 Slave Arm Drawing</a></li>
+              <li><a href="${buildHref('t4-videos')}">T4 Videos</a></li>
+            </ul>
+          </li>
+          <li><a href="${buildHref('fitting-finder')}">Fitting Finder</a></li>
+          <li><a href="${buildHref('contact')}">Contact</a></li>
+        </ul>
+      </nav>
+    `;
+    document.body.appendChild(drawer);
+
+    const backdrop = drawer.querySelector<HTMLDivElement>('.drawer-backdrop');
+    const panel = drawer.querySelector<HTMLDivElement>('.drawer-panel');
+    const closeBtn = drawer.querySelector<HTMLButtonElement>('.close-drawer');
+    const parents = Array.from(drawer.querySelectorAll<HTMLButtonElement>('.drawer-parent'));
+
+    const closeDrawer = () => {
+      drawer.classList.remove('open');
+      burgerBtn?.setAttribute('aria-expanded', 'false');
+    };
+    const openDrawer = () => {
+      drawer.classList.add('open');
+      burgerBtn?.setAttribute('aria-expanded', 'true');
+      panel?.focus();
+    };
+
+    burgerBtn?.addEventListener('click', () => openDrawer());
+    backdrop?.addEventListener('click', closeDrawer);
+    closeBtn?.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('open')) {
+        closeDrawer();
+      }
+    });
+
+    parents.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        const nested = btn.nextElementSibling as HTMLElement | null;
+        nested?.toggleAttribute('hidden', expanded);
+      });
+    });
+
+    // Mobile app bar for app pages
+    if (options.pageType === 'app') {
+      const appBar = document.createElement('div');
+      appBar.className = 'app-bar';
+      appBar.innerHTML = `
+        <button class="icon-btn appbar-btn" id="appbar-back" aria-label="Go back">&#8592;</button>
+        <div class="appbar-title">${pageTitle}</div>
+        <div class="appbar-actions">
+          <button class="icon-btn appbar-btn" id="appbar-share" aria-label="Share">&#128279;</button>
+          <a class="icon-btn appbar-btn" id="appbar-close" aria-label="Close" href="${homeHref}">&#10005;</a>
+        </div>
+      `;
+      siteHeader.appendChild(appBar);
+
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      toast.hidden = true;
+      toast.textContent = 'Link copied';
+      document.body.appendChild(toast);
+
+      const backBtn = appBar.querySelector<HTMLButtonElement>('#appbar-back');
+      const shareBtn = appBar.querySelector<HTMLButtonElement>('#appbar-share');
+      const closeLink = appBar.querySelector<HTMLAnchorElement>('#appbar-close');
+
+      const showToast = () => {
+        toast.hidden = false;
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+          toast.hidden = true;
+        }, 1800);
+      };
+
+      backBtn?.addEventListener('click', () => {
+        if (window.history.length > 1) window.history.back();
+        else window.location.href = homeHref;
+      });
+
+      shareBtn?.addEventListener('click', async () => {
+        const url = window.location.href;
+        if (navigator.share) {
+          try {
+            await navigator.share({ url, title: pageTitle });
+          } catch {
+            // ignore cancellation
+          }
+        } else if (navigator.clipboard) {
+          try {
+            await navigator.clipboard.writeText(url);
+            showToast();
+          } catch {
+            showToast();
+          }
+        }
+      });
+
+      closeLink?.addEventListener('click', () => {
+        // handled via href
+      });
+    }
   }
 
   if (siteFooter) {

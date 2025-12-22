@@ -267,6 +267,7 @@ p.lead {
   border-radius: 14px;
   padding: 1rem;
   box-shadow: 0 12px 26px rgba(12, 31, 58, 0.1);
+  overflow: hidden;
 }
 
 .finder-card {
@@ -382,6 +383,8 @@ p.lead {
   width: 100%;
   border-collapse: collapse;
   min-width: 520px;
+  table-layout: auto;
+  word-break: break-word;
 }
 
 .result-table th,
@@ -806,6 +809,196 @@ p.lead {
 
   .pdf-frame {
     min-height: 420px;
+  }
+}
+
+/* Drawer menu */
+.drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  pointer-events: none;
+}
+
+.drawer.open {
+  pointer-events: auto;
+}
+
+.drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.drawer.open .drawer-backdrop {
+  opacity: 1;
+}
+
+.drawer-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: min(80vw, 320px);
+  height: 100%;
+  background: #fff;
+  border-right: 1px solid #e2e8f0;
+  box-shadow: 6px 0 24px rgba(0, 0, 0, 0.12);
+  transform: translateX(-100%);
+  transition: transform 220ms ease;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.drawer.open .drawer-panel {
+  transform: translateX(0);
+}
+
+.drawer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.drawer-list a {
+  display: block;
+  padding: 0.5rem 0.6rem;
+  border-radius: 10px;
+  color: #0b192f;
+  font-weight: 600;
+}
+
+.drawer-list a:hover,
+.drawer-list a:focus-visible {
+  background: #eef2f8;
+}
+
+.drawer-parent {
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 0.6rem;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.drawer-parent:hover,
+.drawer-parent:focus-visible {
+  background: #eef2f8;
+  border-color: #cbd5e1;
+}
+
+.drawer-nested {
+  list-style: none;
+  padding-left: 0.75rem;
+  margin: 0.2rem 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.drawer-nested a {
+  padding: 0.4rem 0.55rem;
+  border-radius: 8px;
+}
+
+.close-drawer {
+  align-self: flex-end;
+}
+
+/* Mobile app bar for app pages only */
+.app-bar {
+  display: none;
+}
+
+.app-page .topbar {
+  display: grid;
+}
+
+.app-page .app-bar {
+  display: none;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  background: #0b192f;
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  position: sticky;
+  top: 0;
+  z-index: 1500;
+  animation: appbar-slide 200ms ease;
+}
+
+.appbar-title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.appbar-actions {
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
+.appbar-btn {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+@keyframes appbar-slide {
+  from {
+    transform: translateY(-6px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.toast {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0b192f;
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 150ms ease, transform 150ms ease;
+  z-index: 2100;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 800px) {
+  .hero-mobile {
+    min-height: 80vh;
+  }
+
+  .app-page .topbar {
+    display: none;
+  }
+
+  .app-page .app-bar {
+    display: grid;
   }
 }
 

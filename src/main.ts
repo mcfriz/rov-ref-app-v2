@@ -149,6 +149,10 @@ app.innerHTML = `
 // Hero slider controls (mobile).
 const slidesContainer = document.querySelector<HTMLDivElement>('#hero-slides');
 const dots = Array.from(document.querySelectorAll<HTMLButtonElement>('#hero-dots .dot'));
+const isMobileHero = () => window.matchMedia('(max-width: 800px)').matches;
+let currentSlide = 0;
+let autoTimer: number | null = null;
+let pauseUntil = 0;
 
 function setActiveDot(index: number) {
   dots.forEach((dot, i) => {
@@ -165,12 +169,14 @@ function goToSlide(index: number) {
     behavior: 'smooth',
   });
   setActiveDot(clamped);
+  currentSlide = clamped;
 }
 
 dots.forEach((dot) => {
   dot.addEventListener('click', () => {
     const index = Number(dot.getAttribute('data-index') ?? 0);
     goToSlide(index);
+    pauseUntil = Date.now() + 10000;
   });
 });
 
@@ -179,4 +185,24 @@ slidesContainer?.addEventListener('scroll', () => {
   const slideWidth = slidesContainer.getBoundingClientRect().width;
   const index = Math.round(slidesContainer.scrollLeft / slideWidth);
   setActiveDot(index);
+  currentSlide = index;
+  pauseUntil = Date.now() + 10000;
 });
+
+function startAutoSlide() {
+  if (!slidesContainer || !isMobileHero()) return;
+  if (autoTimer) window.clearInterval(autoTimer);
+  autoTimer = window.setInterval(() => {
+    if (Date.now() < pauseUntil) return;
+    const next = (currentSlide + 1) % heroSlides.length;
+    goToSlide(next);
+  }, 5000);
+}
+
+['touchstart', 'wheel', 'keydown', 'mousedown'].forEach((evt) => {
+  slidesContainer?.addEventListener(evt, () => {
+    pauseUntil = Date.now() + 10000;
+  });
+});
+
+startAutoSlide();
