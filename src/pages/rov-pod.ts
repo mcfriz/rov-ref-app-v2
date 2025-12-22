@@ -8,8 +8,6 @@ if (!app) {
   throw new Error('Root element #app not found');
 }
 
-const base = import.meta.env.BASE_URL ?? '/';
-const baseWithSlash = base.endsWith('/') ? base : `${base}/`;
 const backHref = '../index.html';
 
 app.innerHTML = `

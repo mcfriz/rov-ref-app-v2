@@ -43,10 +43,10 @@ export function initShell(options: ShellOptions) {
     siteHeader.innerHTML = `
       <header class="topbar">
         <div class="topbar-left">
+          <button class="icon-btn" id="burger-btn" aria-label="Open menu">
+            <span aria-hidden="true">&#9776;</span>
+          </button>
           <a class="brand-link" href="${homeHref}">
-            <button class="icon-btn" id="burger-btn" aria-label="Open menu">
-              <span aria-hidden="true">&#9776;</span>
-            </button>
             <img class="brand-mark" src="${logoSrc}" alt="ROV Reference App logo" />
           </a>
         </div>

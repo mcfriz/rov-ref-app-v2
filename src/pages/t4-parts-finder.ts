@@ -31,8 +31,6 @@ if (!app) {
 const base = import.meta.env.BASE_URL ?? '/';
 const baseWithSlash = base.endsWith('/') ? base : `${base}/`;
 const dataUrl = `${baseWithSlash}data/t4_parts_finder.json`;
-const searchAction = `${baseWithSlash}apps/search.html`;
-const logoSrc = `${baseWithSlash}assets/images/ROV_REF_Logo_black_on_transparent.png`;
 
 function normalize(text: string) {
   return text.toLowerCase().replace(/[\s-]+/g, '');
@@ -51,49 +49,9 @@ function mapPart(raw: RawPart): Part | null {
   };
 }
 
-const topbar = `
-  <header class="topbar">
-    <div class="topbar-left">
-      <button class="icon-btn" id="burger-btn" aria-label="Open menu">
-        <span aria-hidden="true">&#9776;</span>
-      </button>
-      <img class="brand-mark" src="${logoSrc}" alt="ROV Reference App logo" />
-    </div>
-    <div class="topbar-center">
-      <nav class="nav-links" aria-label="Primary">
-        <a class="nav-link" href="${baseWithSlash}">Home</a>
-        <a class="nav-link" href="${baseWithSlash}apps/fitting-finder.html">Fitting Finder</a>
-        <a class="nav-link" href="${baseWithSlash}apps/rov-cheatsheet.html">Cheatsheets</a>
-      </nav>
-    </div>
-    <div class="topbar-right">
-      <form class="search-form desktop-search" role="search" action="${searchAction}">
-        <label class="sr-only" for="desktop-search-input">Search</label>
-        <input id="desktop-search-input" type="search" name="q" placeholder="Search the app" />
-        <button type="submit" class="icon-btn" aria-label="Search">
-          <span aria-hidden="true">&#128269;</span>
-        </button>
-      </form>
-      <button class="icon-btn mobile-search-btn" id="search-toggle" aria-label="Open search" aria-expanded="false" aria-controls="search-panel">
-        <span aria-hidden="true">&#128269;</span>
-      </button>
-    </div>
-  </header>
-  <div id="search-panel" class="search-panel" hidden>
-    <form class="search-form" role="search" action="${searchAction}">
-      <label class="sr-only" for="mobile-search-input">Search</label>
-      <input id="mobile-search-input" type="search" name="q" placeholder="Search the app" />
-      <button type="submit" class="icon-btn" aria-label="Search">
-        <span aria-hidden="true">&#128269;</span>
-      </button>
-    </form>
-  </div>
-`;
-
 app.innerHTML = `
-  ${topbar}
   <main class="page narrow-page">
-    <p class="back"><a href="../">&larr; Back to dashboard</a></p>
+    <p class="back"><a href="../index.html">&larr; Back to dashboard</a></p>
     <header class="page-header">
       <h1>T4 Parts Finder</h1>
       <p class="lead">Search part numbers and keywords, see the closest matches fast.</p>
@@ -355,20 +313,3 @@ queryInput?.addEventListener('keydown', (event) => {
 
 // Initial data load
 loadParts();
-
-// Search toggle behavior matching the dashboard.
-const searchToggle = document.querySelector<HTMLButtonElement>('#search-toggle');
-const searchPanel = document.querySelector<HTMLDivElement>('#search-panel');
-const mobileSearchInput = document.querySelector<HTMLInputElement>('#mobile-search-input');
-
-searchToggle?.addEventListener('click', () => {
-  const isOpen = searchPanel?.hasAttribute('hidden') === false;
-  if (isOpen) {
-    searchPanel?.setAttribute('hidden', '');
-    searchToggle.setAttribute('aria-expanded', 'false');
-  } else {
-    searchPanel?.removeAttribute('hidden');
-    searchToggle.setAttribute('aria-expanded', 'true');
-    mobileSearchInput?.focus();
-  }
-});

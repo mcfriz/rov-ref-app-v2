@@ -1,8 +1,7 @@
 // Dashboard script for the ROV Reference app.
-// Builds a responsive layout with a mobile carousel and desktop banner using base-aware links.
+// Renders hero, tiles, and interactions. Header/footer come from src/ui/shell-init.
 import './style.css';
 
-type NavLink = { label: string; href: string };
 type HeroSlide = { title: string; subtitle: string; href: string; background: string };
 type ImgTile = {
   title: string;
@@ -16,15 +15,6 @@ const base = import.meta.env.BASE_URL ?? '/';
 const baseWithSlash = base.endsWith('/') ? base : `${base}/`;
 const buildHref = (slug: string) => `${baseWithSlash}apps/${slug}.html`;
 const buildAsset = (path: string) => `${baseWithSlash}${path}`;
-const buildHome = () => baseWithSlash;
-
-const navLinks: NavLink[] = [
-  { label: 'Home', href: buildHome() },
-  { label: 'Operations', href: '#' },
-  { label: 'Maintenance', href: '#' },
-  { label: 'Files', href: '#' },
-  { label: 'Contact', href: buildHref('contact') },
-];
 
 const heroSlides: HeroSlide[] = [
   {
@@ -97,52 +87,7 @@ if (!app) {
   throw new Error('Root element #app not found');
 }
 
-const topbar = `
-  <header class="topbar">
-    <div class="topbar-left">
-      <button class="icon-btn" id="burger-btn" aria-label="Open menu">
-        <span aria-hidden="true">&#9776;</span>
-      </button>
-      <img class="brand-mark" src="${buildAsset('assets/images/ROV_REF_Logo_black_on_transparent.png')}" alt="ROV Reference App logo" />
-    </div>
-    <div class="topbar-center">
-      <nav class="nav-links" aria-label="Primary">
-        ${navLinks
-          .map(
-            (link) => `<a class="nav-link" href="${link.href}">
-            ${link.label}
-          </a>`
-          )
-          .join('')}
-      </nav>
-    </div>
-    <div class="topbar-right">
-      <form class="search-form desktop-search" role="search" action="${buildHref('search')}">
-        <label class="sr-only" for="desktop-search-input">Search</label>
-        <input id="desktop-search-input" type="search" name="q" placeholder="Search" />
-        <button type="submit" class="icon-btn" aria-label="Search">
-          <span aria-hidden="true">🔍</span>
-        </button>
-      </form>
-      <button class="icon-btn mobile-search-btn" id="search-toggle" aria-label="Open search" aria-expanded="false" aria-controls="search-panel">
-        <span aria-hidden="true">🔍</span>
-      </button>
-    </div>
-  </header>
-  <div id="search-panel" class="search-panel" hidden>
-    <form class="search-form" role="search" action="${buildHref('search')}">
-      <label class="sr-only" for="mobile-search-input">Search</label>
-      <input id="mobile-search-input" type="search" name="q" placeholder="Search the app" />
-      <button type="submit" class="icon-btn" aria-label="Search">
-        <span aria-hidden="true">🔍</span>
-      </button>
-    </form>
-  </div>
-`;
-
 app.innerHTML = `
-  ${topbar}
-
   <section class="hero hero-mobile" aria-label="Featured tools">
     <div class="hero-slides" id="hero-slides" aria-live="polite">
       ${heroSlides
@@ -199,36 +144,7 @@ app.innerHTML = `
       )
       .join('')}
   </section>
-
-  <footer class="app-footer">
-    <div class="footer-left">
-      <p class="footer-title">ROV Reference App</p>
-      <p class="footer-note">Information may not be fully correct and some content may be AI-generated. Please verify before use.</p>
-    </div>
-    <div class="footer-links">
-      <a href="${buildHref('contact')}">Contact</a>
-      <a href="${buildHref('rov-cheatsheet')}">Cheatsheets</a>
-      <a href="${buildHref('search')}">Global search</a>
-    </div>
-  </footer>
 `;
-
-// Behavior: toggle mobile search panel.
-const searchToggle = document.querySelector<HTMLButtonElement>('#search-toggle');
-const searchPanel = document.querySelector<HTMLDivElement>('#search-panel');
-const mobileSearchInput = document.querySelector<HTMLInputElement>('#mobile-search-input');
-
-searchToggle?.addEventListener('click', () => {
-  const isOpen = searchPanel?.hasAttribute('hidden') === false;
-  if (isOpen) {
-    searchPanel?.setAttribute('hidden', '');
-    searchToggle.setAttribute('aria-expanded', 'false');
-  } else {
-    searchPanel?.removeAttribute('hidden');
-    searchToggle.setAttribute('aria-expanded', 'true');
-    mobileSearchInput?.focus();
-  }
-});
 
 // Hero slider controls (mobile).
 const slidesContainer = document.querySelector<HTMLDivElement>('#hero-slides');

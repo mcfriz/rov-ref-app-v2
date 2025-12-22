@@ -165,37 +165,6 @@ const queryParams = new URLSearchParams(window.location.search);
 const initialQuery = queryParams.get('q') ?? '';
 
 app.innerHTML = `
-  <header class="topbar">
-    <div class="topbar-left">
-      <button class="icon-btn" id="burger-btn" aria-label="Open menu">
-        <span aria-hidden="true">&#9776;</span>
-      </button>
-      <img class="brand-mark" src="${baseWithSlash}assets/images/ROV_REF_Logo_black_on_transparent.png" alt="ROV Reference App logo" />
-    </div>
-    <div class="topbar-center">
-      <form class="search-form" role="search" action="${baseWithSlash}apps/search.html">
-        <label class="sr-only" for="desktop-search-input">Search</label>
-        <input id="desktop-search-input" type="search" name="q" placeholder="Search everything" value="${initialQuery}" />
-        <button type="submit" class="icon-btn" aria-label="Search">
-          <span aria-hidden="true">&#128269;</span>
-        </button>
-      </form>
-    </div>
-    <div class="topbar-right">
-      <button class="icon-btn mobile-search-btn" id="search-toggle" aria-label="Open search" aria-expanded="false" aria-controls="search-panel">
-        <span aria-hidden="true">&#128269;</span>
-      </button>
-    </div>
-  </header>
-  <div id="search-panel" class="search-panel" hidden>
-    <form class="search-form" role="search" action="${baseWithSlash}apps/search.html">
-      <label class="sr-only" for="mobile-search-input">Search</label>
-      <input id="mobile-search-input" type="search" name="q" placeholder="Search everything" value="${initialQuery}" />
-      <button type="submit" class="icon-btn" aria-label="Search">
-        <span aria-hidden="true">&#128269;</span>
-      </button>
-    </form>
-  </div>
   <main class="page narrow-page">
     <p class="back"><a href="../">&larr; Back to dashboard</a></p>
     <header class="page-header">
@@ -376,20 +345,3 @@ queryInput?.addEventListener('keydown', (event) => {
 
 // Initial load
 loadAll();
-
-// Mobile search panel toggle (header).
-const searchToggle = document.querySelector<HTMLButtonElement>('#search-toggle');
-const searchPanel = document.querySelector<HTMLDivElement>('#search-panel');
-const mobileSearchInput = document.querySelector<HTMLInputElement>('#mobile-search-input');
-
-searchToggle?.addEventListener('click', () => {
-  const isOpen = searchPanel?.hasAttribute('hidden') === false;
-  if (isOpen) {
-    searchPanel?.setAttribute('hidden', '');
-    searchToggle.setAttribute('aria-expanded', 'false');
-  } else {
-    searchPanel?.removeAttribute('hidden');
-    searchToggle.setAttribute('aria-expanded', 'true');
-    mobileSearchInput?.focus();
-  }
-});
