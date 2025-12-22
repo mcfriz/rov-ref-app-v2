@@ -116,8 +116,6 @@ const diameterInput = document.querySelector<HTMLInputElement>('#diameter');
 const dimensionSelect = document.querySelector<HTMLSelectElement>('#dimension');
 const resultsContainer = document.querySelector<HTMLDivElement>('#results');
 const resultCount = document.querySelector<HTMLSpanElement>('#result-count');
-const clearButton = document.querySelector<HTMLButtonElement>('#clear-btn');
-
 let fittings: Fitting[] = [];
 let currentResults: RankedResult[] = [];
 
@@ -298,3 +296,25 @@ async function copyResult(index: number) {
     alert('Copy failed. Please try again.');
   }
 }
+
+resultsContainer?.addEventListener('click', (event) => {
+  const target = event.target as HTMLElement;
+  if (target.matches('.copy-btn')) {
+    const index = Number(target.getAttribute('data-copy-index') ?? -1);
+    if (index >= 0) copyResult(index);
+  }
+});
+
+form?.addEventListener('submit', findFittings);
+document.querySelector<HTMLButtonElement>('#clear-btn')?.addEventListener('click', clearForm);
+
+// Keep Enter key on the input consistent with the button.
+diameterInput?.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    findFittings();
+  }
+});
+
+// Initial data load
+loadFittings();
