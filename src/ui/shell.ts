@@ -119,20 +119,24 @@ export function initShell(options: ShellOptions) {
         <ul class="drawer-list">
           <li><a href="${homeHref}">Home</a></li>
           <li>
-            <button class="drawer-parent" aria-expanded="false">ROV</button>
-            <ul class="drawer-nested" hidden>
-              <li><a href="${buildHref('rov-pod')}">ROV Pod</a></li>
-              <li><a href="${buildHref('cable-list')}">Cables</a></li>
-              <li><a href="${buildHref('rov-cheatsheet')}">ROV Cheat Sheets</a></li>
-            </ul>
+            <details class="menu-group">
+              <summary class="menu-parent">ROV</summary>
+              <div class="menu-children">
+                <a href="${buildHref('rov-pod')}">ROV Pod</a>
+                <a href="${buildHref('cable-list')}">Cables</a>
+                <a href="${buildHref('rov-cheatsheet')}">ROV Cheat Sheets</a>
+              </div>
+            </details>
           </li>
           <li>
-            <button class="drawer-parent" aria-expanded="false">T4</button>
-            <ul class="drawer-nested" hidden>
-              <li><a href="${buildHref('t4-torque')}">T4 Torque</a></li>
-              <li><a href="${buildHref('t4-slave-arm-drawing')}">T4 Slave Arm Drawing</a></li>
-              <li><a href="${buildHref('t4-videos')}">T4 Videos</a></li>
-            </ul>
+            <details class="menu-group">
+              <summary class="menu-parent">T4</summary>
+              <div class="menu-children">
+                <a href="${buildHref('t4-torque')}">T4 Torque</a>
+                <a href="${buildHref('t4-slave-arm-drawing')}">T4 Slave Arm Drawing</a>
+                <a href="${buildHref('t4-videos')}">T4 Videos</a>
+              </div>
+            </details>
           </li>
           <li><a href="${buildHref('fitting-finder')}">Fitting Finder</a></li>
           <li><a href="${buildHref('contact')}">Contact</a></li>
@@ -144,7 +148,6 @@ export function initShell(options: ShellOptions) {
     const backdrop = drawer.querySelector<HTMLDivElement>('.drawer-backdrop');
     const panel = drawer.querySelector<HTMLDivElement>('.drawer-panel');
     const closeBtn = drawer.querySelector<HTMLButtonElement>('.close-drawer');
-    const parents = Array.from(drawer.querySelectorAll<HTMLButtonElement>('.drawer-parent'));
 
     const closeDrawer = () => {
       drawer.classList.remove('open');
@@ -165,12 +168,18 @@ export function initShell(options: ShellOptions) {
       }
     });
 
-    parents.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const expanded = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        const nested = btn.nextElementSibling as HTMLElement | null;
-        nested?.toggleAttribute('hidden', expanded);
+    const groups = Array.from(drawer.querySelectorAll<HTMLDetailsElement>('.menu-group'));
+    groups.forEach((group) => {
+      const summary = group.querySelector<HTMLSummaryElement>('summary');
+      if (!summary) return;
+      summary.addEventListener('click', () => {
+        // Accordion behavior
+        const willOpen = !group.hasAttribute('open');
+        if (willOpen) {
+          groups.forEach((g) => {
+            if (g !== group) g.removeAttribute('open');
+          });
+        }
       });
     });
 

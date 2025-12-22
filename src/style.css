@@ -914,6 +914,58 @@ p.lead {
   align-self: flex-end;
 }
 
+/* Burger menu groups */
+.menu-group {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.1rem;
+}
+
+.menu-parent {
+  list-style: none;
+  cursor: pointer;
+  padding: 0.6rem 0.6rem;
+  border-radius: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  position: relative;
+  min-height: 44px;
+}
+
+.menu-parent::-webkit-details-marker {
+  display: none;
+}
+
+.menu-parent::after {
+  content: '›';
+  margin-left: auto;
+  transition: transform 150ms ease;
+}
+
+.menu-group[open] .menu-parent::after {
+  transform: rotate(90deg);
+}
+
+.menu-children {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.35rem 0.3rem 0.5rem 0.6rem;
+}
+
+.menu-children a {
+  padding: 0.45rem 0.5rem;
+  border-radius: 10px;
+  color: #0b192f;
+  font-weight: 600;
+}
+
+.menu-parent:focus-visible {
+  outline: 2px solid #1d4ed8;
+  outline-offset: 2px;
+}
+
 /* Mobile app bar for app pages only */
 .app-bar {
   display: none;
