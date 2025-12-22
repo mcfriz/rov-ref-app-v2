@@ -30,19 +30,19 @@ const heroSlides: HeroSlide[] = [
     title: 'Fitting Finder',
     subtitle: 'Match hydraulic fittings by OD/ID in seconds.',
     href: buildHref('fitting-finder'),
-    background: 'linear-gradient(135deg, #0ea5e9, #082f49)',
+    background: `url(${buildAsset('assets/images/tiles/fitting-finder.png')}) center/cover`,
   },
   {
     title: 'ROV Cheatsheets',
     subtitle: 'Offline PDFs for ops, maintenance, and readiness.',
     href: buildHref('rov-cheatsheet'),
-    background: 'linear-gradient(135deg, #f97316, #7c2d12)',
+    background: `url(${buildAsset('assets/images/tiles/rov-cheatsheet.png')}) center/cover`,
   },
   {
-    title: 'Cable List',
-    subtitle: 'Field-friendly cable catalog with quick IDs.',
-    href: buildHref('cable-list'),
-    background: 'linear-gradient(135deg, #22c55e, #064e3b)',
+    title: 'Global Search',
+    subtitle: 'One search across fittings, cables, parts, and videos.',
+    href: buildHref('search'),
+    background: `url(${buildAsset('assets/images/tiles/global_search.png')}) center/cover`,
   },
 ];
 
