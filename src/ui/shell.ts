@@ -170,7 +170,7 @@ export function initShell(options: ShellOptions) {
 
     const groups = Array.from(drawer.querySelectorAll<HTMLDetailsElement>('.menu-group'));
     groups.forEach((group) => {
-      const summary = group.querySelector<HTMLSummaryElement>('summary');
+      const summary = group.querySelector<HTMLElement>('summary');
       if (!summary) return;
       summary.addEventListener('click', () => {
         // Accordion behavior
