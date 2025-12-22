@@ -94,18 +94,6 @@ app.innerHTML = `
       </div>
     </section>
   </main>
-
-  <footer class="app-footer">
-    <div class="footer-left">
-      <p class="footer-title">ROV Reference App</p>
-      <p class="footer-note">Information may not be fully correct and some content may be AI-generated. Please verify before use.</p>
-    </div>
-    <div class="footer-links">
-      <a href="${buildHref('contact')}">Contact</a>
-      <a href="${buildHref('rov-cheatsheet')}">Cheatsheets</a>
-      <a href="${buildHref('search')}">Global search</a>
-    </div>
-  </footer>
 `;
 
 const form = document.querySelector<HTMLFormElement>('#contact-form');
