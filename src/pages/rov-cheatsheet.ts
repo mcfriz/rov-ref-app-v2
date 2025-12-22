@@ -23,6 +23,7 @@ const base = import.meta.env.BASE_URL ?? '/';
 const baseWithSlash = base.endsWith('/') ? base : `${base}/`;
 const dataUrl = `${baseWithSlash}data/rov_cheatsheets.json`;
 const logoSrc = `${baseWithSlash}assets/images/ROV_REF_Logo_black_on_transparent.png`;
+const searchAction = `${baseWithSlash}apps/search.html`;
 
 /**
  * Build a safe URL for PDFs, handling both absolute (http) and relative paths.
@@ -51,7 +52,7 @@ const topbar = `
       </nav>
     </div>
     <div class="topbar-right">
-      <form class="search-form desktop-search" role="search">
+      <form class="search-form desktop-search" role="search" action="${searchAction}">
         <label class="sr-only" for="desktop-search-input">Search</label>
         <input id="desktop-search-input" type="search" name="q" placeholder="Search" />
         <button type="submit" class="icon-btn" aria-label="Search">
@@ -64,7 +65,7 @@ const topbar = `
     </div>
   </header>
   <div id="search-panel" class="search-panel" hidden>
-    <form class="search-form" role="search">
+    <form class="search-form" role="search" action="${searchAction}">
       <label class="sr-only" for="mobile-search-input">Search</label>
       <input id="mobile-search-input" type="search" name="q" placeholder="Search the app" />
       <button type="submit" class="icon-btn" aria-label="Search">

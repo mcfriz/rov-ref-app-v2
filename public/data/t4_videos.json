@@ -1,0 +1,100 @@
+{
+  "groups": [
+    {
+      "name": "Azimuth",
+      "videos": [
+        { "label": "Removing the azimuth resolver", "url": "https://youtu.be/BBacQIZjYzc" },
+        { "label": "Re-assembly of the azimuth resolver", "url": "https://youtu.be/VspHZ19kKlU" },
+        { "label": "Exterior cover re-attach", "url": "https://youtu.be/R-BnQIlFpqM" },
+        { "label": "Azimuth actuator removal", "url": "https://youtu.be/XfzsUxUXTS0" },
+        { "label": "Azimuth actuator re assembly", "url": "https://youtu.be/dZbqdxKbczs" }
+      ]
+    },
+    {
+      "name": "Elbow",
+      "videos": [
+        { "label": "Installing the elbow resolver", "url": "https://youtu.be/4BkaSYhx79A" },
+        { "label": "Elbow actuator removal", "url": "https://youtu.be/iUdxOetclQ4" },
+        { "label": "Elbow actuator disassembly", "url": "https://youtu.be/gm3GXnFXdyQ" },
+        { "label": "Elbow actuator re-assembly", "url": "https://youtu.be/if1QAEWQ8zY" },
+        { "label": "Elbow actuator re-attach", "url": "https://youtu.be/dYXBbipjilo" },
+        { "label": "Removing the elbow resolver", "url": "https://youtu.be/zmDEwqvp4V8" },
+        { "label": "Exterior cover re-attach", "url": "https://youtu.be/uuXqxJT0oRA" }
+      ]
+    },
+    {
+      "name": "Forearm",
+      "videos": [
+        { "label": "Forearm board servo disassembly", "url": "https://youtu.be/aQQGaf1JhcY" },
+        { "label": "Forearm board servo re-assembly", "url": "https://youtu.be/p90EvudLlkk" },
+        { "label": "Intro to resolvers", "url": "https://youtu.be/TZqrgIhncKc" },
+        { "label": "Exterior cover re-attach", "url": "https://youtu.be/SdHey6M0yqc" }
+      ]
+    },
+    {
+      "name": "Jaw",
+      "videos": [
+        { "label": "Disassembly of the pin type jaw assy", "url": "https://youtu.be/0QGCBP2lw1A" },
+        { "label": "Jaw pin re-assembly", "url": "https://youtu.be/rX9U-X2AwJk" },
+        { "label": "Jaw t-bar design disassembly", "url": "https://youtu.be/KYZ7CNZblBQ" },
+        { "label": "Jaw t-bar re-assembly", "url": "https://youtu.be/neciA1zpsmA" }
+      ]
+    },
+    {
+      "name": "Master Controller",
+      "videos": [
+        { "label": "Master controller re-assembly", "url": "https://youtu.be/bo6C6b1yj9k" },
+        { "label": "Master controller disassembly", "url": "https://youtu.be/m4vTGS_MwMo" }
+      ]
+    },
+    {
+      "name": "Shoulder",
+      "videos": [
+        { "label": "Removing the shoulder resolver", "url": "https://youtu.be/Era2gOtWapo" },
+        { "label": "Installing the shoulder resolver", "url": "https://youtu.be/REb0lAHXT64" },
+        { "label": "Shoulder joint disassembly", "url": "https://youtu.be/M2fUi5ULV9E" },
+        { "label": "Shoulder joint re-assembly", "url": "https://youtu.be/wYkhfEKABO8" },
+        { "label": "Exterior cover re-attach", "url": "https://youtu.be/SdHey6M0yqc" }
+      ]
+    },
+    {
+      "name": "Upper Arm",
+      "videos": [
+        { "label": "Solenoid valve and filter replacement", "url": "https://youtu.be/kIySaOuEoqw" },
+        { "label": "Linear actuator disassembly", "url": "https://youtu.be/zXW7IhCEDPg" },
+        { "label": "Linear actuator re-assembly", "url": "https://youtu.be/Hws9bqMlazY" },
+        { "label": "Filter replacement only", "url": "https://youtu.be/gm-USEme5fE" },
+        { "label": "Exterior cover re-attach", "url": "https://youtu.be/SdHey6M0yqc" }
+      ]
+    },
+    {
+      "name": "Wrist Pitch Yaw",
+      "videos": [
+        { "label": "Nose block re-assembly", "url": "https://youtu.be/p98Ykk0Gxks" },
+        { "label": "Removing the pitch resolver", "url": "https://youtu.be/I1Vp9UgXSNk" },
+        { "label": "Installing the pitch resolver", "url": "https://youtu.be/GeBixweI-3A" },
+        { "label": "Removing the yaw resolver", "url": "https://youtu.be/6jF3Gaqmoz4" },
+        { "label": "Installing the yaw resolver", "url": "https://youtu.be/YZplYdMzdpw" },
+        { "label": "Removing camera assy", "url": "https://youtu.be/fh1HN5RNMTQ" },
+        { "label": "Installing the camera assy", "url": "https://youtu.be/FrZV0mEBTlo" },
+        { "label": "Wrist jaw removal", "url": "https://youtu.be/TDcKzvucF8M" },
+        { "label": "Wrist jaw resolver LDVT disassembly", "url": "https://youtu.be/racOxWicBP8" },
+        { "label": "Wrist jaw LVDT resolver assembly", "url": "https://youtu.be/RRnnLhcawDE" },
+        { "label": "Nose block disassembly", "url": "https://youtu.be/90Y-4N8j488" },
+        { "label": "Wrist disassembly", "url": "https://youtu.be/WjQqLfm2kAw" },
+        { "label": "Wrist re-assembly", "url": "https://youtu.be/-QFCFxhEsco" },
+        { "label": "Wrist jaw re-attach", "url": "https://youtu.be/LPgLuRhKi9I" },
+        { "label": "Pitch yaw removal", "url": "https://youtu.be/5qhOEXb8AWY" },
+        { "label": "Pitch yaw re-attach", "url": "https://youtu.be/K3XMLv694O8" }
+      ]
+    },
+    {
+      "name": "Compensation and Testing",
+      "videos": [
+        { "label": "Weekly re-torquing", "url": "https://youtu.be/dqvv1HjVyEQ" },
+        { "label": "Testing re-assembled manipulator", "url": "https://youtu.be/r4YNADZR-LU" },
+        { "label": "Charging the compensation system", "url": "https://youtu.be/SgOU01FOU6M" }
+      ]
+    }
+  ]
+}

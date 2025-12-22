@@ -31,6 +31,7 @@ const dataUrl = `${baseWithSlash}data/fittings.json`;
 const logoSrc = `${baseWithSlash}assets/images/ROV_REF_Logo_black_on_transparent.png`;
 const fittingPdfUrl = `${baseWithSlash}assets/pdfs/Hyd_Fitting_Finder.pdf`;
 const INITIAL_MESSAGE = 'Enter a diameter and pick OD or ID to see matches.';
+const searchAction = `${baseWithSlash}apps/search.html`;
 
 const topbar = `
   <header class="topbar">
@@ -48,7 +49,7 @@ const topbar = `
       </nav>
     </div>
     <div class="topbar-right">
-      <form class="search-form desktop-search" role="search">
+      <form class="search-form desktop-search" role="search" action="${searchAction}">
         <label class="sr-only" for="desktop-search-input">Search</label>
         <input id="desktop-search-input" type="search" name="q" placeholder="Search" />
         <button type="submit" class="icon-btn" aria-label="Search">
@@ -61,7 +62,7 @@ const topbar = `
     </div>
   </header>
   <div id="search-panel" class="search-panel" hidden>
-    <form class="search-form" role="search">
+    <form class="search-form" role="search" action="${searchAction}">
       <label class="sr-only" for="mobile-search-input">Search</label>
       <input id="mobile-search-input" type="search" name="q" placeholder="Search the app" />
       <button type="submit" class="icon-btn" aria-label="Search">
