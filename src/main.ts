@@ -18,16 +18,22 @@ const buildAsset = (path: string) => `${baseWithSlash}${path}`;
 
 const heroSlides: HeroSlide[] = [
   {
-    title: 'Contact',
-    subtitle: 'Send feedback, feature ideas, or bug reports.',
-    href: buildHref('contact'),
-    background: `url(${buildAsset('assets/images/tiles/contact_form_portrait.png')}) center/cover`,
+    title: 'Welcome to the ROV Reference App',
+    subtitle: 'Stay ready offshore.',
+    href: buildHref('welcome'),
+    background: `url(${buildAsset('assets/images/tiles/welcome.png')}) center/cover`,
   },
   {
     title: 'Global Search',
     subtitle: 'One search across drawings, cables, parts, and videos.',
     href: buildHref('search'),
     background: `url(${buildAsset('assets/images/tiles/global_search_portrait.png')}) center/cover`,
+  },
+  {
+    title: 'Contact & Feedback',
+    subtitle: 'Send feature ideas or flag issues quickly.',
+    href: buildHref('contact'),
+    background: `url(${buildAsset('assets/images/tiles/contact_form.png')}) center/cover`,
   },
 ];
 

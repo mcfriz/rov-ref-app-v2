@@ -25,6 +25,7 @@ export default defineConfig(() => {
           t4PartsFinder: fromRoot("apps/t4-parts-finder.html"),
           t4Videos: fromRoot("apps/t4-videos.html"),
           globalSearch: fromRoot("apps/search.html"),
+          welcome: fromRoot("apps/welcome.html"),
         },
       },
     },

@@ -76,7 +76,7 @@ header {
   gap: 0.5rem;
   min-height: 58px;
   max-height: 64px;
-  padding: 0.35rem 0;
+  padding: 0.35rem 0.75rem;
   background: #ffffff;
   border-bottom: 1px solid var(--border);
 }
