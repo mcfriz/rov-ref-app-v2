@@ -35,7 +35,10 @@ type Procedure = {
 };
 
 const app = document.querySelector<HTMLDivElement>('#app');
-if (!app) throw new Error('Root element #app not found');
+if (!app) {
+  throw new Error('Root element #app not found');
+}
+const appRoot: HTMLDivElement = app;
 
 const base = import.meta.env.BASE_URL ?? '/';
 const baseWithSlash = base.endsWith('/') ? base : `${base}/`;
@@ -89,7 +92,7 @@ async function fetchJson<T>(url: string): Promise<T | null> {
 }
 
 function renderBaseSkeleton() {
-  app.innerHTML = `
+  appRoot.innerHTML = `
     <main class="page narrow-page">
       <p class="back"><a href="../index.html">&larr; Back to dashboard</a></p>
       <header class="page-header">
