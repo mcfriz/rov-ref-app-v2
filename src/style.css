@@ -41,9 +41,9 @@ a {
   padding: 0 1.25rem 3rem;
 }
 
-.app-page #app {
-  padding-top: calc(var(--appbar-h) + var(--header-h));
-}
+  .app-page #app {
+    padding-top: 0.25rem;
+  }
 
 main.page {
   max-width: 1024px;
@@ -64,6 +64,52 @@ header {
   gap: 0.5rem;
   margin-bottom: 1.5rem;
 }
+
+.page-hero {
+  margin: 0;
+  width: 100%;
+  min-height: 180px;
+  background: #0b192f center/cover no-repeat;
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero__overlay {
+  position: relative;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.45) 100%);
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  min-height: 180px;
+}
+
+.page-hero__overlay h1 {
+  margin: 0;
+  color: #fff;
+  text-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+}
+
+.app-page .page-header h1 {
+  display: none;
+}
+
+.app-page .page-header {
+  margin-bottom: 0.75rem;
+}
+
+.app-page .page-hero {
+  margin-top: calc(var(--appbar-h) + var(--header-h));
+  margin-bottom: 0.2rem;
+}
+
+  .app-page main.page {
+    padding-top: 0.75rem;
+    padding-bottom: 1.75rem;
+    gap: 0.5rem;
+  }
 
 /* Top bar + navigation */
 .topbar {
@@ -135,7 +181,7 @@ header {
   border: 1px solid var(--border);
   background: #ffffff;
   color: #0b192f;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 0.45rem 0.55rem;
   display: inline-flex;
   align-items: center;
@@ -191,7 +237,7 @@ h1 {
 
 p.lead {
   margin: 0;
-  color: white;
+  color: var(--muted);
   max-width: 640px;
 }
 
@@ -202,7 +248,7 @@ p.lead {
 }
 
 .back {
-  margin: 0;
+  margin: 0.25rem 0 0.35rem;
 }
 
 .back a {
@@ -321,13 +367,14 @@ p.lead {
 
 .btn {
   border: 1px solid transparent;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 0.6rem 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
   background: #e2e8f0;
   color: #0b192f;
+  min-width: 122px;
 }
 
 .btn.primary {
@@ -353,6 +400,7 @@ p.lead {
 .btn.small {
   padding: 0.35rem 0.65rem;
   font-size: 0.9rem;
+  min-width: 104px;
 }
 
 .btn:hover,
@@ -515,7 +563,8 @@ p.lead {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 0.3rem;
+  gap: 0.5rem;
+  align-items: flex-start;
 }
 
 .slide-overlay h2 {
@@ -523,9 +572,13 @@ p.lead {
   font-size: 1.4rem;
 }
 
-.slide-sub {
-  margin: 0;
-  color: #e2e8f0;
+.hero-cta {
+  align-self: center;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  text-shadow: none;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
 }
 
 .hero-dots {
@@ -807,6 +860,14 @@ p.lead {
 @media (max-width: 600px) {
   #app {
     padding: 1.5rem 1.1rem 2rem;
+  }
+
+  .btn {
+    min-width: 110px;
+  }
+
+  .btn.small {
+    min-width: 96px;
   }
 
   .tile-grid {
@@ -1106,6 +1167,22 @@ p.lead {
   transform: translate(-50%, 0);
 }
 
+.mini-thumb {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+}
+
+.mini-text {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
 @media (max-width: 800px) {
   .hero-mobile {
     min-height: calc(100vh - var(--header-h));
@@ -1134,6 +1211,28 @@ p.lead {
 
   .app-page .app-bar {
     display: grid;
+  }
+
+  .page-hero__overlay {
+    padding: 2rem 1.1rem;
+    min-height: 160px;
+  }
+
+  .app-page main.page {
+    padding-top: 0.3rem;
+    gap: 0.35rem;
+  }
+
+  .app-page .back {
+    display: none;
+  }
+
+  .app-page .page-hero {
+    margin-bottom: 1.85rem;
+  }
+
+  .app-page #app {
+    padding-top: 0.15rem;
   }
 }
 

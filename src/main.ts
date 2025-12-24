@@ -19,19 +19,19 @@ const buildAsset = (path: string) => `${baseWithSlash}${path}`;
 const heroSlides: HeroSlide[] = [
   {
     title: 'Welcome to the ROV Reference App',
-    subtitle: 'Stay ready offshore.',
+    subtitle: 'Read More',
     href: buildHref('welcome'),
     background: `url(${buildAsset('assets/images/tiles/welcome.png')}) center/cover`,
   },
   {
     title: 'Global Search',
-    subtitle: 'One search across drawings, cables, parts, and videos.',
+    subtitle: 'Search',
     href: buildHref('search'),
     background: `url(${buildAsset('assets/images/tiles/global_search_portrait.png')}) center/cover`,
   },
   {
     title: 'Contact & Feedback',
-    subtitle: 'Send feature ideas or flag issues quickly.',
+    subtitle: 'Contact',
     href: buildHref('contact'),
     background: `url(${buildAsset('assets/images/tiles/contact_form.png')}) center/cover`,
   },
@@ -49,6 +49,12 @@ const tiles: ImgTile[] = [
     subtitle: 'Pick an ROV and open its PDF quick ref.',
     href: buildHref('rov-cheatsheet'),
     img: buildAsset('assets/images/tiles/rov-cheatsheet.png'),
+  },
+  {
+    title: 'Procedures',
+    subtitle: 'In-app procedures with search and categories.',
+    href: buildHref('procedures'),
+    img: buildAsset('assets/images/tiles/rov_ref_ref_files.png'),
   },
   {
     title: 'Cable List',
@@ -73,6 +79,12 @@ const tiles: ImgTile[] = [
     subtitle: 'Configuration notes and filterable part lookups.',
     href: buildHref('rov-pod'),
     img: buildAsset('assets/images/tiles/rov-pod.png'),
+  },
+  {
+    title: 'Manual Finder',
+    subtitle: 'Manuals, drawings, and reference files in one search.',
+    href: buildHref('manual-finder'),
+    img: buildAsset('assets/images/tiles/rov_ref_ref_files.png'),
   },
   {
     title: 'T4 Parts Finder',
@@ -102,7 +114,7 @@ app.innerHTML = `
             <a class="hero-slide" href="${slide.href}" data-index="${index}" style="background: ${slide.background}">
               <div class="slide-overlay">
                 <h2>${slide.title}</h2>
-                <p class="slide-sub">${slide.subtitle}</p>
+                <span class="hero-cta btn primary">${slide.subtitle}</span>
               </div>
             </a>
           `

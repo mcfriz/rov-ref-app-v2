@@ -14,6 +14,7 @@ const buildAsset = (path: string) => `${baseWithSlash}${path}`;
 
 const navLinks = [
   { label: 'Home', href: baseWithSlash },
+  { label: 'Procedures', href: buildHref('procedures') },
   { label: 'Operations', href: '#' },
   { label: 'Maintenance', href: '#' },
   { label: 'Files', href: '#' },
@@ -120,6 +121,7 @@ export function initShell(options: ShellOptions) {
         <button class="icon-btn close-drawer" aria-label="Close menu">&times;</button>
         <ul class="drawer-list">
           <li><a href="${homeHref}">Home</a></li>
+          <li><a href="${buildHref('procedures')}">Procedures</a></li>
           <li>
             <details class="menu-group">
               <summary class="menu-parent">ROV</summary>
@@ -140,6 +142,7 @@ export function initShell(options: ShellOptions) {
               </div>
             </details>
           </li>
+          <li><a href="${buildHref('manual-finder')}">Manual Finder</a></li>
           <li><a href="${buildHref('fitting-finder')}">Fitting Finder</a></li>
           <li><a href="${buildHref('contact')}">Contact</a></li>
         </ul>
@@ -187,6 +190,17 @@ export function initShell(options: ShellOptions) {
 
     // Mobile app bar for app pages
     if (options.pageType === 'app') {
+      // Page hero banner with title over background image
+      const hero = document.createElement('div');
+      hero.className = 'page-hero';
+      hero.style.backgroundImage = `url('${buildAsset('assets/images/deep_blue_Background.png')}')`;
+      hero.innerHTML = `
+        <div class="page-hero__overlay">
+          <h1>${pageTitle}</h1>
+        </div>
+      `;
+      siteHeader.insertAdjacentElement('afterend', hero);
+
       const appBar = document.createElement('div');
       appBar.className = 'app-bar';
       appBar.innerHTML = `
