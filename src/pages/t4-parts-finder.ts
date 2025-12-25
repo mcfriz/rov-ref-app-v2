@@ -284,6 +284,10 @@ async function loadParts() {
     const response = await fetch(dataUrl);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const payload = await response.json();
+    if (!payload) {
+      renderEmpty('Failed to load parts data. Check your JSON file.');
+      return;
+    }
     const rawList: RawPart[] = Array.isArray(payload)
       ? payload
       : Array.isArray((payload as any)?.cables)

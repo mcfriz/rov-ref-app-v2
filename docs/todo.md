@@ -2,6 +2,12 @@
 
 > Collected tasks to improve consistency, robustness, and UX across the multi-page app. Prioritize top-down; trim or reorder as needed.
 
+## Phased plan
+1) **Stability/UX quick wins**: add fetch error/empty states everywhere, clean up spacing/contrast, confirm back-link desktop-only behavior, and add lazy-loading/fallbacks for images.
+2) **Navigation & search polish**: tune global search mini-app insertion/fallback thresholds, add source badges, tighten header offsets and aria/focus handling.
+3) **Data & A11y hardening**: lightweight schema checks, aria-live toasts/status, image error placeholders, and consistent chip/tag rendering.
+4) **Performance & QA**: debounce/throttle handlers, cache JSON per session where safe, add internal link checker and unit tests for search/procedure helpers.
+
 ## Navigation, Header, and Hero
 - [ ] Standardize top offsets: ensure `--header-h` and `--appbar-h` are applied uniformly on all app pages, and verify hero spacing on mobile vs desktop.
 - [ ] Back link visibility: confirm mobile hide/desktop show behavior across all pages; align copy to “Back to dashboard”.

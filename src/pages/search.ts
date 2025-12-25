@@ -329,7 +329,7 @@ const initialQuery = queryParams.get('q') ?? '';
 
 app.innerHTML = `
   <main class="page narrow-page">
-    <p class="back"><a href="../">&larr; Back to dashboard</a></p>
+    <p class="back"><a href="../index.html">&larr; Back to dashboard</a></p>
     <header class="page-header">
       <h1>Search</h1>
       <p class="lead">Search cables, T4 parts, fittings, manuals, and videos. Results are ranked by closest match.</p>

@@ -152,7 +152,7 @@ async function loadVideos() {
     renderEmpty('Loading videos...');
     const response = await fetch(dataUrl);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const payload = (await response.json()) as VideoData;
+    const payload = (await response.json()) as VideoData | null;
     const list: VideoGroup[] = Array.isArray(payload)
       ? payload
       : Array.isArray((payload as any)?.groups)

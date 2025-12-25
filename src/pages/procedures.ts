@@ -305,7 +305,11 @@ function renderSteps(steps?: Step[]) {
         <div class="fit-row" style="align-items:center; gap:0.5rem;">
           <strong>Step ${idx + 1}${s.title ? `: ${s.title}` : ''}</strong>
         </div>
-        ${s.image ? `<img src="${s.image}" alt="" loading="lazy" style="max-width:100%; border-radius:10px; margin:0.5rem 0;">` : ''}
+        ${
+          s.image
+            ? `<img src="${s.image}" alt="" loading="lazy" onerror="this.style.display='none';" style="max-width:100%; border-radius:10px; margin:0.5rem 0;">`
+            : ''
+        }
         ${s.text.map((p) => `<p class="helper-text" style="color:#0b192f;">${p}</p>`).join('')}
         ${s.notes && s.notes.length ? `<ul>${s.notes.map((n) => `<li>${n}</li>`).join('')}</ul>` : ''}
       </article>`
@@ -412,6 +416,14 @@ async function init() {
   ]);
   categories = cats ?? [];
   indexItems = idx ?? [];
+
+  if (!categories.length || !indexItems.length) {
+    const content = document.querySelector<HTMLDivElement>('#content-area');
+    if (content) {
+      content.innerHTML = `<p class="helper-text">Could not load procedures data. Please check your connection or JSON files.</p>`;
+    }
+    return;
+  }
 
   const searchInput = document.querySelector<HTMLInputElement>('#search-input');
   searchInput?.addEventListener('input', () => {
