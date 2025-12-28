@@ -30,6 +30,7 @@ const base = import.meta.env.BASE_URL ?? '/';
 const baseWithSlash = base.endsWith('/') ? base : `${base}/`;
 const dataUrl = `${baseWithSlash}data/fittings.json`;
 const fittingPdfUrl = `${baseWithSlash}assets/pdfs/Hyd_Fitting_Finder.pdf`;
+const measureImg = `${baseWithSlash}assets/images/fitting_finder_measure.jpeg`;
 const INITIAL_MESSAGE = 'Enter a diameter and pick OD or ID to see matches.';
 
 app.innerHTML = `
@@ -93,6 +94,7 @@ app.innerHTML = `
             <li><strong>Inner diameter (ID):</strong> Measure across the opening (inside edge to inside edge).</li>
             <li>Use digital calipers with at least 0.1 mm precision for best results.</li>
           </ol>
+          <img class="measure-img" src="${measureImg}" alt="Example caliper measurement for fittings" loading="lazy" onerror="this.style.display='none';" />
         </div>
       </details>
       <details class="accordion-item">

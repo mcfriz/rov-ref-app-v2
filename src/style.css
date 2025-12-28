@@ -68,7 +68,7 @@ header {
 .page-hero {
   margin: 0;
   width: 100%;
-  min-height: 180px;
+  min-height: 140px;
   background: #0b192f center/cover no-repeat;
   border-radius: 0;
   position: relative;
@@ -521,6 +521,15 @@ p.lead {
 .accordion-body ol {
   margin: 0.4rem 0;
   padding-left: 1.1rem;
+}
+
+.measure-img {
+  width: 100%;
+  max-width: 520px;
+  border-radius: 12px;
+  margin-top: 0.5rem;
+  box-shadow: 0 10px 24px rgba(12, 31, 58, 0.12);
+  display: block;
 }
 
 .hero {
