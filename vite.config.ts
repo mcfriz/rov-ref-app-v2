@@ -23,6 +23,7 @@ export default defineConfig(() => {
           t4Torque: fromRoot("apps/t4-torque.html"),
           t4SlaveArmDrawing: fromRoot("apps/t4-slave-arm-drawing.html"),
           t4PartsFinder: fromRoot("apps/t4-parts-finder.html"),
+          atlasPartsFinder: fromRoot("apps/atlas-parts-finder.html"),
           t4Videos: fromRoot("apps/t4-videos.html"),
           globalSearch: fromRoot("apps/search.html"),
           welcome: fromRoot("apps/welcome.html"),

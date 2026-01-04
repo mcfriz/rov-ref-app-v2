@@ -93,6 +93,12 @@ const tiles: ImgTile[] = [
     img: buildAsset('assets/images/tiles/T4-parts.png'),
   },
   {
+    title: 'Atlas Parts Finder',
+    subtitle: 'Search Atlas manipulator parts and descriptions.',
+    href: buildHref('atlas-parts-finder'),
+    img: buildAsset('assets/images/tiles/T4-parts.png'),
+  },
+  {
     title: 'T4 Videos',
     subtitle: 'Maintenance walkthroughs grouped by assembly.',
     href: buildHref('t4-videos'),

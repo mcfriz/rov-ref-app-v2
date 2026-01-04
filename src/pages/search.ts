@@ -6,7 +6,7 @@ type Result = {
   title: string;
   detail: string;
   source: string;
-  kind: 'cable' | 'part' | 'fitting' | 'video' | 'manual' | 'manual-view' | 'mini-app';
+  kind: 'cable' | 'part' | 'atlas-part' | 'fitting' | 'video' | 'manual' | 'manual-view' | 'mini-app';
   url?: string;
   docNo?: string;
   img?: string;
@@ -56,6 +56,7 @@ const buildAsset = (path: string) => `${baseWithSlash}${path}`;
 const endpoints = {
   cables: `${baseWithSlash}data/cable.json`,
   parts: `${baseWithSlash}data/t4_parts_finder.json`,
+  atlasParts: `${baseWithSlash}data/atlas_parts_finder.json`,
   fittings: `${baseWithSlash}data/fittings.json`,
   videos: `${baseWithSlash}data/t4_videos.json`,
   manuals: `${baseWithSlash}data/rov_ref_ref_files.json`,
@@ -94,6 +95,14 @@ const miniApps = [
     img: buildAsset('assets/images/tiles/T4-parts.png'),
     keywords: ['t4', 'titan', 'part', 'spare', 'bom', 'assy', '001-1888'],
     slug: 't4-parts-finder',
+  },
+  {
+    title: 'Atlas Parts Finder',
+    subtitle: 'Atlas manipulator parts',
+    href: buildHref('atlas-parts-finder'),
+    img: buildAsset('assets/images/tiles/T4-parts.png'),
+    keywords: ['atlas', 'manipulator', 'part', 'spare', 'bom', 'assy', '008-0216', 'gamma'],
+    slug: 'atlas-parts-finder',
   },
   {
     title: 'ROV Cheatsheets',
@@ -257,6 +266,26 @@ function mapParts(data: any): Result[] {
     }));
 }
 
+function mapAtlasParts(data: any): Result[] {
+  const list: Part[] = (Array.isArray(data) ? data : data?.cables ?? data ?? []).map((raw: PartRaw) => ({
+    partNumber: raw['Part Number'],
+    description: raw['Description'],
+    expanded: raw['Expanded Description'],
+    link: raw.link || (raw.fileName ? `${baseWithSlash}assets/pdfs/${raw.fileName}` : undefined),
+  }));
+
+  return list
+    .filter((p) => p.partNumber && p.description)
+    .map((part) => ({
+      title: part.partNumber,
+      detail: [part.description, part.expanded].filter(Boolean).join(' | '),
+      source: 'Atlas Part',
+      kind: 'atlas-part',
+      url: part.link,
+      score: 0,
+    }));
+}
+
 function mapFittings(data: any): Result[] {
   const list: Fitting[] = Array.isArray(data) ? data : [];
   return list.map((f) => {
@@ -347,6 +376,7 @@ app.innerHTML = `
             <option value="all">Global (all sources)</option>
             <option value="cable">Cables only</option>
             <option value="part">T4 parts only</option>
+            <option value="atlas-part">Atlas parts only</option>
             <option value="fitting">Fittings only</option>
             <option value="video">T4 videos only</option>
             <option value="manual">Manuals & drawings only</option>
@@ -356,7 +386,7 @@ app.innerHTML = `
           <button type="submit" class="btn primary">Find</button>
           <button type="button" class="btn ghost" id="clear-btn">Clear</button>
         </div>
-        <p class="helper-text">Pulls from cable.json, t4_parts_finder.json, fittings.json, t4_videos.json, and rov_ref_ref_files.json.</p>
+        <p class="helper-text">Pulls from cable.json, t4_parts_finder.json, atlas_parts_finder.json, fittings.json, t4_videos.json, and rov_ref_ref_files.json.</p>
       </form>
     </section>
 
@@ -470,7 +500,7 @@ function combinedScore(query: string, entry: Result) {
     // light boost so mini app card is competitive but still respects normal ordering
     score += 10;
   }
-  if (partNumberPattern.test(query.trim()) && entry.kind === 'part') {
+  if (partNumberPattern.test(query.trim()) && (entry.kind === 'part' || entry.kind === 'atlas-part')) {
     score += 120;
   }
   return score;
@@ -537,9 +567,10 @@ function search(event?: Event) {
 
 async function loadAll() {
   renderEmpty('Loading search index...');
-  const [cables, parts, fittings, videos, manuals] = await Promise.all([
+  const [cables, parts, atlasParts, fittings, videos, manuals] = await Promise.all([
     fetchJson(endpoints.cables),
     fetchJson(endpoints.parts),
+    fetchJson(endpoints.atlasParts),
     fetchJson(endpoints.fittings),
     fetchJson(endpoints.videos),
     fetchJson(endpoints.manuals),
@@ -548,6 +579,7 @@ async function loadAll() {
   allResults = [
     ...mapCables(cables),
     ...mapParts(parts),
+    ...mapAtlasParts(atlasParts),
     ...mapFittings(fittings),
     ...mapVideos(videos),
     ...mapManuals(manuals),

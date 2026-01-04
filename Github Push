@@ -1,0 +1,5 @@
+# After making changes to your files...
+
+git add .
+git commit -m "Add new procedures and update styling"
+git push
