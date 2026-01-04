@@ -45,6 +45,15 @@
     "updated": "2025-01-04"
   },
   {
+    "id": "t4-troubleshooting",
+    "title": "T4 Troubleshooting Guide",
+    "summary": "Step-by-step guide for fault isolation and troubleshooting of the T4 manipulator, including joint diagnostics, system error handling, and status indicator LEDs.",
+    "categories": ["manipulators", "maintenance", "troubleshooting"],
+    "tags": ["t4", "troubleshooting", "manipulator", "diagnostics"],
+    "keywords": ["T4", "troubleshooting", "manipulator", "master test", "slave test", "servo loop", "system errors"],
+    "updated": "2026-01-04"
+  },
+  {
     "id": "umbilical-termination-moulding",
     "title": "Umbilical Termination and Moulding",
     "summary": "Terminate and mould a steel armoured ROV umbilical, including load testing and inspection.",

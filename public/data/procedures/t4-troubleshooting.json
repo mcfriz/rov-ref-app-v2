@@ -1,0 +1,288 @@
+{
+  "id": "t4-troubleshooting",
+  "title": "T4 Troubleshooting Guide",
+  "purpose": [
+    "Provide technicians with a comprehensive procedure to isolate faults and diagnose problems with the T4 manipulator, covering preliminary checks, joint diagnostics, key and freeze button failures, system error messages, status LEDs, voltage test points and factory assistance guidance."
+  ],
+  "safety": [
+    "Ensure power is supplied to the master controller, slave arm and servo controller before attempting any diagnostics.",
+    "Check that all telemetry conductors are secure at both the slave and master controller connectors.",
+    "Do not move joints to their full travel limits while servo loops are open; use the Freeze button to prevent uncontrolled movement.",
+    "Do not disable error checking unless instructed by engineering; running with error checking disabled may cause equipment damage."
+  ],
+  "tools": [
+    "MASTER TEST screen (diagnostic menu)",
+    "SLAVE TEST screen (diagnostic menu)",
+    "Binding wire for cable serving"
+  ],
+  "parts": [],
+  "steps": [
+    {
+      "title": "Preliminary Fault Isolation Procedures",
+      "text": [
+        "Ensure that the workstation is receiving electrical power and that the master controller display is on.",
+        "Ensure the slave controller is receiving electrical power and the slave arm and servo controller are powered.",
+        "Check that the servo commands/resolver inputs at the junction box are connected to the correct vehicle functions.",
+        "Ensure all telemetry conductors between the master controller and slave arm show continuity and are properly connected.",
+        "If the malfunction persists, use the following sections and troubleshooting tables to isolate the fault."
+      ]
+    },
+    {
+      "title": "Definitions of Slave Arm Performance",
+      "text": [
+        "Unresponsive: The arm does not respond to commands.",
+        "Sluggish: The arm responds slowly or exhibits jerky operation.",
+        "Erratic: Joints move unpredictably in response to commands.",
+        "Sagging: A joint droops and should be rigid instead.",
+        "Hard over: A joint runs to one extreme of travel and stays there."
+      ]
+    },
+    {
+      "title": "Diagnosing Master/Slave Joint Problems",
+      "text": [
+        "If uncontrolled operation or servo runaway occurs, press the Freeze button to open the servo loops and lock the arm.",
+        "Do not move any joint to its full travel limits while the servo loops are open.",
+        "When the servo loops are open the joint will remain at the commanded position and will not re-centre when the command is removed.",
+        "When the servo loops are closed the joint will re-centre when stow commands are released.",
+        "Use the Stow In/Out test by holding the Stow In button for approximately two seconds, releasing it and observing whether the joint recentres."
+      ]
+    },
+    {
+      "title": "Using the Master Test Screen",
+      "image": "../assets/images/troubleshooting_t4/figure1.png",
+      "text": [
+        "Access the MASTER TEST screen via the diagnostic menu; the screen locks the servo loops and disables motion.",
+        "Each joint is identified by number and displayed with its position value. A bar indicates the jaw band value (0–255).",
+        "Use the arrow keys to select a joint and verify that the indicated position value moves when the master controller is operated.",
+        "Pressing the Freeze button opens the servo loops; releasing it closes them.",
+        "Use the Keys field to observe which keys are depressed. A ‘1’ indicates the key is pressed; a ‘0’ indicates it is released."
+      ]
+    },
+    {
+      "title": "Using the Slave Test Screen",
+      "image": "../assets/images/troubleshooting_t4/figure2.png",
+      "text": [
+        "Access the SLAVE TEST screen to verify resolver outputs and servo commands. The screen displays command and position values for each joint.",
+        "Open the servo loops and observe the FRZ field; when FRZ is ON the servo loops are open and joints cannot be moved from the slave controller.",
+        "Unfreeze by pressing the Freeze button; the servo loops will close and FRZ will change to OFF.",
+        "Select a joint and move the master controller; the Command value should change but the Position value should remain constant with the servos open.",
+        "Close the servo loops and repeat; both Command and Position values should change together when the joint moves."
+      ]
+    },
+    {
+      "title": "Travel Limits",
+      "table": {
+        "headers": ["Joint", "Minimum", "Maximum"],
+        "rows": [
+          ["Shoulder", "0467", "6730"],
+          ["Elbow", "0719", "6223"],
+          ["Forearm", "0355", "5985"],
+          ["Wrist rotate", "0457", "6292"],
+          ["Jaw rotate", "0292", "5997"],
+          ["Jaw band", "0000", "0255"]
+        ]
+      },
+      "text": [
+        "Do not drive the joints beyond their travel limits shown in the table.",
+        "Values may vary slightly from joint to joint but should remain close to the specified minimum and maximum."  
+      ]
+    },
+    {
+      "title": "Diagnosing Key and Freeze Button Failures",
+      "text": [
+        "Observe the Keys field on the MASTER TEST screen. The field displays characters corresponding to function keys and the Freeze button.",
+        "A \"0\" indicates a key is released and a \"1\" indicates it is depressed.",
+        "Depress one key at a time while observing the Keys field to verify that the corresponding character changes from \"0\" to \"1\".",
+        "If a character does not change when the key is pressed, the key switch or Freeze button may be faulty and must be repaired or replaced.",
+        "If no characters change, the interface cable may be at fault; substitute a spare cable to verify."  
+      ],
+      "table": {
+        "headers": ["Key Identification", "Character"],
+        "rows": [
+          ["Freeze", "1"],
+          ["Stow in", "2"],
+          ["Stow out", "3"],
+          ["Test", "4"],
+          ["Jaw index", "5"],
+          ["Jaw freeze", "6"],
+          ["Shoulder freeze", "7"],
+          ["Elbow freeze", "8"],
+          ["Forearm freeze", "9"],
+          ["Wrist rotate freeze", "0"],
+          ["Jaw rotate freeze", "-"],
+          ["Jaw freeze 2", "+"]
+        ]
+      }
+    },
+    {
+      "title": "Troubleshooting Tables",
+      "text": [
+        "Use the following tables to diagnose screen-displayed symptoms, master arm symptoms, slave arm symptoms, and jaw problems.",
+        "Each table lists possible causes and recommended remedies for the given symptom."  
+      ],
+      "tables": [
+        {
+          "title": "Screen-Displayed Symptoms (Table 3)",
+          "headers": ["Symptom", "Possible Cause", "Remedy"],
+          "rows": [
+            ["Master display shows no characters", "No power to master controller", "Check master power switch and fuse"],
+            ["Master display flickers or resets", "Voltage drop or intermittent power", "Check cable connections and power supply"],
+            ["Keys field shows incorrect characters", "Stuck or faulty key switch", "Replace key switch"],
+            ["Master display shows abnormal characters", "Master controller fault", "Cycle power or replace controller"]
+          ]
+        },
+        {
+          "title": "Master Arm Symptoms (Table 4)",
+          "headers": ["Symptom", "Possible Cause", "Remedy"],
+          "rows": [
+            ["Freeze button does not lock master arm", "Freeze button failed", "Replace Freeze button"],
+            ["Jaw does not open/close", "Jaw collar loose", "Tighten jaw collar"],
+            ["Jaw binding during rotation", "Jaw collar out of adjustment", "Adjust jaw collar alignment"]
+          ]
+        },
+        {
+          "title": "Slave Arm Symptoms (Entire Arm) (Table 5)",
+          "headers": ["Symptom", "Possible Cause", "Remedy"],
+          "rows": [
+            ["Slave arm unresponsive", "No hydraulic power or electrical power", "Check hydraulic and electrical supply; verify servo power"],
+            ["Slave arm sluggish", "Hydraulic pressure low", "Check hydraulic pressure and filter"],
+            ["Slave arm erratic", "Electrical interference or wiring fault", "Check wiring and connectors"],
+            ["Slave arm operates only in one direction", "Servo module failure", "Swap resolver/servo modules and test"]
+          ]
+        },
+        {
+          "title": "Slave Arm Symptoms (Individual Joints) (Table 6)",
+          "headers": ["Symptom", "Possible Cause", "Remedy"],
+          "rows": [
+            ["Shoulder joint leaks hydraulic oil", "Damaged O-ring", "Replace O-ring"],
+            ["Elbow joint unresponsive", "Resolver failure", "Replace resolver"],
+            ["Wrist joint hard over", "Servo valve failure", "Replace servo valve"],
+            ["Multiple joints unresponsive", "Power distribution fault", "Check slave controller power supply"]
+          ]
+        },
+        {
+          "title": "Jaw Symptoms (Table 7)",
+          "headers": ["Symptom", "Possible Cause", "Remedy"],
+          "rows": [
+            ["Jaw will not open or close", "Hydraulic cylinder leak", "Inspect cylinder and replace seals"],
+            ["Jaw rotates slowly", "Low hydraulic flow", "Check hydraulic supply and return"],
+            ["Jaw index inaccurate", "Faulty jaw resolver", "Replace jaw resolver"]
+          ]
+        }
+      ]
+    },
+    {
+      "title": "System Errors",
+      "image": "../assets/images/troubleshooting_t4/figure3.png",
+      "text": [
+        "Use the SHOW ERRORS menu to display system errors. Error numbers 01 through 07 may be displayed.",
+        "Refer to Table 8 for definitions of system errors and Table 9 for possible causes and remedies.",
+        "Do not disable error checking unless instructed; if disabling is required, follow manufacturer guidelines."  
+      ],
+      "tables": [
+        {
+          "title": "System Errors (Table 8)",
+          "headers": ["Error", "Description"],
+          "rows": [
+            ["01", "Master range error – master joint range exceeded"],
+            ["02", "Slave range error – slave joint range exceeded"],
+            ["03", "Master voltage error – under or over voltage on master"],
+            ["04", "Slave voltage error – under or over voltage on slave"],
+            ["05", "Hydr OFF – hydraulic power off"],
+            ["06", "Comm error – communication fault"],
+            ["07", "Data error – invalid data"],
+            ["08", "Fatal telemetry error – shut down system"]
+          ]
+        },
+        {
+          "title": "Error Causes and Remedies (Table 9)",
+          "headers": ["Error", "Possible Cause", "Remedy"],
+          "rows": [
+            ["01", "Master joint exceeded travel limit", "Stow master joint back into range"],
+            ["02", "Slave joint exceeded travel limit", "Stow slave joint back into range"],
+            ["03", "Master power supply too high or low", "Check master power supply"],
+            ["04", "Slave power supply too high or low", "Check slave power supply"],
+            ["05", "Hydraulic pump off", "Turn hydraulic power on"],
+            ["06", "Telecom fault", "Check cables and connectors"],
+            ["07", "Invalid data received", "Reset system and check configuration"],
+            ["08", "Fatal telemetry error", "Shut down system and call factory support"]
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Disabling Error Checking and Fatal Telemetry Errors",
+      "text": [
+        "Do not disable error checking unless specifically directed; disabling error checking allows the system to operate with faults unchecked and can result in damage.",
+        "If a fatal telemetry error message appears, turn off power to both manipulator arms immediately.",
+        "Diagnose and correct the problem before restarting the system; if errors persist after restarting, contact field support."  
+      ],
+      "tables": [
+        {
+          "title": "Fatal Telemetry Errors (Table 10)",
+          "headers": ["Error", "Description", "Remedy"],
+          "rows": [
+            ["F01", "Communication lost between master and slave", "Check telemetry cables and power; restart system"],
+            ["F02", "Servo processor failure", "Replace servo processor board"],
+            ["F03", "Power fault in slave", "Check slave power supply and fuses"],
+            ["F04", "Power fault in master", "Check master power supply and fuses"],
+            ["F05", "Software fault detected", "Cycle power; reload software if necessary"]
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Status Indicator LEDs (Slave Controller)",
+      "image": "../assets/images/troubleshooting_t4/figure4.png",
+      "text": [
+        "PWR: Illuminated when +/-16 V power is present on the slave board.",
+        "PROC: Illuminated when the slave controller CPU is operating.",
+        "VALVE: Illuminated when valve power is on; turns off when a fatal error occurs.",
+        "TX: Flashes to indicate data transmission to the master.",
+        "RX: Flashes to indicate receipt of valid commands from the master."  
+      ]
+    },
+    {
+      "title": "Status Indicator LEDs (Master Controller)",
+      "image": "../assets/images/troubleshooting_t4/figure5.png",
+      "text": [
+        "Pwr: Power is present on the master board.",
+        "Done: The system CPU startup self-test is complete.",
+        "Proc: The master CPU is operating correctly.",
+        "TX: Flashes when the master is transmitting data to the slave.",
+        "RX: Flashes when valid telemetry data is received from the slave.",
+        "Jaw: Indicates the jaw module is installed.",
+        "Extra: Reserved for factory use."  
+      ]
+    },
+    {
+      "title": "Master Controller Voltage Test Points",
+      "image": "../assets/images/troubleshooting_t4/figure6.png",
+      "text": [
+        "Test points on the master board allow measurement of +/-16 V, +12 V, +5 V, +3.3 V, +2.5 V, +1.2 V and ground.",
+        "Use a suitable meter and test leads to verify these voltages.",
+        "The master controller board contains no user-serviceable parts; contact customer service if any faults are found."  
+      ]
+    },
+    {
+      "title": "Factory Assistance",
+      "text": [
+        "If problems persist after following the troubleshooting procedures, contact the factory for assistance.",
+        "Be prepared to describe the fault symptoms, whether the problem is constant or intermittent, environmental and operating conditions at the time the problem occurred, whether the fault appeared suddenly or gradually, whether other manipulator functions are affected, and any other relevant information.",
+        "Providing complete information will help the factory engineer diagnose and advise corrective action."  
+      ]
+    }
+  ],
+  "notes": [
+    "Tables are summarised versions of the troubleshooting tables from the manual and maintain the original wording where possible.",
+    "Images referenced in the procedure (Figures 1–6) must be saved into the specified assets folder for proper display in the user interface."
+  ],
+  "sourceMaterial": [
+    {
+      "label": "Troubleshooting T4 Manual",
+      "url": ""
+    }
+  ]
+}
+
+

@@ -18,7 +18,15 @@ type IndexItem = {
   keywords: string[];
   updated: string;
 };
-type Step = { title?: string; image?: string; text: string[]; notes?: string[] };
+type Table = { title?: string; headers: string[]; rows: string[][] };
+type Step = {
+  title?: string;
+  image?: string;
+  text: string[];
+  notes?: string[];
+  table?: Table;
+  tables?: Table[];
+};
 type Troubleshoot = { symptom: string; checks: string[] };
 type SourceMaterial = { label: string; url: string };
 type Procedure = {
@@ -298,6 +306,23 @@ function renderTroubleshooting(items?: Troubleshoot[]) {
 
 function renderSteps(steps?: Step[]) {
   if (!steps || !steps.length) return '';
+
+  const renderTable = (table: Table) => {
+    const headerRow = table.headers.map((h) => `<th>${h}</th>`).join('');
+    const rows = table.rows
+      .map((r) => `<tr>${r.map((cell) => `<td>${cell}</td>`).join('')}</tr>`)
+      .join('');
+    const caption = table.title ? `<caption>${table.title}</caption>` : '';
+    return `
+      <div class="table-scroll" style="margin:0.5rem 0;">
+        <table class="result-table">
+          ${caption}
+          <thead><tr>${headerRow}</tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>`;
+  };
+
   const body = steps
     .map(
       (s, idx) => `
@@ -311,6 +336,13 @@ function renderSteps(steps?: Step[]) {
             : ''
         }
         ${s.text.map((p) => `<p class="helper-text" style="color:#0b192f;">${p}</p>`).join('')}
+        ${
+          s.table
+            ? renderTable(s.table)
+            : s.tables && s.tables.length
+              ? s.tables.map((t) => renderTable(t)).join('')
+              : ''
+        }
         ${s.notes && s.notes.length ? `<ul>${s.notes.map((n) => `<li>${n}</li>`).join('')}</ul>` : ''}
       </article>`
     )

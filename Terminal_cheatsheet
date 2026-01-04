@@ -3,3 +3,8 @@
 git add .
 git commit -m "Add new procedures and update styling"
 git push
+
+# Live preview... http://localhost:4173
+
+npm run dev -- --host --port 4173
+

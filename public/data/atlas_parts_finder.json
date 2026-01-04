@@ -1,0 +1,477 @@
+[
+  {
+    "Part Number": "008-0216",
+    "Description": "KIT,SOFT GOODS,LIN ACTR,T3",
+    "Expanded Description": "Soft goods kit for the linear actuator, T3 manipulator."
+  },
+  {
+    "Part Number": "008-0509",
+    "Description": "SPS KIT,ATLAS,HOSES",
+    "Expanded Description": "Hose kit for the Atlas manipulator."
+  },
+  {
+    "Part Number": "008-0510",
+    "Description": "SPARES KIT,ATLAS,HDW",
+    "Expanded Description": "Hardware spares kit for the Atlas manipulator."
+  },
+  {
+    "Part Number": "008-0096",
+    "Description": "SP KIT, RIG, WRIST",
+    "Expanded Description": "Collection of spare parts for the rig assembly, wrist assembly."
+  },
+  {
+    "Part Number": "003-0115",
+    "Description": "BRG,PSTN,LIN ACTR,T2 GAMMA",
+    "Expanded Description": "Bearing for piston, linear actuator (T2 GAMMA); reduces friction and supports smooth motion in the manipulator."
+  },
+  {
+    "Part Number": "004-0649",
+    "Description": "SEAL,PSTN,LIN ACTR,T2/3,GAMMA",
+    "Expanded Description": "Seal for piston, linear actuator, T2/T3 manipulator, Gamma manipulator; prevents fluid leakage and keeps contaminants out of the hydraulic system."
+  },
+  {
+    "Part Number": "004-0669",
+    "Description": "O-RING,2-031,BUNA 90",
+    "Expanded Description": "O-ring (2-031) made of Buna-N nitrile rubber (90 durometer); prevents fluid leakage and keeps contaminants out of the hydraulic system."
+  },
+  {
+    "Part Number": "001-0893",
+    "Description": "BRG,ROD",
+    "Expanded Description": "Bearing for rod; reduces friction and supports smooth motion in the manipulator."
+  },
+  {
+    "Part Number": "004-0650",
+    "Description": "SEAL,ROD,LIN ACTR,GAMMA",
+    "Expanded Description": "Seal for rod, linear actuator, Gamma manipulator; prevents fluid leakage and keeps contaminants out of the hydraulic system."
+  },
+  {
+    "Part Number": "004-0651",
+    "Description": "SCRAPER,ROD,LIN ACTR,T2 GAMMA",
+    "Expanded Description": "Scraper for rod, linear actuator (T2 GAMMA)."
+  },
+  {
+    "Part Number": "004-0082",
+    "Description": "O-RING,3-904 BUNA 90",
+    "Expanded Description": "O-ring (3-904 BUNA 90); prevents fluid leakage and keeps contaminants out of the hydraulic system."
+  },
+  {
+    "Part Number": "006-2613-1",
+    "Description": "HOSE,-4 JIC,56-DH,73.75 LG",
+    "Expanded Description": "Hydraulic hose with specifications -4 JIC, 56-DH, 73.75 LG, used to route fluid between components in the Atlas manipulator."
+  },
+  {
+    "Part Number": "006-2613-2",
+    "Description": "HOSE,-4 JIC,56-DH,72.75 LG",
+    "Expanded Description": "Hydraulic hose with specifications -4 JIC, 56-DH, 72.75 LG, used to route fluid between components in the Atlas manipulator."
+  },
+  {
+    "Part Number": "006-2613-3",
+    "Description": "HOSE,-4 JIC,56-DH,74.5O LG",
+    "Expanded Description": "Hydraulic hose with specifications -4 JIC, 56-DH, 74.5O LG, used to route fluid between components in the Atlas manipulator."
+  },
+  {
+    "Part Number": "006-2613-4",
+    "Description": "HOSE,-4 JIC,56-DH,73.50 LG",
+    "Expanded Description": "Hydraulic hose with specifications -4 JIC, 56-DH, 73.50 LG, used to route fluid between components in the Atlas manipulator."
+  },
+  {
+    "Part Number": "006-2613-5",
+    "Description": "HOSE,-4 JIC,56-DH,79.25 LG",
+    "Expanded Description": "Hydraulic hose with specifications -4 JIC, 56-DH, 79.25 LG, used to route fluid between components in the Atlas manipulator."
+  },
+  {
+    "Part Number": "006-2613-6",
+    "Description": "HOSE,-4 JIC,56-DH,69.25 LG",
+    "Expanded Description": "Hydraulic hose with specifications -4 JIC, 56-DH, 69.25 LG, used to route fluid between components in the Atlas manipulator."
+  },
+  {
+    "Part Number": "006-2613-7",
+    "Description": "HOSE,-4 JIC,56-DH,75.75 LG",
+    "Expanded Description": "Hydraulic hose with specifications -4 JIC, 56-DH, 75.75 LG, used to route fluid between components in the Atlas manipulator."
+  },
+  {
+    "Part Number": "006-2613-8",
+    "Description": "HOSE,-4 JIC,56-DH,62.00 LG",
+    "Expanded Description": "Hydraulic hose with specifications -4 JIC, 56-DH, 62.00 LG, used to route fluid between components in the Atlas manipulator."
+  },
+  {
+    "Part Number": "006-2613-9",
+    "Description": "HOSE,-4 JIC,56-DH,28.50 LG",
+    "Expanded Description": "Hydraulic hose with specifications -4 JIC, 56-DH, 28.50 LG, used to route fluid between components in the Atlas manipulator."
+  },
+  {
+    "Part Number": "006-2613-10",
+    "Description": "HOSE,-4 JIC,56-DH,41.75 LG",
+    "Expanded Description": "Hydraulic hose with specifications -4 JIC, 56-DH, 41.75 LG, used to route fluid between components in the Atlas manipulator."
+  },
+  {
+    "Part Number": "006-2613-11",
+    "Description": "HOSE,-4 JIC,56-DH,42.25 LG",
+    "Expanded Description": "Hydraulic hose with specifications -4 JIC, 56-DH, 42.25 LG, used to route fluid between components in the Atlas manipulator."
+  },
+  {
+    "Part Number": "006-2613-12",
+    "Description": "HOSE,-4 JIC,56-DH,32.00 LG",
+    "Expanded Description": "Hydraulic hose with specifications -4 JIC, 56-DH, 32.00 LG, used to route fluid between components in the Atlas manipulator."
+  },
+  {
+    "Part Number": "006-2613-13",
+    "Description": "HOSE,-4 JIC,56-DH,15.50 LG",
+    "Expanded Description": "Hydraulic hose with specifications -4 JIC, 56-DH, 15.50 LG, used to route fluid between components in the Atlas manipulator."
+  },
+  {
+    "Part Number": "006-2613-14",
+    "Description": "HOSE,-4 JIC,56-DH,17.00 LG",
+    "Expanded Description": "Hydraulic hose with specifications -4 JIC, 56-DH, 17.00 LG, used to route fluid between components in the Atlas manipulator."
+  },
+  {
+    "Part Number": "006-2613-15",
+    "Description": "HOSE,-4 JIC,56-DH,72.50 LG",
+    "Expanded Description": "Hydraulic hose with specifications -4 JIC, 56-DH, 72.50 LG, used to route fluid between components in the Atlas manipulator."
+  },
+  {
+    "Part Number": "001-4342",
+    "Description": "RETAINER, PIN",
+    "Expanded Description": "Pin; aligns or secures components within the assembly."
+  },
+  {
+    "Part Number": "002-0029P",
+    "Description": "HHCS,1/4-20 X 1/2,SS,PATCH",
+    "Expanded Description": "Hex-head cap screw (1/4-20 X 1/2) made of stainless steel; provides secure fastening for components in the manipulator."
+  },
+  {
+    "Part Number": "003-0114",
+    "Description": "BRG,PVT,LIN ACTR,T2 GAMMA",
+    "Expanded Description": "Bearing for pivot, linear actuator (T2 GAMMA); reduces friction and supports smooth motion in the manipulator."
+  },
+  {
+    "Part Number": "002-1440",
+    "Description": "ANODE,GALVANIC",
+    "Expanded Description": "Galvanic anode; acts as a sacrificial metal to prevent corrosion on the manipulator."
+  },
+  {
+    "Part Number": "002-0229P",
+    "Description": "SHCS,10-24 X 3/8,SS,PATCH",
+    "Expanded Description": "Socket-head cap screw (10-24 X 3/8) made of stainless steel; provides secure fastening for components in the manipulator."
+  },
+  {
+    "Part Number": "002-0195",
+    "Description": "SHCS,10-24X1-1/4,SS",
+    "Expanded Description": "Socket-head cap screw (10-24X1-1/4) made of stainless steel; provides secure fastening for components in the manipulator."
+  },
+  {
+    "Part Number": "003-0298",
+    "Description": "BRG,THRUST,1\"IDX1.75\"OD\"X.0585",
+    "Expanded Description": "Thrust bearing (1\"IDX1.75\"OD\"X.0585); reduces friction and supports smooth motion in the manipulator."
+  },
+  {
+    "Part Number": "003-0263",
+    "Description": "BRG,DIXON,CJ16E18-5",
+    "Expanded Description": "Bearing (CJ16E18-5); reduces friction and supports smooth motion in the manipulator."
+  },
+  {
+    "Part Number": "001-10523",
+    "Description": "BRNG,TOP HAT,1.0 ID,.735 LG",
+    "Expanded Description": "Bearing (1.0 ID, .735 LG); reduces friction and supports smooth motion in the manipulator."
+  },
+  {
+    "Part Number": "003-0263-2",
+    "Description": "BEARING,DIXON,1.0X1.125X.438L",
+    "Expanded Description": "Bearing (1.0X1.125X.438L); reduces friction and supports smooth motion in the manipulator."
+  },
+  {
+    "Part Number": "003-0263-1",
+    "Description": "BRG,DIXON,1.0 ID X .530 LG",
+    "Expanded Description": "Bearing (1.0 ID X .530 LG); reduces friction and supports smooth motion in the manipulator."
+  },
+  {
+    "Part Number": "001-10743",
+    "Description": "HARD STOP,SHOULDER,A7F",
+    "Expanded Description": "Mechanical stop for shoulder assembly, A7F manipulator; limits motion and protects components from overtravel."
+  },
+  {
+    "Part Number": "001-10492",
+    "Description": "HARD STOP,AZIMUTH,A7F",
+    "Expanded Description": "Mechanical stop for azimuth axis, A7F manipulator; limits motion and protects components from overtravel."
+  },
+  {
+    "Part Number": "001-10538",
+    "Description": "STOP,PITCH,A7F",
+    "Expanded Description": "Mechanical stop for pitch axis, A7F manipulator; limits motion and protects components from overtravel."
+  },
+  {
+    "Part Number": "001-7520",
+    "Description": "BOLT,6 PT,5/8-18,STD",
+    "Expanded Description": "Bolt (6 PT, 5/8-18); provides secure fastening for components in the manipulator."
+  },
+  {
+    "Part Number": "001-5396",
+    "Description": "PLATE,T-BAR,LOCKING",
+    "Expanded Description": "Plate; provides structural support or serves as a mounting surface."
+  },
+  {
+    "Part Number": "002-1925",
+    "Description": "ANTI-SIEZE,1 OZ TUBE",
+    "Expanded Description": "Part (1 OZ TUBE)."
+  },
+  {
+    "Part Number": "001-10493",
+    "Description": "SPACER,HARD STOP,AZIMUTH,A7F",
+    "Expanded Description": "Spacer for azimuth axis, A7F manipulator; maintains appropriate distance between components."
+  },
+  {
+    "Part Number": "002-3168",
+    "Description": "ANODE,T-20",
+    "Expanded Description": "Galvanic anode (T-20); acts as a sacrificial metal to prevent corrosion on the manipulator."
+  },
+  {
+    "Part Number": "002-0966",
+    "Description": "SHCS,1/4-20X.75,SS",
+    "Expanded Description": "Socket-head cap screw (1/4-20X.75) made of stainless steel; provides secure fastening for components in the manipulator."
+  },
+  {
+    "Part Number": "002-0188",
+    "Description": "HHCS,1/4-20X1.5,SS",
+    "Expanded Description": "Hex-head cap screw (1/4-20X1.5) made of stainless steel; provides secure fastening for components in the manipulator."
+  },
+  {
+    "Part Number": "002-0715P",
+    "Description": "HHCS,1/2-20X1.5,316SS,NLK",
+    "Expanded Description": "Hex-head cap screw (1/2-20X1.5) made of 316 stainless steel; provides secure fastening for components in the manipulator."
+  },
+  {
+    "Part Number": "004-0222",
+    "Description": "O-RING,2-010 BUNA 90",
+    "Expanded Description": "O-ring (2-010 BUNA 90); prevents fluid leakage and keeps contaminants out of the hydraulic system."
+  },
+  {
+    "Part Number": "003-0174",
+    "Description": "BSHG,FL.,1/4X5/16X1/4LG.,NYL",
+    "Expanded Description": "Bushing (1/4X5/16X1/4LG.); provides smooth motion and reduces wear between moving parts."
+  },
+  {
+    "Part Number": "004-0617",
+    "Description": "SEAL,FLUROCARBON #AR10400-418-",
+    "Expanded Description": "Seal (FLUROCARBON #AR10400-418-); prevents fluid leakage and keeps contaminants out of the hydraulic system."
+  },
+  {
+    "Part Number": "002-1544",
+    "Description": "WSHR,G10,5/16X9/16X1/16",
+    "Expanded Description": "Washer (G10, 5/16X9/16X1/16); distributes load and provides spacing in assemblies."
+  },
+  {
+    "Part Number": "004-0803",
+    "Description": "SEAL,SHAMBAN,TGZF-S4016NA",
+    "Expanded Description": "Seal (TGZF-S4016NA); prevents fluid leakage and keeps contaminants out of the hydraulic system."
+  },
+  {
+    "Part Number": "001-4454",
+    "Description": "BRG,SLYDRING,2.875IDX3.063X.25",
+    "Expanded Description": "Slider ring bearing (2.875IDX3.063X.25); reduces friction and supports smooth motion in the manipulator."
+  },
+  {
+    "Part Number": "003-0074",
+    "Description": "WSHR,THR,TRA2840,TORRINGTON",
+    "Expanded Description": "Washer (TRA2840); distributes load and provides spacing in assemblies."
+  },
+  {
+    "Part Number": "003-0013",
+    "Description": "TORRINGTON,NTA 2840",
+    "Expanded Description": "Part (NTA 2840)."
+  },
+  {
+    "Part Number": "004-0575",
+    "Description": "SEAL,AR10103-214-UH,FLUROCARBO",
+    "Expanded Description": "Seal (AR10103-214-UH) made of fluorocarbon; prevents fluid leakage and keeps contaminants out of the hydraulic system."
+  },
+  {
+    "Part Number": "004-0574",
+    "Description": "SEAL,AR10103-212-UH,FLUROCARBO",
+    "Expanded Description": "Seal (AR10103-212-UH) made of fluorocarbon; prevents fluid leakage and keeps contaminants out of the hydraulic system."
+  },
+  {
+    "Part Number": "004-0081",
+    "Description": "O-RING,2-035 BUNA 70",
+    "Expanded Description": "O-ring (2-035 BUNA 70); prevents fluid leakage and keeps contaminants out of the hydraulic system."
+  },
+  {
+    "Part Number": "004-0017",
+    "Description": "O-RING,2-031 BUNA 70",
+    "Expanded Description": "O-ring (2-031 BUNA 70); prevents fluid leakage and keeps contaminants out of the hydraulic system."
+  },
+  {
+    "Part Number": "004-0413",
+    "Description": "O-RING,2-026 V75",
+    "Expanded Description": "O-ring (2-026 V75); prevents fluid leakage and keeps contaminants out of the hydraulic system."
+  },
+  {
+    "Part Number": "004-0110",
+    "Description": "O-RING,2-046 BUNA 70",
+    "Expanded Description": "O-ring (2-046 BUNA 70); prevents fluid leakage and keeps contaminants out of the hydraulic system."
+  },
+  {
+    "Part Number": "001-4448",
+    "Description": "BOLT,OIL SPLY,WR",
+    "Expanded Description": "Bolt; provides secure fastening for components in the manipulator."
+  },
+  {
+    "Part Number": "001-4449",
+    "Description": "BOLT,OIL RTN,WR",
+    "Expanded Description": "Bolt; provides secure fastening for components in the manipulator."
+  },
+  {
+    "Part Number": "004-0445",
+    "Description": "O-RING,2-006 V90",
+    "Expanded Description": "O-ring (2-006 V90); prevents fluid leakage and keeps contaminants out of the hydraulic system."
+  },
+  {
+    "Part Number": "001-1984",
+    "Description": "BSHG,WR OIL SPLY TUBE",
+    "Expanded Description": "Bushing; provides smooth motion and reduces wear between moving parts."
+  },
+  {
+    "Part Number": "004-0698",
+    "Description": "O-RING,2-011,DISOGRIN 90 DURO",
+    "Expanded Description": "O-ring (2-011) made of Disogrin polyurethane (90 durometer); prevents fluid leakage and keeps contaminants out of the hydraulic system."
+  },
+  {
+    "Part Number": "004-0576",
+    "Description": "WSHR,CRUSH,5/16",
+    "Expanded Description": "Washer (5/16); distributes load and provides spacing in assemblies."
+  },
+  {
+    "Part Number": "001-4577",
+    "Description": "SHCS,5/16-18X3,CADMIUM PLD,UNB",
+    "Expanded Description": "Socket-head cap screw (5/16-18X3) made of cadmium-plated; provides secure fastening for components in the manipulator."
+  },
+  {
+    "Part Number": "003-0092",
+    "Description": "WSHR,THR,TORRINGTON #TRC 1427",
+    "Expanded Description": "Washer (TORRINGTON #TRC 1427); distributes load and provides spacing in assemblies."
+  },
+  {
+    "Part Number": "003-0091",
+    "Description": "BRG,THR,TORRINGTON #NTC 1427",
+    "Expanded Description": "Bearing (TORRINGTON #NTC 1427); reduces friction and supports smooth motion in the manipulator."
+  },
+  {
+    "Part Number": "002-0139",
+    "Description": "SHCS,10-32X3/4,SS",
+    "Expanded Description": "Socket-head cap screw (10-32X3/4) made of stainless steel; provides secure fastening for components in the manipulator."
+  },
+  {
+    "Part Number": "003-0078",
+    "Description": "BRG,CJ08E10-4,DIXON,.5X.625X.5",
+    "Expanded Description": "Bearing (CJ08E10-4, .5X.625X.5); reduces friction and supports smooth motion in the manipulator."
+  },
+  {
+    "Part Number": "001-2946",
+    "Description": "BRG,2.25 BORE PSTN,GAMMA",
+    "Expanded Description": "Bearing for Gamma manipulator (2.25 BORE PSTN); reduces friction and supports smooth motion in the manipulator."
+  },
+  {
+    "Part Number": "004-0616",
+    "Description": "SEAL,PSTN,SHAMBAN,34G02250-A46",
+    "Expanded Description": "Seal (34G02250-A46) for piston; prevents fluid leakage and keeps contaminants out of the hydraulic system."
+  },
+  {
+    "Part Number": "004-0542",
+    "Description": "O-RING,2-034 BUNA 70",
+    "Expanded Description": "O-ring (2-034 BUNA 70); prevents fluid leakage and keeps contaminants out of the hydraulic system."
+  },
+  {
+    "Part Number": "004-0541",
+    "Description": "RING,BACKUP,8-034 BUNA 90",
+    "Expanded Description": "Part (8-034 BUNA 90)."
+  },
+  {
+    "Part Number": "001-0893",
+    "Description": "BRG,ROD",
+    "Expanded Description": "Bearing for rod; reduces friction and supports smooth motion in the manipulator."
+  },
+  {
+    "Part Number": "004-0508",
+    "Description": "STEPSEAL,S48270-4203-109P",
+    "Expanded Description": "Part (S48270-4203-109P)."
+  },
+  {
+    "Part Number": "004-0619",
+    "Description": "O-RING,2-114,N90",
+    "Expanded Description": "O-ring (2-114) made of nitrile rubber (90 durometer); prevents fluid leakage and keeps contaminants out of the hydraulic system."
+  },
+  {
+    "Part Number": "003-0050",
+    "Description": "BRG,CJ12E144 DIXON",
+    "Expanded Description": "Bearing (CJ12E144 DIXON); reduces friction and supports smooth motion in the manipulator."
+  },
+  {
+    "Part Number": "004-0650",
+    "Description": "SEAL,ROD,LIN ACTR,GAMMA",
+    "Expanded Description": "Seal for rod, linear actuator, Gamma manipulator; prevents fluid leakage and keeps contaminants out of the hydraulic system."
+  },
+  {
+    "Part Number": "010-0173",
+    "Description": "TOOL,CLP,JAW",
+    "Expanded Description": "Specialized tool for jaw assembly, used to service or assemble components in the manipulator."
+  },
+  {
+    "Part Number": "010-0174",
+    "Description": "TOOL,INSTALL,M,2.25",
+    "Expanded Description": "Specialized tool (2.25), used to service or assemble components in the manipulator."
+  },
+  {
+    "Part Number": "010-0175",
+    "Description": "TOOL,SIZING,F,2.25",
+    "Expanded Description": "Specialized tool (2.25), used to service or assemble components in the manipulator."
+  },
+  {
+    "Part Number": "010-0804",
+    "Description": "TOOL,PISTON ROD,JAW",
+    "Expanded Description": "Specialized tool for jaw assembly, used to service or assemble components in the manipulator."
+  },
+  {
+    "Part Number": "010-0184",
+    "Description": "TOOL,INSTL,M,1.75",
+    "Expanded Description": "Specialized tool (1.75), used to service or assemble components in the manipulator."
+  },
+  {
+    "Part Number": "010-0185",
+    "Description": "TOOL,SIZING,F,1.75",
+    "Expanded Description": "Specialized tool (1.75), used to service or assemble components in the manipulator."
+  },
+  {
+    "Part Number": "010-0203",
+    "Description": "TOOL,SIZING,M,1.0",
+    "Expanded Description": "Specialized tool (1.0), used to service or assemble components in the manipulator."
+  },
+  {
+    "Part Number": "010-0486",
+    "Description": "SKT,MOD,NOSE NUT,LIN ACT.",
+    "Expanded Description": "Specialized tool, used to service or assemble components in the manipulator."
+  },
+  {
+    "Part Number": "010-0804-1",
+    "Description": "TOOL,PSTN ROD,JAW,SIDE SKIRT",
+    "Expanded Description": "Specialized tool for jaw assembly, used to service or assemble components in the manipulator."
+  },
+  {
+    "Part Number": "010-1455",
+    "Description": "TOOL,CLAMP,ACTUATOR ROD,1 IN",
+    "Expanded Description": "Specialized tool (1 IN), used to service or assemble components in the manipulator."
+  },
+  {
+    "Part Number": "010-1456",
+    "Description": "TOOL,PIN ALIGN ASSY",
+    "Expanded Description": "Specialized tool, used to service or assemble components in the manipulator."
+  },
+  {
+    "Part Number": "010-1457",
+    "Description": "TOOL,BEARING INSTL & RMV",
+    "Expanded Description": "Specialized tool, used to service or assemble components in the manipulator."
+  },
+  {
+    "Part Number": "010-1084",
+    "Description": "ADAPTER,SOCKET,1/2\"F TO 3/4\" M",
+    "Expanded Description": "Specialized tool (1/2\"F TO 3/4\" M), used to service or assemble components in the manipulator."
+  }
+]

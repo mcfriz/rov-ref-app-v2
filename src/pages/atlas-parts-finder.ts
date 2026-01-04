@@ -11,9 +11,12 @@ type Part = {
 };
 
 type RawPart = {
-  'Part Number': string;
-  Description: string;
+  'Part Number'?: string;
+  Description?: string;
   'Expanded Description'?: string;
+  partNumber?: string;
+  description?: string;
+  expandedDescription?: string;
   link?: string;
   fileName?: string;
 };
@@ -37,13 +40,14 @@ function normalize(text: string) {
 }
 
 function mapPart(raw: RawPart): Part | null {
-  const partNumber = raw['Part Number'];
-  const description = raw['Description'];
+  const partNumber = raw['Part Number'] ?? raw.partNumber;
+  const description = raw.Description ?? raw.description;
+  const expandedDescription = raw['Expanded Description'] ?? raw.expandedDescription;
   if (!partNumber || !description) return null;
   return {
-    partNumber: String(partNumber),
-    description: String(description),
-    expandedDescription: raw['Expanded Description'] ?? undefined,
+    partNumber: String(partNumber).trim(),
+    description: String(description).trim(),
+    expandedDescription: expandedDescription ? String(expandedDescription).trim() : undefined,
     link: raw.link,
     fileName: raw.fileName,
   };
@@ -283,16 +287,28 @@ async function loadParts() {
     renderEmpty('Loading parts...');
     const response = await fetch(dataUrl);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const payload = await response.json();
+    const text = await response.text();
+    if (!text.trim()) {
+      renderEmpty('Atlas parts data file is empty. Add entries to public/data/atlas_parts_finder.json.');
+      return;
+    }
+
+    const payload = JSON.parse(text);
     if (!payload) {
       renderEmpty('Failed to load parts data. Check your JSON file.');
       return;
     }
+
     const rawList: RawPart[] = Array.isArray(payload)
       ? payload
-      : Array.isArray((payload as any)?.cables)
-        ? (payload as any).cables
-        : (payload as any)?.cables ?? (payload as any) ?? [];
+      : Array.isArray((payload as any)?.parts)
+        ? (payload as any).parts
+        : Array.isArray((payload as any)?.items)
+          ? (payload as any).items
+          : Array.isArray((payload as any)?.cables)
+            ? (payload as any).cables
+            : (payload as any)?.parts ?? (payload as any)?.items ?? (payload as any)?.cables ?? (payload as any) ?? [];
+
     const mapped = rawList.map(mapPart).filter((p): p is Part => Boolean(p));
     parts = mapped;
     if (!parts.length) {
