@@ -1,0 +1,11 @@
+[
+  { "id": "rov", "name": "ROV", "icon": "../assets/icons/rov.svg", "description": "Vehicle-level checks" },
+  { "id": "manipulators", "name": "Manipulators", "icon": "../assets/icons/manipulators.svg", "description": "Arms and wrists" },
+  { "id": "thrusters", "name": "Thrusters", "icon": "../assets/icons/thrusters.svg", "description": "Propulsion tasks" },
+  { "id": "tooling", "name": "Tooling", "icon": "../assets/icons/tooling.svg", "description": "Tools and adapters" },
+  { "id": "cameras", "name": "Cameras", "icon": "../assets/icons/cameras.svg", "description": "Camera setups" },
+  { "id": "lights", "name": "Lights", "icon": "../assets/icons/lights.svg", "description": "Lighting adjustments" },
+  { "id": "tms", "name": "TMS", "icon": "../assets/icons/tms.svg", "description": "TMS operations" },
+  { "id": "lars", "name": "LARS", "icon": "../assets/icons/lars.svg", "description": "Launch & recovery" },
+  { "id": "other", "name": "Other", "icon": "../assets/icons/other.svg", "description": "Miscellaneous" }
+]

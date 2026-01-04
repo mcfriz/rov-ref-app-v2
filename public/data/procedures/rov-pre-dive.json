@@ -1,0 +1,43 @@
+{
+  "id": "rov-pre-dive",
+  "title": "ROV Pre-Dive Check",
+  "purpose": [
+    "Confirm the vehicle is safe and ready for launch.",
+    "Catch obvious defects before splash."
+  ],
+  "safety": [
+    "Lock out tag out for high-voltage circuits when hands are in panels.",
+    "Keep propulsion disabled until all hands are clear."
+  ],
+  "tools": ["Multimeter", "Torch", "Clean lint-free wipes"],
+  "parts": ["Unknown O-ring spares (verify kit)", "Connector caps"],
+  "steps": [
+    {
+      "title": "Power and comms",
+      "text": [
+        "Verify surface power is stable and breakers are set.",
+        "Bring up telemetry and confirm heartbeats from all nodes."
+      ]
+    },
+    {
+      "title": "Leak checks",
+      "text": [
+        "Inspect housings for moisture or condensation.",
+        "Check oil compensation levels and look for sheen."
+      ]
+    },
+    {
+      "title": "Motion and cameras",
+      "text": [
+        "Test basic thruster jogs (short pulses only).",
+        "Cycle cameras and lights; confirm feeds are clean."
+      ],
+      "notes": ["Disable thruster test if divers are in the water."]
+    }
+  ],
+  "troubleshooting": [
+    { "symptom": "No comms on boot", "checks": ["Verify switches are powered", "Swap topside fiber if in doubt"] }
+  ],
+  "notes": ["Record findings in the dive log.", "Escalate anomalies before launch."],
+  "sourceMaterial": [{ "label": "ROV Ops Guide (placeholder)", "url": "https://example.com" }]
+}

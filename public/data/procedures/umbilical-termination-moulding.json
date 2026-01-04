@@ -1,0 +1,120 @@
+{
+  "id": "umbilical-termination-moulding",
+  "title": "Umbilical Termination and Moulding",
+  "purpose": [
+    "Terminate and mould a steel armoured ROV umbilical using a termination socket.",
+    "Verify mechanical integrity through load testing before returning to service."
+  ],
+  "safety": [
+    "Only trained and competent personnel may perform or supervise this procedure.",
+    "Ensure all electrical systems are isolated, locked out, and proven dead.",
+    "Establish exclusion zones during cutting and load testing.",
+    "Never place fingers through UTS eyes; use slings or rope at all times."
+  ],
+  "tools": [
+    "Binding wire",
+    "Cutting tools for armoured cable",
+    "Cleaning and degreasing materials",
+    "Moulding compound (Wirelock or equivalent)",
+    "Soft slings",
+    "Load cell or approved test weights",
+    "Buckets and spill control materials"
+  ],
+  "parts": [
+    "Termination socket (UTS)",
+    "Moulding compound"
+  ],
+  "steps": [
+    {
+      "title": "Preparation",
+      "text": [
+        "Confirm weather and vessel movements are suitable for the operation.",
+        "Ensure permits to work are in place and a toolbox talk has been completed.",
+        "Check moulding compound expiry date.",
+        "Isolate electrical supplies, prove dead, and lock off systems."
+      ]
+    },
+    {
+      "title": "System shutdown and isolation",
+      "text": [
+        "Shut down and ground the ROV system.",
+        "Pay out the required length of umbilical from the winch.",
+        "Power off the winch and/or A-frame.",
+        "Post work-in-progress signage and verify complete isolation."
+      ]
+    },
+    {
+      "title": "Disconnect and cut back",
+      "text": [
+        "Secure the umbilical to prevent movement before cutting.",
+        "Disconnect the termination socket from the TMS or vehicle using slings or rope.",
+        "Apply secure bindings either side of the cut location.",
+        "Cut the umbilical at the required length.",
+        "Remove the old cast from the termination socket."
+      ]
+    },
+    {
+      "title": "Prepare termination socket and strands",
+      "text": [
+        "Thoroughly clean and degrease the inside of the termination socket.",
+        "Inspect the socket for damage.",
+        "Apply a tight binding-wire serving approximately 45 mm long to the umbilical before cutting the strands.",
+        "End the binding wire where the bullet entry will sit when the termination socket is in its final position."
+      ],
+      "notes": [
+        "Correct placement of the binding wire helps prevent bird-caging and maintains correct strand lay."
+      ]
+    },
+    {
+      "title": "Cut and prepare strands",
+      "text": [
+        "Cut the armour strands to match the cone shape of the termination socket.",
+        "Slightly spread the strands to allow access for cleaning.",
+        "Thoroughly clean and degrease all strands.",
+        "Pull the termination socket over the strands.",
+        "Ensure strands sit 2–5 mm below the edge of the cone.",
+        "Confirm strands are evenly distributed and the umbilical is straight and level."
+      ]
+    },
+    {
+      "title": "Moulding",
+      "text": [
+        "Mix the moulding compound according to the manufacturer's instructions.",
+        "Do not heat the termination socket or umbilical.",
+        "Pour the compound slowly and continuously against the inner wall of the socket.",
+        "Fill to the edge of the cone without overfilling or underfilling.",
+        "Seal any leakage at the umbilical entry with grease tape if required.",
+        "Allow the mould to cure as specified by the compound manufacturer."
+      ]
+    },
+    {
+      "title": "Load test",
+      "text": [
+        "Conduct a task-specific safety briefing before load testing.",
+        "Establish an exclusion zone around the test area.",
+        "Apply a test load equal to 125% of the system safe working load.",
+        "Hold the test load for a minimum of five minutes.",
+        "Use soft slings or approved adapters; do not connect rigging directly to the termination socket bolt."
+      ]
+    },
+    {
+      "title": "Inspection and completion",
+      "text": [
+        "Inspect the moulded termination for cracks, deformation, or signs of separation.",
+        "Report and document any defects immediately.",
+        "Remove or discard any rigging loaded beyond its rated capacity."
+      ]
+    }
+  ],
+  "notes": [
+    "The moulding and termination process must always follow the moulding compound manufacturer's instructions.",
+    "Correct strand preparation and cleanliness are critical for long-term termination integrity."
+  ],
+  "sourceMaterial": [
+    {
+      "label": "Umbilical Termination and Moulding Procedure",
+      "url": ""
+    }
+  ]
+}
+

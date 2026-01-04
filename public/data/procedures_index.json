@@ -1,0 +1,56 @@
+[
+  {
+    "id": "rov-pre-dive",
+    "title": "ROV Pre-Dive Check",
+    "summary": "Pre-dive checklist for vehicle readiness and safety.",
+    "categories": ["rov"],
+    "tags": ["checklist", "pre-dive", "safety"],
+    "keywords": ["power-up", "inspections", "leak check"],
+    "updated": "2025-01-05"
+  },
+  {
+    "id": "t4-elbow-seal",
+    "title": "T4 Elbow Seal Replacement",
+    "summary": "Replace elbow rotary seal and verify torque settings.",
+    "categories": ["manipulators", "tooling"],
+    "tags": ["t4", "elbow", "seal", "001-1888"],
+    "keywords": ["torque", "hydraulic", "seal", "manipulator"],
+    "updated": "2025-01-04"
+  },
+  {
+    "id": "thruster-ingress",
+    "title": "Thruster Water Ingress Response",
+    "summary": "Stabilize, inspect, and dry a thruster after water ingress.",
+    "categories": ["thrusters", "rov"],
+    "tags": ["thruster", "ingress", "leak"],
+    "keywords": ["dewater", "testing", "insulation"],
+    "updated": "2024-12-20"
+  },
+  {
+    "id": "cardev-filter-replacement",
+    "title": "Cardev Filter Replacement",
+    "summary": "Replace the Cardev hydraulic filter on main or auxiliary systems and bleed hydraulics.",
+    "categories": ["rov", "hydraulics", "maintenance"],
+    "tags": ["cardev", "filter", "hydraulic", "main", "aux", "kystdesign"],
+    "keywords": ["hydraulics", "filter", "oil", "compensator", "bleeding", "rov"],
+    "updated": "2025-01-04"
+  },
+  {
+    "id": "t4-manipulator-replacement",
+    "title": "T4 Manipulator Replacement",
+    "summary": "Remove and install a T4 manipulator, including hydraulic reconnection, bleeding, and functional testing.",
+    "categories": ["manipulators", "rov", "maintenance"],
+    "tags": ["t4", "manipulator", "replacement", "hydraulics", "kystdesign"],
+    "keywords": ["t4", "manipulator", "hydraulic", "bleeding", "torque", "rov"],
+    "updated": "2025-01-04"
+  },
+  {
+    "id": "umbilical-termination-moulding",
+    "title": "Umbilical Termination and Moulding",
+    "summary": "Terminate and mould a steel armoured ROV umbilical, including load testing and inspection.",
+    "categories": ["rov", "cables", "maintenance"],
+    "tags": ["umbilical", "termination", "moulding", "wirelock", "rov"],
+    "keywords": ["umbilical", "termination socket", "moulding", "load test", "armoured cable"],
+    "updated": "2026-01-04"
+  }
+]

@@ -1,0 +1,123 @@
+{
+  "id": "t4-manipulator-replacement",
+  "title": "T4 Manipulator Replacement",
+  "purpose": [
+    "Remove and replace a T4 manipulator.",
+    "Restore full hydraulic and mechanical functionality after installation."
+  ],
+  "safety": [
+    "Ensure ROV hydraulics and instrumentation are powered off before starting.",
+    "Secure the T4 manipulator at all times to prevent uncontrolled movement.",
+    "Wear appropriate PPE including gloves and eye protection."
+  ],
+  "tools": [
+    "Torque wrench",
+    "Soft slings",
+    "Crane and rigging",
+    "Oil rags",
+    "Bucket"
+  ],
+  "parts": [
+    "Replacement T4 manipulator",
+    "Hydraulic oil"
+  ],
+  "steps": [
+    {
+      "title": "Prepare for removal",
+      "text": [
+        "Ensure ROV hydraulics and instrumentation are powered off.",
+        "Secure the T4 manipulator by wrapping a soft sling around the elbow and connecting it to the crane.",
+        "Prepare oil rags and spill control materials."
+      ]
+    },
+    {
+      "title": "Disconnect services",
+      "text": [
+        "Disconnect all hydraulic hoses from the T4, including main and compensator lines.",
+        "Disconnect the electrical/data cable.",
+        "Cap all hoses immediately to prevent oil loss and contamination."
+      ]
+    },
+    {
+      "title": "Remove mounting bolts",
+      "text": [
+        "Untorque the six mounting bolts located under the shoulder.",
+        "Remove four bolts initially, leaving two bolts in place to retain alignment.",
+        "Prepare the crane and ensure all personnel are clear.",
+        "Remove the remaining two bolts once ready to lift."
+      ]
+    },
+    {
+      "title": "Lift and store manipulator",
+      "text": [
+        "Carefully lift the T4 clear of the base using the crane.",
+        "Transfer and secure the manipulator in the designated storage or transport box."
+      ]
+    },
+    {
+      "title": "Prepare for installation",
+      "text": [
+        "Prepare the replacement T4 manipulator.",
+        "Install two guide bolts into the shoulder mounting holes on the base.",
+        "Wrap a sling around the elbow of the T4 and connect it to the crane rigging."
+      ]
+    },
+    {
+      "title": "Install manipulator",
+      "text": [
+        "Lift the T4 into position above the base.",
+        "Ensure the arrow indicator on the T4 is pointing forward.",
+        "Lower the T4 until the guide bolts enter the mounting holes.",
+        "Install four mounting bolts and hand-tighten only.",
+        "Secure the T4 to prevent movement by slinging the elbow to nearby gratings.",
+        "Remove the two guide bolts.",
+        "Install the remaining two mounting bolts."
+      ]
+    },
+    {
+      "title": "Torque and reconnect",
+      "text": [
+        "Torque all six mounting bolts to 108 Nm using a calibrated torque wrench.",
+        "Disconnect the crane.",
+        "Reconnect all hydraulic hoses and electrical/data cables.",
+        "Fill the compensator with hydraulic oil and bleed air as required."
+      ]
+    },
+    {
+      "title": "Bleed system",
+      "text": [
+        "Power on the ROV and start the hydraulic system.",
+        "Move the T4 to its maximum upward position.",
+        "Secure the T4 in this position using a sling.",
+        "Connect the filling hose to the valve pack compensator.",
+        "Place a bucket beneath the T4 to collect oil.",
+        "Slightly loosen the camera cover bolts at the highest point to allow air and oil to escape.",
+        "Continue filling until oil flows without air bubbles.",
+        "Retighten and torque the camera cover bolts.",
+        "Fill the compensator to the correct level."
+      ]
+    },
+    {
+      "title": "Functional test and shutdown",
+      "text": [
+        "Operate all joints of the T4 to confirm correct function.",
+        "Remove all slings.",
+        "Inspect for oil leaks.",
+        "Recheck and top up compensator oil level if required.",
+        "Park the T4 and shut down ROV hydraulics once satisfied."
+      ]
+    }
+  ],
+  "notes": [
+    "Always confirm torque values against the latest T4 torque reference.",
+    "Maintain communication with the control room throughout the procedure.",
+    "Record the manipulator replacement in the maintenance log."
+  ],
+  "sourceMaterial": [
+    {
+      "label": "T4 Manipulator Maintenance Manual (placeholder)",
+      "url": "https://example.com"
+    }
+  ]
+}
+

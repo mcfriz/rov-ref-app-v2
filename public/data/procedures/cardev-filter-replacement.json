@@ -1,0 +1,116 @@
+{
+  "id": "cardev-filter-replacement",
+  "title": "Cardev Filter Replacement (Main / Aux System)",
+  "purpose": [
+    "Replace the Cardev hydraulic filter on the main or auxiliary hydraulic system.",
+    "Prevent oil contamination and maintain hydraulic system performance."
+  ],
+  "safety": [
+    "Ensure the hydraulic system is depressurised before opening the filter housing.",
+    "Do not open the Cardev filter unless the associated compensator is fully drained.",
+    "Wear gloves and eye protection to prevent oil exposure."
+  ],
+  "tools": [
+    "27 mm spanner",
+    "Torque wrench with 27 mm socket",
+    "Bucket",
+    "Flat screwdriver",
+    "Vacuum pump and hose"
+  ],
+  "parts": [
+    "New Cardev filter with O-ring"
+  ],
+  "steps": [
+    {
+      "title": "Identify system",
+      "text": [
+        "Identify which hydraulic system the Cardev filter will be replaced on.",
+        "Confirm whether the filter is connected to the main or auxiliary system."
+      ]
+    },
+    {
+      "title": "Drain hydraulic system",
+      "text": [
+        "Drain oil from the selected hydraulic system.",
+        "For auxiliary system only: connect the vacuum hose to the return port at the front of the ROV.",
+        "Start the vacuum pump."
+      ]
+    },
+    {
+      "title": "Confirm compensator is drained",
+      "text": [
+        "Observe the compensator for the selected system while draining.",
+        "When the compensator spring is fully extended, slightly open the relief valve to allow air to push remaining hydraulic oil out."
+      ]
+    },
+    {
+      "title": "Open Cardev filter housing",
+      "text": [
+        "Ensure no more oil is draining, then stop the vacuum pump.",
+        "Using a 27 mm spanner, loosen the Cardev filter lid by turning it counter-clockwise."
+      ],
+      "notes": [
+        "Do not open the filter housing if the compensator is not fully drained. Failure to do so will result in an oil spill."
+      ]
+    },
+    {
+      "title": "Remove used filter",
+      "text": [
+        "Remove the used Cardev filter by pulling upward on the two lifting slings.",
+        "If the filter is difficult to remove due to expansion, use a flat screwdriver to gently compress the filter while pulling it free.",
+        "Avoid damaging the Cardev filter housing."
+      ]
+    },
+    {
+      "title": "Flush filter housing",
+      "text": [
+        "Fill the filter housing with approximately 1 inch of clean hydraulic oil.",
+        "Start the vacuum pump to flush contaminated oil from the housing.",
+        "Stop the vacuum pump once the oil has drained."
+      ]
+    },
+    {
+      "title": "Install new filter",
+      "text": [
+        "Remove the plastic packaging from the new Cardev filter.",
+        "Install the new filter into the housing.",
+        "Prime the filter by filling it with clean hydraulic oil until fully saturated."
+      ]
+    },
+    {
+      "title": "Fit lid and torque",
+      "text": [
+        "Lubricate the new O-ring seal and install it onto the filter lid.",
+        "Refit the lid and torque to 50 Nm."
+      ]
+    },
+    {
+      "title": "Refill and bleed system",
+      "text": [
+        "Refill the selected hydraulic system.",
+        "Confirm oil level via communications with the control room.",
+        "Bleed the system using the Cardev and compensator bleed ports.",
+        "Run the system and remove any remaining air.",
+        "Top up oil level if required after operation."
+      ]
+    },
+    {
+      "title": "Dispose of used filter",
+      "text": [
+        "Leave the used Cardev filter on a drain until oil stops dripping.",
+        "Place the filter in a plastic bag and dispose of it in the designated filter waste bin."
+      ]
+    }
+  ],
+  "notes": [
+    "This procedure applies to both main and auxiliary hydraulic systems on Kystdesign ROVs.",
+    "Replacement filters for Edda Freya are stored on the top rack beside the hydraulic room."
+  ],
+  "sourceMaterial": [
+    {
+      "label": "Cardev filter maintenance reference (placeholder)",
+      "url": "https://example.com"
+    }
+  ]
+}
+

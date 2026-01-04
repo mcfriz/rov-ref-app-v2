@@ -1,0 +1,16 @@
+Project: ROV Ref App v2 (GitHub Pages)
+
+Tech rules:
+- Use plain HTML + CSS + vanilla JavaScript only.
+- No frameworks, no build step, no backend.
+- Keep it mobile-first and fast.
+- Data lives in /data/*.json.
+- Assets in /assets/*.
+- Use relative paths that work on GitHub Pages under a repo subpath.
+
+Coding style:
+- Readable > clever.
+- Small functions with clear names.
+- Every file starts with a short comment header: what it does + how to edit (important).
+- Avoid duplicated layout: use shared helpers in /js/app.js.
+- When making changes, prefer editing complete files, not snippets.

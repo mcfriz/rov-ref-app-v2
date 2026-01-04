@@ -1,0 +1,42 @@
+{
+  "id": "thruster-ingress",
+  "title": "Thruster Water Ingress Response",
+  "purpose": [
+    "Stabilize a thruster after suspected water ingress.",
+    "Prevent further damage and document findings."
+  ],
+  "safety": [
+    "Isolate electrical power to the thruster.",
+    "Handle wet components with insulated gloves."
+  ],
+  "tools": ["Insulation tester", "Lint-free wipes", "Heat gun (low setting)"],
+  "parts": ["Desiccant packs", "Replacement seals (unknown PN)"],
+  "steps": [
+    {
+      "title": "Isolate and drain",
+      "text": [
+        "Secure the ROV and isolate thruster power.",
+        "Open drain ports if present and collect any water."
+      ]
+    },
+    {
+      "title": "Inspect internals",
+      "text": [
+        "Remove the cover and inspect for corrosion or debris.",
+        "Dry components gently; avoid overheating coils."
+      ]
+    },
+    {
+      "title": "Test and document",
+      "text": [
+        "Perform insulation resistance test once dry.",
+        "Document readings and any corrosion observed."
+      ]
+    }
+  ],
+  "troubleshooting": [
+    { "symptom": "Low insulation reading", "checks": ["Repeat drying cycle", "Inspect cable glands", "Plan for rewind/replacement"] }
+  ],
+  "notes": ["Escalate if readings remain low; replace seals before next dive."],
+  "sourceMaterial": [{ "label": "Thruster service note (placeholder)", "url": "https://example.com" }]
+}

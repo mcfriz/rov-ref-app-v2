@@ -1,0 +1,44 @@
+{
+  "id": "t4-elbow-seal",
+  "title": "T4 Elbow Seal Replacement",
+  "purpose": [
+    "Replace the elbow rotary seal to correct leakage.",
+    "Validate torque after reassembly."
+  ],
+  "safety": [
+    "Depressurize hydraulics before disassembly.",
+    "Wear eye protection and gloves."
+  ],
+  "tools": ["Torque wrench", "Seal pick", "Lint-free wipes"],
+  "parts": ["Elbow rotary seal (unknown PN)", "Cleaner, O-ring safe"],
+  "steps": [
+    {
+      "title": "Isolate and clean",
+      "image": "../assets/img/procedures/t4-elbow-seal/step-01.webp",
+      "text": [
+        "Isolate hydraulic supply and bleed pressure.",
+        "Clean the elbow exterior to keep debris out."
+      ]
+    },
+    {
+      "title": "Remove old seal",
+      "text": [
+        "Remove cover screws and expose the seal cavity.",
+        "Pick out the seal carefully to avoid scratching the bore."
+      ]
+    },
+    {
+      "title": "Install new seal",
+      "text": [
+        "Lubricate the new seal lightly and press it evenly into place.",
+        "Reinstall cover and torque fasteners per spec."
+      ],
+      "notes": ["Use torque values from the T4 torque cheat sheet."]
+    }
+  ],
+  "troubleshooting": [
+    { "symptom": "Seal still weeps", "checks": ["Inspect bore for damage", "Verify torque pattern", "Confirm seal orientation"] }
+  ],
+  "notes": ["Log part number used; update maintenance record."],
+  "sourceMaterial": [{ "label": "T4 Elbow exploded view (placeholder)", "url": "https://example.com" }]
+}
