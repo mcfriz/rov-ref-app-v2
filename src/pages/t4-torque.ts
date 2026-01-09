@@ -22,31 +22,28 @@ app.innerHTML = `
         <div class="nav-buttons">
           <a class="nav-btn active" href="t4-torque.html">T4 Torque</a>
           <a class="nav-btn" href="t4-slave-arm-drawing.html">T4 Slave Arm Drawing</a>
-          <a class="nav-btn disabled" aria-disabled="true" tabindex="-1">T4 O-Rings (Coming soon)</a>
           <a class="nav-btn" href="t4-videos.html">T4 Videos</a>
         </div>
       </div>
     </section>
 
-    <section class="card">
-      <h2>Source material</h2>
-      <p class="helper-text">Primary reference lives in a local PDF so it still works offline on vessels.</p>
-      <div class="pdf-actions">
+    <section class="row-with-action">
+      <div class="card">
+        <h2>Source material</h2>
+        <p class="helper-text">Current PDF: <a href="${pdfPath}" target="_blank" rel="noopener">T4 Torque Cheat Sheet</a></p>
+      </div>
+      <div class="row-action">
         <a class="btn" id="open-pdf" href="${pdfPath}" target="_blank" rel="noopener">Open PDF (new tab)</a>
-        <span class="helper-text">If the embed below is slow on mobile, use the button instead.</span>
       </div>
     </section>
 
     <section class="card">
-      <h2>Embedded viewer</h2>
-      <p class="helper-text">Desktop users can scroll the PDF below. Mobile browsers sometimes block inline PDFs.</p>
       <iframe
         title="T4 Torque Cheat Sheet PDF"
         id="pdf-frame"
         class="pdf-frame"
         src="${pdfPath}"
       ></iframe>
-      <p class="helper-text">Cannot see it? Tap "Open PDF (new tab)" above to view it directly.</p>
     </section>
   </main>
 `;

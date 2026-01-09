@@ -29,7 +29,6 @@ app.innerHTML = `
         <div class="nav-buttons">
           <a class="nav-btn" href="t4-torque.html">T4 Torque</a>
           <a class="nav-btn" href="t4-slave-arm-drawing.html">T4 Slave Arm Drawing</a>
-          <a class="nav-btn disabled" aria-disabled="true" tabindex="-1">T4 O-Rings (Coming soon)</a>
           <a class="nav-btn active" href="t4-videos.html">T4 Videos</a>
         </div>
       </div>

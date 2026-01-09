@@ -26,22 +26,20 @@ app.innerHTML = `
           <label for="rov">Select ROV</label>
           <select id="rov" name="rov"></select>
         </div>
-        <div class="button-row">
-          <a class="btn primary" id="open-pdf" href="#" target="_blank" rel="noopener">Open PDF (new tab)</a>
-        </div>
-        <p class="helper-text">Links use base-safe paths so they work on GitHub Pages.</p>
       </form>
     </section>
 
-    <section class="card">
-      <h2>Source material</h2>
-      <p id="source-link" class="helper-text"></p>
-      <p class="helper-text">Mobile users: use “Open PDF (new tab)” if the embed is slow.</p>
+    <section class="row-with-action">
+      <div class="card">
+        <h2>Source material</h2>
+        <p id="source-link" class="helper-text"></p>
+      </div>
+      <div class="row-action">
+        <a class="btn" id="open-pdf" href="#" target="_blank" rel="noopener">Open PDF (new tab)</a>
+      </div>
     </section>
 
     <section class="card">
-      <h2>Embedded viewer</h2>
-      <p class="helper-text">Desktop inline preview. Mobile browsers can block embedded PDFs.</p>
       <iframe title="ROV Cheat Sheet" id="pdf-frame" class="pdf-frame"></iframe>
     </section>
   </main>
