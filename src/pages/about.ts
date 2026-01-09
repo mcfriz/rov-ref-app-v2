@@ -19,7 +19,6 @@ const tileContact = `${baseWithSlash}assets/images/tiles/contact_form.png`;
 const tileSearch = `${baseWithSlash}assets/images/tiles/Global_search.png`;
 const tileManuals = `${baseWithSlash}assets/images/tiles/rov_ref_ref_files.png`;
 const tileWelcome = `${baseWithSlash}assets/images/tiles/welcome.png`;
-const logoBackdrop = `${baseWithSlash}assets/images/Logo_background.png`;
 const logoMark = `${baseWithSlash}assets/images/ROV_ref_logo.png`;
 
 app.innerHTML = `
