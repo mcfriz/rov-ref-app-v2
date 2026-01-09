@@ -62,23 +62,24 @@ app.innerHTML = `
     </header>
 
     <section class="card finder-card">
-      <form id="finder-form" class="finder-form">
-        <div class="field">
-          <label for="query">Search</label>
-          <input
-            type="search"
-            id="query"
-            name="query"
-            placeholder="Part number or keyword (e.g., 008-0216, seal, bearing)"
-            autocomplete="off"
-          />
+      <div class="finder-row">
+        <form id="finder-form" class="finder-form">
+          <div class="field">
+            <label for="query">Search</label>
+            <input
+              type="search"
+              id="query"
+              name="query"
+              placeholder="Part number or keyword (e.g., 008-0216, seal, bearing)"
+              autocomplete="off"
+            />
+          </div>
+          <p class="helper-text">Fields marked with * in descriptions mean they are not fully confirmed.</p>
+        </form>
+        <div class="finder-action">
+          <button type="submit" class="btn primary" form="finder-form">Find</button>
         </div>
-        <div class="button-row">
-          <button type="submit" class="btn primary">Find</button>
-          <button type="button" class="btn ghost" id="clear-btn">Clear</button>
-        </div>
-        <p class="helper-text">Data comes from <code>public/data/atlas_parts_finder.json</code>. Fields marked with * in descriptions mean they are not fully confirmed.</p>
-      </form>
+      </div>
     </section>
 
     <section class="card" id="results-card">
@@ -116,7 +117,6 @@ const form = document.querySelector<HTMLFormElement>('#finder-form');
 const queryInput = document.querySelector<HTMLInputElement>('#query');
 const resultsContainer = document.querySelector<HTMLDivElement>('#results');
 const resultCount = document.querySelector<HTMLSpanElement>('#result-count');
-const clearButton = document.querySelector<HTMLButtonElement>('#clear-btn');
 
 let parts: Part[] = [];
 
@@ -275,13 +275,6 @@ function search(event?: Event) {
   renderResults(toShow);
 }
 
-function clearForm() {
-  if (!queryInput) return;
-  queryInput.value = '';
-  renderEmpty('Enter a part number or keyword to begin.');
-  queryInput.focus();
-}
-
 async function loadParts() {
   try {
     renderEmpty('Loading parts...');
@@ -323,7 +316,6 @@ async function loadParts() {
 }
 
 form?.addEventListener('submit', search);
-clearButton?.addEventListener('click', clearForm);
 queryInput?.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
     event.preventDefault();

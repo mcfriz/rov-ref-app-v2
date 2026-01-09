@@ -40,23 +40,30 @@ app.innerHTML = `
     </header>
 
     <section class="card finder-card">
-      <form id="finder-form" class="finder-form">
-        <div class="field">
-          <label for="query">Search</label>
-          <input
-            type="search"
-            id="query"
-            name="query"
-            placeholder="Cable number or keyword (e.g., CBL-1023, temp sensor)"
-            autocomplete="off"
-          />
+      <div class="finder-row">
+        <form id="finder-form" class="finder-form">
+          <div class="field">
+            <label for="query">Search</label>
+            <input
+              type="search"
+              id="query"
+              name="query"
+              placeholder="Cable number or keyword (e.g., CBL-1023, temp sensor)"
+              autocomplete="off"
+            />
+          </div>
+          <p class="helper-text">Press Enter or tap "Find" to search.</p>
+        </form>
+        <div class="finder-action">
+          <button type="submit" class="btn primary" form="finder-form">Find</button>
         </div>
-        <div class="button-row">
-          <button type="submit" class="btn primary">Find</button>
-          <button type="button" class="btn ghost" id="clear-btn">Clear</button>
-        </div>
-        <p class="helper-text">Press Enter or tap "Find" to search. Data comes from <code>public/data/cable.json</code>.</p>
-      </form>
+      </div>
+    </section>
+
+    <section class="card" id="featured-cables">
+      <h2>Featured cables</h2>
+      <p class="helper-text">Three random picks from the cable library.</p>
+      <div id="featured-list"></div>
     </section>
 
     <section class="card" id="results-card">
@@ -94,7 +101,7 @@ const form = document.querySelector<HTMLFormElement>('#finder-form');
 const queryInput = document.querySelector<HTMLInputElement>('#query');
 const resultsContainer = document.querySelector<HTMLDivElement>('#results');
 const resultCount = document.querySelector<HTMLSpanElement>('#result-count');
-const clearButton = document.querySelector<HTMLButtonElement>('#clear-btn');
+const featuredList = document.querySelector<HTMLDivElement>('#featured-list');
 
 let cables: Cable[] = [];
 
@@ -174,75 +181,89 @@ function renderResults(results: RankedCable[]) {
   resultCount.textContent = `${top.length} shown (best match first)`;
 
   if (usingDesktopLayout) {
-    const rows = top
+    resultsContainer.innerHTML = top
       .map(
         (entry, index) => `
-        <tr class="${index === 0 ? 'highlight' : ''}">
-          <td>${entry.cable.cableNo}</td>
-          <td>${entry.cable.name}</td>
-          <td>${entry.cable.system ?? ''}</td>
-          <td>${entry.cable.rov?.join(', ') ?? ''}</td>
-          <td>${entry.cable.tags?.join(', ') ?? ''}</td>
-          <td class="actions">
+        <div class="row-with-action">
+          <article class="fit-card cable-card ${index === 0 ? 'highlight' : ''}">
+            <div class="cable-field">
+              <span class="label">Cable No</span>
+              <strong>${entry.cable.cableNo}</strong>
+            </div>
+            <div class="cable-field">
+              <span class="label">Name</span>
+              <span>${entry.cable.name}</span>
+            </div>
+            ${
+              entry.cable.system
+                ? `<div class="cable-field"><span class="label">System</span><span>${entry.cable.system}</span></div>`
+                : ''
+            }
+            ${
+              entry.cable.rov?.length
+                ? `<div class="cable-field"><span class="label">ROV</span><span>${entry.cable.rov.join(', ')}</span></div>`
+                : ''
+            }
+            ${
+              entry.cable.tags?.length
+                ? `<div class="cable-field"><span class="label">Tags</span><span>${entry.cable.tags.join(', ')}</span></div>`
+                : ''
+            }
+            ${
+              entry.cable.notes
+                ? `<div class="cable-field"><span class="label">Notes</span><span>${entry.cable.notes}</span></div>`
+                : ''
+            }
+          </article>
+          <div class="row-action">
             <a class="btn small" href="${entry.cable.link}" target="_blank" rel="noopener noreferrer">Open drawing</a>
-            <button class="btn small ghost copy-btn" data-copy="${entry.cable.cableNo}">Copy cable no</button>
-          </td>
-        </tr>
+          </div>
+        </div>
       `
       )
       .join('');
-
-    resultsContainer.innerHTML = `
-      <div class="table-scroll">
-        <table class="result-table">
-          <thead>
-            <tr>
-              <th>Cable No</th>
-              <th>Name</th>
-              <th>System</th>
-              <th>ROV</th>
-              <th>Tags</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>${rows}</tbody>
-        </table>
-      </div>
-    `;
   } else {
     resultsContainer.innerHTML = top
       .map(
         (entry, index) => `
-        <article class="fit-card ${index === 0 ? 'highlight' : ''}">
-          <div class="fit-row">
-            <span class="label">Cable No</span>
-            <strong>${entry.cable.cableNo}</strong>
-          </div>
-          <div class="fit-row">
-            <span class="label">Name</span>
-            <span>${entry.cable.name}</span>
-          </div>
-          ${entry.cable.system ? `<div class="fit-row"><span class="label">System</span><span>${entry.cable.system}</span></div>` : ''}
-          ${entry.cable.rov?.length ? `<div class="fit-row"><span class="label">ROV</span><span>${entry.cable.rov.join(', ')}</span></div>` : ''}
-          ${entry.cable.tags?.length ? `<div class="fit-row"><span class="label">Tags</span><span>${entry.cable.tags.join(', ')}</span></div>` : ''}
-          ${entry.cable.notes ? `<div class="fit-row"><span class="label">Notes</span><span>${entry.cable.notes}</span></div>` : ''}
-          <div class="fit-actions" style="gap: 0.5rem; flex-wrap: wrap; justify-content: flex-start;">
+        <div class="row-with-action">
+          <article class="fit-card cable-card ${index === 0 ? 'highlight' : ''}">
+            <div class="cable-field">
+              <span class="label">Cable No</span>
+              <strong>${entry.cable.cableNo}</strong>
+            </div>
+            <div class="cable-field">
+              <span class="label">Name</span>
+              <span>${entry.cable.name}</span>
+            </div>
+            ${
+              entry.cable.system
+                ? `<div class="cable-field"><span class="label">System</span><span>${entry.cable.system}</span></div>`
+                : ''
+            }
+            ${
+              entry.cable.rov?.length
+                ? `<div class="cable-field"><span class="label">ROV</span><span>${entry.cable.rov.join(', ')}</span></div>`
+                : ''
+            }
+            ${
+              entry.cable.tags?.length
+                ? `<div class="cable-field"><span class="label">Tags</span><span>${entry.cable.tags.join(', ')}</span></div>`
+                : ''
+            }
+            ${
+              entry.cable.notes
+                ? `<div class="cable-field"><span class="label">Notes</span><span>${entry.cable.notes}</span></div>`
+                : ''
+            }
+          </article>
+          <div class="row-action">
             <a class="btn small" href="${entry.cable.link}" target="_blank" rel="noopener noreferrer">Open drawing</a>
-            <button class="btn small ghost copy-btn" data-copy="${entry.cable.cableNo}">Copy cable no</button>
           </div>
-        </article>
+        </div>
       `
       )
       .join('');
-  }
-}
-
-async function copyCable(cableNo: string) {
-  try {
-    await navigator.clipboard.writeText(cableNo);
-  } catch (error) {
-    console.error('Copy failed', error);
-    alert('Copy failed. Please try again.');
   }
 }
 
@@ -269,13 +290,6 @@ function search(event?: Event) {
   renderResults(toShow);
 }
 
-function clearForm() {
-  if (!queryInput) return;
-  queryInput.value = '';
-  renderEmpty('Enter a cable number or keyword to begin.');
-  queryInput.focus();
-}
-
 async function loadCables() {
   try {
     renderEmpty('Loading cables...');
@@ -291,6 +305,33 @@ async function loadCables() {
     if (!cables.length) {
       renderEmpty('No cables found in data file.');
     } else {
+      if (featuredList) {
+        const picks = [...cables]
+          .sort(() => Math.random() - 0.5)
+          .slice(0, Math.min(3, cables.length));
+        featuredList.innerHTML = picks
+          .map(
+            (entry) => `
+            <div class="row-with-action">
+              <div class="video-row featured-card">
+                <div class="video-text">
+                  <div class="featured-field">
+                    <span class="label">Cable No</span>
+                    <strong>${entry.cableNo}</strong>
+                  </div>
+                  <div class="featured-field">
+                    <span class="label">Name</span>
+                    <span>${entry.name}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row-action">
+                <a class="btn small" href="${entry.link}" target="_blank" rel="noopener noreferrer">Open drawing</a>
+              </div>
+            </div>`
+          )
+          .join('');
+      }
       renderEmpty('Enter a cable number or keyword to begin.');
     }
   } catch (error) {
@@ -299,16 +340,7 @@ async function loadCables() {
   }
 }
 
-resultsContainer?.addEventListener('click', (event) => {
-  const target = event.target as HTMLElement;
-  if (target.matches('.copy-btn')) {
-    const cableNo = target.getAttribute('data-copy');
-    if (cableNo) copyCable(cableNo);
-  }
-});
-
 form?.addEventListener('submit', search);
-clearButton?.addEventListener('click', clearForm);
 queryInput?.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
     event.preventDefault();

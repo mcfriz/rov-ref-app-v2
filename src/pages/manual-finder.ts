@@ -41,24 +41,31 @@ app.innerHTML = `
     </header>
 
     <section class="card finder-card">
-      <form id="finder-form" class="finder-form">
-        <div class="field">
-          <label for="query">Search</label>
-          <input
-            id="query"
-            type="search"
-            name="q"
-            placeholder="Document number, name, or keyword..."
-            value="${initialQuery}"
-            autocomplete="off"
-          />
+      <div class="finder-row">
+        <form id="finder-form" class="finder-form">
+          <div class="field">
+            <label for="query">Search</label>
+            <input
+              id="query"
+              type="search"
+              name="q"
+              placeholder="Document number, name, or keyword..."
+              value="${initialQuery}"
+              autocomplete="off"
+            />
+          </div>
+          <p class="helper-text">External links open in a new tab.</p>
+        </form>
+        <div class="finder-action">
+          <button type="submit" class="btn primary" form="finder-form">Find</button>
         </div>
-        <div class="button-row">
-          <button type="submit" class="btn primary">Find</button>
-          <button type="button" class="btn ghost" id="clear-btn">Clear</button>
-        </div>
-        <p class="helper-text">Data loads from <code>public/data/rov_ref_ref_files.json</code>. External links open in a new tab.</p>
-      </form>
+      </div>
+    </section>
+
+    <section class="card" id="featured-manuals">
+      <h2>Featured manuals</h2>
+      <p class="helper-text">Three random picks from the reference library.</p>
+      <div id="featured-list"></div>
     </section>
 
     <section class="card" id="results-card">
@@ -88,7 +95,7 @@ const form = document.querySelector<HTMLFormElement>('#finder-form');
 const queryInput = document.querySelector<HTMLInputElement>('#query');
 const resultsContainer = document.querySelector<HTMLDivElement>('#results');
 const resultCount = document.querySelector<HTMLSpanElement>('#result-count');
-const clearButton = document.querySelector<HTMLButtonElement>('#clear-btn');
+const featuredList = document.querySelector<HTMLDivElement>('#featured-list');
 
 let manuals: Manual[] = [];
 
@@ -172,32 +179,6 @@ function asDisplay(value?: string) {
   return value && value.trim() ? value : 'unknown';
 }
 
-function createToast() {
-  let toast = document.querySelector<HTMLDivElement>('.toast');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.setAttribute('role', 'status');
-    toast.setAttribute('aria-live', 'polite');
-    toast.hidden = true;
-    document.body.appendChild(toast);
-  }
-  return toast;
-}
-
-const toast = createToast();
-
-function showToast(message: string) {
-  if (!toast) return;
-  toast.textContent = message;
-  toast.hidden = false;
-  toast.classList.add('show');
-  window.setTimeout(() => {
-    toast.classList.remove('show');
-    toast.hidden = true;
-  }, 1800);
-}
-
 function renderResults(list: Manual[]) {
   if (!resultsContainer || !resultCount) return;
   if (!list.length) {
@@ -211,119 +192,77 @@ function renderResults(list: Manual[]) {
   resultCount.textContent = `${top.length} shown (best match first)`;
 
   if (usingDesktop) {
-    const rows = top
-      .map(
-        (item, index) => `
-          <tr class="${index === 0 ? 'highlight' : ''}">
-            <td>
-              <div><strong>${asDisplay(item.title)}</strong></div>
-              <div class="muted">${asDisplay(item.description)}</div>
-            </td>
-            <td>${asDisplay(item.docNo)}</td>
-            <td>${asDisplay(item.category)}</td>
-            <td>${asDisplay(item.date)}</td>
-            <td class="actions">
-              ${
-                item.link
-                  ? `<a class="btn small" href="${item.link}" target="_blank" rel="noopener noreferrer">Open</a>`
-                  : ''
-              }
-              ${
-                item.link
-                  ? `<button class="btn small ghost copy-link" data-url="${item.link}">Copy link</button>`
-                  : ''
-              }
-              ${
-                item.docNo
-                  ? `<button class="btn small ghost copy-doc" data-doc="${item.docNo}">Copy doc no</button>`
-                  : ''
-              }
-            </td>
-          </tr>
-        `
-      )
-      .join('');
-
-    resultsContainer.innerHTML = `
-      <div class="table-scroll">
-        <table class="result-table">
-          <thead>
-            <tr>
-              <th>Document name</th>
-              <th>Document number</th>
-              <th>Category</th>
-              <th>Date approved</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>${rows}</tbody>
-        </table>
-      </div>
-    `;
-  } else {
     resultsContainer.innerHTML = top
       .map(
         (item, index) => `
-        <article class="fit-card ${index === 0 ? 'highlight' : ''}">
-          <div class="fit-row">
-            <span class="label">Title</span>
-            <strong>${asDisplay(item.title)}</strong>
-          </div>
-          <div class="fit-row">
-            <span class="label">Doc #</span>
-            <span>${asDisplay(item.docNo)}</span>
-          </div>
-          <div class="fit-row">
-            <span class="label">Category</span>
-            <span>${asDisplay(item.category)}</span>
-          </div>
-          <div class="fit-row">
-            <span class="label">Date</span>
-            <span>${asDisplay(item.date)}</span>
-          </div>
-          <p class="helper-text">${asDisplay(item.description)}</p>
-          <div class="fit-actions" style="gap:0.5rem; flex-wrap: wrap; justify-content: flex-start;">
+        <div class="row-with-action">
+          <article class="fit-card manual-card ${index === 0 ? 'highlight' : ''}">
+            <div class="manual-field">
+              <span class="label">Title</span>
+              <strong>${asDisplay(item.title)}</strong>
+            </div>
+            <div class="manual-field">
+              <span class="label">Doc #</span>
+              <span>${asDisplay(item.docNo)}</span>
+            </div>
+            <div class="manual-field">
+              <span class="label">Category</span>
+              <span>${asDisplay(item.category)}</span>
+            </div>
+            <div class="manual-field">
+              <span class="label">Date</span>
+              <span>${asDisplay(item.date)}</span>
+            </div>
+            <p class="helper-text">${asDisplay(item.description)}</p>
+          </article>
+          <div class="row-action">
             ${
               item.link
                 ? `<a class="btn small" href="${item.link}" target="_blank" rel="noopener noreferrer">Open</a>`
                 : ''
             }
+          </div>
+        </div>
+      `
+      )
+      .join('');
+  } else {
+    resultsContainer.innerHTML = top
+      .map(
+        (item, index) => `
+        <div class="row-with-action">
+          <article class="fit-card manual-card ${index === 0 ? 'highlight' : ''}">
+            <div class="manual-field">
+              <span class="label">Title</span>
+              <strong>${asDisplay(item.title)}</strong>
+            </div>
+            <div class="manual-field">
+              <span class="label">Doc #</span>
+              <span>${asDisplay(item.docNo)}</span>
+            </div>
+            <div class="manual-field">
+              <span class="label">Category</span>
+              <span>${asDisplay(item.category)}</span>
+            </div>
+            <div class="manual-field">
+              <span class="label">Date</span>
+              <span>${asDisplay(item.date)}</span>
+            </div>
+            <p class="helper-text">${asDisplay(item.description)}</p>
+          </article>
+          <div class="row-action">
             ${
               item.link
-                ? `<button class="btn small ghost copy-link" data-url="${item.link}">Copy link</button>`
-                : ''
-            }
-            ${
-              item.docNo
-                ? `<button class="btn small ghost copy-doc" data-doc="${item.docNo}">Copy doc no</button>`
+                ? `<a class="btn small" href="${item.link}" target="_blank" rel="noopener noreferrer">Open</a>`
                 : ''
             }
           </div>
-        </article>
+        </div>
       `
       )
       .join('');
   }
 
-  const copyLinkButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('.copy-link'));
-  copyLinkButtons.forEach((btn) => {
-    btn.addEventListener('click', async () => {
-      const url = btn.dataset.url;
-      if (!url || !navigator.clipboard) return;
-      await navigator.clipboard.writeText(url);
-      showToast('Copied link');
-    });
-  });
-
-  const copyDocButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('.copy-doc'));
-  copyDocButtons.forEach((btn) => {
-    btn.addEventListener('click', async () => {
-      const doc = btn.dataset.doc;
-      if (!doc || !navigator.clipboard) return;
-      await navigator.clipboard.writeText(doc);
-      showToast('Copied document number');
-    });
-  });
 }
 
 async function loadData() {
@@ -342,6 +281,39 @@ async function loadData() {
       date: item['Date approved'],
       link: item.Link,
     }));
+
+    if (featuredList && manuals.length) {
+      const picks = [...manuals]
+        .sort(() => Math.random() - 0.5)
+        .slice(0, Math.min(3, manuals.length));
+      featuredList.innerHTML = picks
+        .map(
+          (item) => `
+          <div class="row-with-action">
+            <div class="video-row featured-card">
+              <div class="video-text">
+                <div class="featured-field">
+                  <span class="label">Title</span>
+                  <strong>${asDisplay(item.title)}</strong>
+                </div>
+                <div class="featured-field">
+                  <span class="label">Description</span>
+                  <span>${asDisplay(item.description)}</span>
+                </div>
+              </div>
+            </div>
+            <div class="row-action">
+              ${
+                item.link
+                  ? `<a class="btn small" href="${item.link}" target="_blank" rel="noopener noreferrer">Open</a>`
+                  : ''
+              }
+            </div>
+          </div>`
+        )
+        .join('');
+    }
+
     if (!initialQuery) {
       renderEmpty('Enter a term to search manuals and drawings.');
     } else {
@@ -369,11 +341,6 @@ function search(event?: Event) {
 }
 
 form?.addEventListener('submit', search);
-clearButton?.addEventListener('click', () => {
-  if (queryInput) queryInput.value = '';
-  renderEmpty('Enter a term to search manuals and drawings.');
-});
-
 queryInput?.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
     event.preventDefault();

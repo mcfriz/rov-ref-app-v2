@@ -12,7 +12,6 @@ app.innerHTML = `
     <p class="back"><a href="../index.html">&larr; Back to dashboard</a></p>
 
     <header class="page-header">
-      <div class="pill">Tier 1</div>
       <h1>T4 Torque Cheat Sheet</h1>
       <p class="lead">Quick torque reference for T4 tasks. Open the PDF for the full checklist and values.</p>
     </header>

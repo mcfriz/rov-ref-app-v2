@@ -36,23 +36,24 @@ app.innerHTML = `
     </section>
 
     <section class="card finder-card">
-      <form id="video-form" class="finder-form">
-        <div class="field">
-          <label for="query">Search videos</label>
-          <input
-            type="search"
-            id="query"
-            name="query"
-            placeholder="Keyword or part (e.g., resolver, elbow, jaw)"
-            autocomplete="off"
-          />
+      <div class="finder-row">
+        <form id="video-form" class="finder-form">
+          <div class="field">
+            <label for="query">Search videos</label>
+            <input
+              type="search"
+              id="query"
+              name="query"
+              placeholder="Keyword or part (e.g., resolver, elbow, jaw)"
+              autocomplete="off"
+            />
+          </div>
+          <p class="helper-text">Filters across group names and video labels.</p>
+        </form>
+        <div class="finder-action">
+          <button type="submit" class="btn primary" form="video-form">Find</button>
         </div>
-        <div class="button-row">
-          <button type="submit" class="btn primary">Find</button>
-          <button type="button" class="btn ghost" id="clear-btn">Clear</button>
-        </div>
-        <p class="helper-text">Filters across group names and video labels. Data comes from <code>public/data/t4_videos.json</code>.</p>
-      </form>
+      </div>
     </section>
 
     <section class="card" id="results-card">
@@ -69,7 +70,6 @@ const form = document.querySelector<HTMLFormElement>('#video-form');
 const queryInput = document.querySelector<HTMLInputElement>('#query');
 const resultsContainer = document.querySelector<HTMLDivElement>('#results');
 const resultCount = document.querySelector<HTMLSpanElement>('#result-count');
-const clearButton = document.querySelector<HTMLButtonElement>('#clear-btn');
 
 let groups: VideoGroup[] = [];
 
@@ -78,13 +78,6 @@ function renderEmpty(message: string) {
     resultsContainer.innerHTML = `<p class="helper-text">${message}</p>`;
   }
   if (resultCount) resultCount.textContent = '';
-}
-
-function copyLink(url: string) {
-  navigator.clipboard.writeText(url).catch((error) => {
-    console.error('Copy failed', error);
-    alert('Copy failed. Please try again.');
-  });
 }
 
 function matches(query: string, group: VideoGroup, video: VideoItem): boolean {
@@ -109,13 +102,14 @@ function renderGroups(query: string) {
       const items = matchedVideos
         .map(
           (video) => `
-          <div class="video-row">
-            <div class="video-text">
-              <p class="video-label">${video.label}</p>
+          <div class="row-with-action">
+            <div class="video-row">
+              <div class="video-text">
+                <p class="video-label">${video.label}</p>
+              </div>
             </div>
-            <div class="video-actions">
+            <div class="row-action">
               <a class="btn small" href="${video.url}" target="_blank" rel="noopener">Watch</a>
-              <button class="btn small ghost copy-btn" data-url="${video.url}">Copy link</button>
             </div>
           </div>`
         )
@@ -175,23 +169,10 @@ form?.addEventListener('submit', (event) => {
   renderGroups(queryInput?.value ?? '');
 });
 
-clearButton?.addEventListener('click', () => {
-  if (queryInput) queryInput.value = '';
-  renderGroups('');
-});
-
 queryInput?.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
     event.preventDefault();
     renderGroups(queryInput.value);
-  }
-});
-
-resultsContainer?.addEventListener('click', (event) => {
-  const target = event.target as HTMLElement;
-  if (target.matches('.copy-btn')) {
-    const url = target.getAttribute('data-url');
-    if (url) copyLink(url);
   }
 });
 

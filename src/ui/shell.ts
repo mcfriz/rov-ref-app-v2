@@ -24,6 +24,7 @@ const footerHtml = `
     <p class="footer-note">Information may not be fully correct and some content may be AI-generated. Please verify before use.</p>
   </div>
   <div class="footer-links">
+    <a href="${buildHref('about')}">About</a>
     <a href="${buildHref('contact')}">Contact</a>
     <a href="${buildHref('rov-cheatsheet')}">Cheatsheets</a>
     <a href="${buildHref('search')}">Global search</a>

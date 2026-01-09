@@ -42,24 +42,25 @@ app.innerHTML = `
     </header>
 
     <section class="card finder-card">
-      <form id="finder-form" class="finder-form">
-        <div class="field">
-          <label for="diameter">Approx. diameter (mm)</label>
-          <input type="number" id="diameter" name="diameter" step="0.01" min="0" inputmode="decimal" placeholder="e.g. 12.7" required />
+      <div class="finder-row">
+        <form id="finder-form" class="finder-form">
+          <div class="field">
+            <label for="diameter">Approx. diameter (mm)</label>
+            <input type="number" id="diameter" name="diameter" step="0.01" min="0" inputmode="decimal" placeholder="e.g. 12.7" required />
+          </div>
+          <div class="field">
+            <label for="dimension">Measurement type</label>
+            <select id="dimension" name="dimension">
+              <option value="od">Outer Diameter (OD)</option>
+              <option value="id">Inner Diameter (ID)</option>
+            </select>
+          </div>
+          <p class="helper-text">Press Enter or tap "Find" to search.</p>
+        </form>
+        <div class="finder-action">
+          <button type="submit" class="btn primary" form="finder-form">Find closest matches</button>
         </div>
-        <div class="field">
-          <label for="dimension">Measurement type</label>
-          <select id="dimension" name="dimension">
-            <option value="od">Outer Diameter (OD)</option>
-            <option value="id">Inner Diameter (ID)</option>
-          </select>
-        </div>
-        <div class="button-row">
-          <button type="submit" class="btn primary">Find closest matches</button>
-          <button type="button" class="btn ghost" id="clear-btn">Clear</button>
-        </div>
-        <p class="helper-text">Press Enter or tap "Find" to search. Data comes from <code>public/data/fittings.json</code>.</p>
-      </form>
+      </div>
     </section>
 
     <section class="card" id="results-card">
@@ -276,17 +277,6 @@ function findFittings(event?: Event) {
   renderResults(top, measurement);
 }
 
-function clearForm() {
-  if (form && resultsContainer && resultCount) {
-    form.reset();
-    resultsContainer.innerHTML = '';
-    resultCount.textContent = '';
-    currentResults = [];
-    diameterInput?.focus();
-    renderEmpty(INITIAL_MESSAGE);
-  }
-}
-
 async function copyResult(index: number) {
   const result = currentResults[index];
   if (!result) return;
@@ -308,7 +298,6 @@ resultsContainer?.addEventListener('click', (event) => {
 });
 
 form?.addEventListener('submit', findFittings);
-document.querySelector<HTMLButtonElement>('#clear-btn')?.addEventListener('click', clearForm);
 
 // Keep Enter key on the input consistent with the button.
 diameterInput?.addEventListener('keydown', (event) => {

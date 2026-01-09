@@ -14,11 +14,11 @@ app.innerHTML = `
     <p class="back"><a href="../index.html">&larr; Back to dashboard</a></p>
     <header class="page-header">
       <h1>Contact</h1>
-      <p class="lead">Send feedback, request features, or report an issue.</p>
+      <p class="lead">Have feedback or a request? Send us a quick note and we will take a look.</p>
     </header>
 
-    <section class="card finder-card">
-      <form id="contact-form" class="finder-form">
+    <section class="card">
+      <form id="contact-form" class="contact-form">
         <div class="field">
           <label for="category">Category *</label>
           <select id="category" name="category" required>
@@ -74,12 +74,11 @@ app.innerHTML = `
           <p class="helper-text">Adds browser, screen size, and page URL to help debug.</p>
         </div>
 
-        <div class="button-row">
-          <button type="submit" class="btn primary" id="submit-btn">Submit</button>
-          <button type="button" class="btn ghost" id="clear-btn">Clear</button>
+        <div class="contact-actions">
+          <button type="submit" class="btn primary" id="submit-btn">Send message</button>
         </div>
 
-        <p class="helper-text">Don’t include sensitive client/vessel information.</p>
+        <p class="helper-text">Don't include sensitive client/vessel information.</p>
         <div id="form-status" class="form-status" aria-live="polite"></div>
       </form>
     </section>
@@ -99,7 +98,6 @@ app.innerHTML = `
 const form = document.querySelector<HTMLFormElement>('#contact-form');
 const statusEl = document.querySelector<HTMLDivElement>('#form-status');
 const submitBtn = document.querySelector<HTMLButtonElement>('#submit-btn');
-const clearBtn = document.querySelector<HTMLButtonElement>('#clear-btn');
 
 function setStatus(message: string, type: 'success' | 'error' | 'info' = 'info') {
   if (!statusEl) return;
@@ -137,8 +135,8 @@ async function handleSubmit(event: Event) {
   }
 
   submitBtn.disabled = true;
-  submitBtn.textContent = 'Sending…';
-  setStatus('Sending your message…', 'info');
+  submitBtn.textContent = 'Sending...';
+  setStatus('Sending your message...', 'info');
 
   try {
     const response = await fetch(formEndpoint, {
@@ -162,12 +160,4 @@ async function handleSubmit(event: Event) {
   }
 }
 
-function clearForm() {
-  form?.reset();
-  setStatus('', 'info');
-  const subject = document.querySelector<HTMLInputElement>('#subject');
-  subject?.focus();
-}
-
 form?.addEventListener('submit', handleSubmit);
-clearBtn?.addEventListener('click', clearForm);

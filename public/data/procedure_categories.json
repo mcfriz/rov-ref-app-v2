@@ -7,5 +7,6 @@
   { "id": "lights", "name": "Lights", "icon": "../assets/icons/lights.svg", "description": "Lighting adjustments" },
   { "id": "tms", "name": "TMS", "icon": "../assets/icons/tms.svg", "description": "TMS operations" },
   { "id": "lars", "name": "LARS", "icon": "../assets/icons/lars.svg", "description": "Launch & recovery" },
-  { "id": "other", "name": "Other", "icon": "../assets/icons/other.svg", "description": "Miscellaneous" }
+  { "id": "other", "name": "Other", "icon": "../assets/icons/other.svg", "description": "Miscellaneous" },
+  { "id": "admin", "name": "Admin", "icon": "../assets/icons/other.svg", "description": "Admin checklists and logs" }
 ]

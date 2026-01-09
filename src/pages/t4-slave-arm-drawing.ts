@@ -12,7 +12,6 @@ app.innerHTML = `
     <p class="back"><a href="../index.html">&larr; Back to dashboard</a></p>
 
     <header class="page-header">
-      <div class="pill">Tier 1</div>
       <h1>T4 Slave Arm Drawing Cheat Sheet</h1>
       <p class="lead">PDF-first reference for the T4 slave arm drawing. Open in a new tab for fastest viewing.</p>
     </header>

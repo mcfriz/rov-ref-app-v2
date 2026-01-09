@@ -238,7 +238,7 @@ function mapCables(data: any): Result[] {
     return {
       title: cable.cableNo,
       detail: detailParts || cable.name || '',
-      source: 'Cable',
+      source: 'Cable Finder',
       kind: 'cable',
       url: cable.link,
       score: 0,
@@ -259,7 +259,7 @@ function mapParts(data: any): Result[] {
     .map((part) => ({
       title: part.partNumber,
       detail: [part.description, part.expanded].filter(Boolean).join(' | '),
-      source: 'T4 Part',
+      source: 'T4 Parts Finder',
       kind: 'part',
       url: part.link,
       score: 0,
@@ -279,7 +279,7 @@ function mapAtlasParts(data: any): Result[] {
     .map((part) => ({
       title: part.partNumber,
       detail: [part.description, part.expanded].filter(Boolean).join(' | '),
-      source: 'Atlas Part',
+      source: 'Atlas Parts Finder',
       kind: 'atlas-part',
       url: part.link,
       score: 0,
@@ -294,7 +294,7 @@ function mapFittings(data: any): Result[] {
     return {
       title: f.thread || f.type || 'Fitting',
       detail,
-      source: 'Fitting',
+      source: 'Fitting Finder',
       kind: 'fitting',
       url: undefined,
       score: 0,
@@ -310,7 +310,7 @@ function mapVideos(data: any): Result[] {
       results.push({
         title: video.label,
         detail: group.name,
-        source: 'T4 Video',
+        source: 'T4 Maintenance Videos',
         kind: 'video',
         url: video.url,
         score: 0,
@@ -334,7 +334,7 @@ function mapManuals(data: any): Result[] {
   return list.map((item) => ({
     title: item.title,
     detail: [item.docNo, item.category, item.description, item.equipment, item.date].filter(Boolean).join(' | '),
-    source: 'Manual',
+    source: 'Manual & Drawing Finder',
     kind: 'manual',
     url: item.link,
     docNo: item.docNo,
@@ -365,29 +365,29 @@ app.innerHTML = `
     </header>
 
     <section class="card finder-card">
-      <form id="finder-form" class="finder-form">
-        <div class="field">
-          <label for="query">Search everything</label>
-          <input type="search" id="query" name="q" placeholder="e.g., resolver, CBL-1023, T4, jaw" value="${initialQuery}" autocomplete="off" />
+      <div class="finder-row">
+        <form id="finder-form" class="finder-form">
+          <div class="field">
+            <label for="query">Search everything</label>
+            <input type="search" id="query" name="q" placeholder="e.g., resolver, CBL-1023, T4, jaw" value="${initialQuery}" autocomplete="off" />
+          </div>
+          <div class="field">
+            <label for="source-filter">Source</label>
+            <select id="source-filter" name="source">
+              <option value="all">Global (all sources)</option>
+              <option value="cable">Cables only</option>
+              <option value="part">T4 parts only</option>
+              <option value="atlas-part">Atlas parts only</option>
+              <option value="fitting">Fittings only</option>
+              <option value="video">T4 videos only</option>
+              <option value="manual">Manuals & drawings only</option>
+            </select>
+          </div>
+        </form>
+        <div class="finder-action">
+          <button type="submit" class="btn primary" form="finder-form">Find</button>
         </div>
-        <div class="field">
-          <label for="source-filter">Source</label>
-          <select id="source-filter" name="source">
-            <option value="all">Global (all sources)</option>
-            <option value="cable">Cables only</option>
-            <option value="part">T4 parts only</option>
-            <option value="atlas-part">Atlas parts only</option>
-            <option value="fitting">Fittings only</option>
-            <option value="video">T4 videos only</option>
-            <option value="manual">Manuals & drawings only</option>
-          </select>
-        </div>
-        <div class="button-row">
-          <button type="submit" class="btn primary">Find</button>
-          <button type="button" class="btn ghost" id="clear-btn">Clear</button>
-        </div>
-        <p class="helper-text">Pulls from cable.json, t4_parts_finder.json, atlas_parts_finder.json, fittings.json, t4_videos.json, and rov_ref_ref_files.json.</p>
-      </form>
+      </div>
     </section>
 
     <section class="card" id="results-card">
@@ -405,7 +405,6 @@ const queryInput = document.querySelector<HTMLInputElement>('#query');
 const sourceSelect = document.querySelector<HTMLSelectElement>('#source-filter');
 const resultsContainer = document.querySelector<HTMLDivElement>('#results');
 const resultCount = document.querySelector<HTMLSpanElement>('#result-count');
-const clearButton = document.querySelector<HTMLButtonElement>('#clear-btn');
 
 let allResults: Result[] = [];
 
@@ -427,68 +426,52 @@ function render(list: Result[]) {
   const limit = usingDesktop ? 25 : 10;
   const top = list.slice(0, limit);
 
-  if (usingDesktop) {
-    const rows = top
-      .map(
-        (entry, index) => `
-            <tr class="${index === 0 ? 'highlight' : ''}">
-              <td>
-                ${entry.kind === 'mini-app' && entry.img ? `<img class="mini-thumb" src="${entry.img}" alt="" loading="lazy" onerror="this.style.display='none';">` : ''}
-                <div class="mini-text">
-                  <div><strong>${entry.title}</strong></div>
-                  <div class="muted">${entry.detail}</div>
-                </div>
-              </td>
-              <td>${entry.kind === 'mini-app' ? '' : entry.detail}</td>
-              <td>${entry.source}</td>
-              <td class="actions">
-            ${entry.url ? `<a class="btn small" href="${entry.url}" target="_blank" rel="noopener noreferrer">Open</a>` : ''}
-          </td>
-        </tr>
-      `
-      )
-      .join('');
-    resultsContainer.innerHTML = `
-      <div class="table-scroll">
-        <table class="result-table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Detail</th>
-              <th>Source</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>${rows}</tbody>
-        </table>
-      </div>
-    `;
-  } else {
-    resultsContainer.innerHTML = top
-      .map(
-        (entry, index) => `
-        <article class="fit-card ${index === 0 ? 'highlight' : ''}">
-          ${entry.kind === 'mini-app' && entry.img ? `<img class="mini-thumb" src="${entry.img}" alt="" loading="lazy" onerror="this.style.display='none';">` : ''}
-          <div class="fit-row">
+  resultsContainer.innerHTML = top
+    .map((entry, index) => {
+      const isMini = entry.kind === 'mini-app';
+      const miniTile = isMini
+        ? `
+          <a class="search-mini-tile" href="${entry.url ?? '#'}" ${entry.url ? 'target="_blank" rel="noopener noreferrer"' : ''} style="background-image: url('${entry.img ?? ''}');">
+            <div class="search-mini-overlay"></div>
+            <div class="search-mini-content">
+              <span class="pill subtle">Recommended</span>
+              <strong>${entry.title}</strong>
+              <span class="helper-text">${entry.detail}</span>
+            </div>
+          </a>
+        `
+        : `
+          <div class="search-field">
             <span class="label">Title</span>
             <strong>${entry.title}</strong>
           </div>
-          <div class="fit-row">
+          <div class="search-field">
             <span class="label">Detail</span>
             <span>${entry.detail}</span>
           </div>
-          <div class="fit-row">
+          <div class="search-field">
             <span class="label">Source</span>
-            <span>${entry.source}</span>
+            <span class="source-pill">${entry.source}</span>
           </div>
-          <div class="fit-actions" style="gap:0.5rem; flex-wrap: wrap; justify-content: flex-start;">
-            ${entry.url ? `<a class="btn small" href="${entry.url}" target="_blank" rel="noopener noreferrer">Open</a>` : ''}
+        `;
+      return isMini
+        ? `
+          <article class="fit-card search-card search-mini-card ${index === 0 ? 'highlight' : ''}">
+            ${miniTile}
+          </article>
+        `
+        : `
+          <div class="row-with-action">
+            <article class="fit-card search-card ${index === 0 ? 'highlight' : ''}">
+              ${miniTile}
+            </article>
+            <div class="row-action">
+              ${entry.url ? `<a class="btn small" href="${entry.url}" target="_blank" rel="noopener noreferrer">Open</a>` : ''}
+            </div>
           </div>
-        </article>
-      `
-      )
-      .join('');
-  }
+        `;
+    })
+    .join('');
 }
 
 function combinedScore(query: string, entry: Result) {
@@ -522,16 +505,16 @@ function search(event?: Event) {
     .sort((a, b) => b.score - a.score);
 
   if (filter === 'all') {
-    const miniScored = miniApps
-      .map((app) => ({
-        title: app.title,
-        detail: app.subtitle,
-        source: 'Mini app',
-        kind: 'mini-app' as const,
-        url: app.href,
-        img: app.img,
-        score: miniScore(query, app),
-      }))
+      const miniScored = miniApps
+        .map((app) => ({
+          title: app.title,
+          detail: app.subtitle,
+          source: app.title,
+          kind: 'mini-app' as const,
+          url: app.href,
+          img: app.img,
+          score: miniScore(query, app),
+        }))
       .sort((a, b) => b.score - a.score);
     const bestMini = miniScored[0];
     const insertIndex = Math.min(2, scored.length);
@@ -554,7 +537,7 @@ function search(event?: Event) {
     const viewAll: Result = {
       title: 'View all results in Manual Finder',
       detail: `Open Manual Finder for "${query}"`,
-      source: 'Manual Finder',
+      source: 'Manual & Drawing Finder',
       kind: 'manual-view',
       url: `${manualFinderUrl}?q=${encodeURIComponent(query)}`,
       score: -1,
@@ -596,11 +579,6 @@ async function loadAll() {
 }
 
 form?.addEventListener('submit', search);
-clearButton?.addEventListener('click', () => {
-  if (queryInput) queryInput.value = '';
-  if (sourceSelect) sourceSelect.value = 'all';
-  renderEmpty('Enter a term to search all data.');
-});
 
 queryInput?.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {

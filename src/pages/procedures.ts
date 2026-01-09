@@ -117,9 +117,10 @@ function renderBaseSkeleton() {
         </form>
       </section>
 
-      <section class="card" id="source-material">
-        <h2>Source material</h2>
-        <p class="helper-text">Links to original documents can be added to each procedure.</p>
+      <section class="card" id="featured-procedures">
+        <h2>Featured procedures</h2>
+        <p class="helper-text">Three random picks from the procedures library.</p>
+        <div id="featured-list"></div>
       </section>
 
       <section class="card" id="content-card">
@@ -132,33 +133,75 @@ function renderBaseSkeleton() {
 function renderHome(query: string) {
   const content = document.querySelector<HTMLDivElement>('#content-area');
   if (!content) return;
+  content.dataset.view = 'home';
 
   if (!query) {
-    const tiles = categories
-      .map(
-        (cat) => `
-      <button class="img-tile" data-cat="${cat.id}" type="button" style="min-height: 140px;">
-        <div class="tile-overlay"></div>
-        <img class="tile-bg" src="${cat.icon}" alt="" loading="lazy" onerror="this.style.display='none';" />
-        <div class="tile-content">
-          <h3>${cat.name}</h3>
-          <p>${cat.description ?? ''}</p>
+    const placeholderRow = `
+      <div class="row-with-action">
+        <div class="video-row">
+          <div class="video-text">
+            <p class="video-label">Placeholder procedure</p>
+            <p class="helper-text">Add more procedures for this category.</p>
+          </div>
         </div>
-      </button>`
-      )
+        <div class="row-action">
+          <span class="pill subtle">Coming soon</span>
+        </div>
+      </div>
+    `;
+    const groups = categories
+      .map((cat) => {
+        const items = indexItems
+          .filter((item) => item.categories.includes(cat.id))
+          .sort((a, b) => a.title.localeCompare(b.title));
+        const count = items.length;
+        const description = cat.description ? `<p class="helper-text">${cat.description}</p>` : '';
+        const list = items
+          .map(
+            (item) => `
+            <div class="row-with-action">
+              <div class="video-row">
+                <div class="video-text">
+                  <p class="video-label">${item.title}</p>
+                  <p class="helper-text">${item.summary}</p>
+                  <span class="pill subtle">Updated ${item.updated}</span>
+                </div>
+              </div>
+              <div class="row-action">
+                <button class="btn small" data-proc="${item.id}" data-cat="${cat.id}">Open</button>
+              </div>
+            </div>`
+          )
+          .concat(placeholderRow)
+          .join('');
+        return `
+          <details class="video-group">
+            <summary>${cat.name} <span class="pill subtle">${count}</span></summary>
+            <div class="video-list">
+              ${description}
+              ${list}
+            </div>
+          </details>
+        `;
+      })
       .join('');
     content.innerHTML = `
       <h2>Browse by category</h2>
-      <div class="tile-grid img-tiles">${tiles}</div>
+      <div class="accordion">${groups}</div>
     `;
 
-    content.querySelectorAll<HTMLButtonElement>('button[data-cat]').forEach((btn) => {
+    content.querySelectorAll<HTMLButtonElement>('button[data-proc]').forEach((btn) => {
       btn.addEventListener('click', () => {
+        const pid = btn.dataset.proc;
         const catId = btn.dataset.cat;
-        if (catId) {
-          lastCategoryFrom = catId;
-          sessionStorage.setItem('procedures:lastCategory', catId);
-          window.location.hash = `#category=${catId}`;
+        if (pid) {
+          lastCategoryFrom = catId ?? null;
+          if (catId) {
+            sessionStorage.setItem('procedures:lastCategory', catId);
+          } else {
+            sessionStorage.removeItem('procedures:lastCategory');
+          }
+          window.location.hash = `#procedure=${pid}`;
         }
       });
     });
@@ -231,6 +274,7 @@ function renderHome(query: string) {
 function renderCategory(categoryId: string) {
   const content = document.querySelector<HTMLDivElement>('#content-area');
   if (!content) return;
+  content.dataset.view = 'category';
   const cat = categories.find((c) => c.id === categoryId);
   const items = indexItems.filter((item) => item.categories.includes(categoryId));
 
@@ -248,16 +292,33 @@ function renderCategory(categoryId: string) {
     .sort((a, b) => a.title.localeCompare(b.title))
     .map(
       (item) => `
-      <article class="fit-card">
-        <div class="fit-row" style="align-items:center; gap:0.5rem;">
-          <strong>${item.title}</strong>
-          <span class="pill subtle">${item.updated}</span>
-        </div>
-        <p class="helper-text">${item.summary}</p>
-        <div class="fit-actions" style="justify-content:flex-start;gap:0.5rem;">
+      <div class="category-row">
+        <article class="fit-card">
+          <div class="fit-row" style="align-items:center; gap:0.5rem;">
+            <strong>${item.title}</strong>
+            <span class="pill subtle">${item.updated}</span>
+          </div>
+          <p class="helper-text">${item.summary}</p>
+        </article>
+        <div class="category-action">
           <button class="btn small" data-proc="${item.id}">Open</button>
         </div>
-      </article>`
+      </div>`
+    )
+    .concat(
+      `
+      <div class="category-row">
+        <article class="fit-card">
+          <div class="fit-row" style="align-items:center; gap:0.5rem;">
+            <strong>Placeholder procedure</strong>
+            <span class="pill subtle">Coming soon</span>
+          </div>
+          <p class="helper-text">Add more procedures for this category.</p>
+        </article>
+        <div class="category-action">
+          <span class="pill subtle">Soon</span>
+        </div>
+      </div>`
     )
     .join('');
 
@@ -366,6 +427,7 @@ function asArray(value?: string | string[]) {
 function renderProcedure(proc: Procedure) {
   const content = document.querySelector<HTMLDivElement>('#content-area');
   if (!content) return;
+  content.dataset.view = 'procedure';
 
   const fromCat = lastCategoryFrom;
   const sections = [
@@ -464,6 +526,45 @@ async function init() {
       renderHome(searchInput.value.trim());
     });
   });
+
+  const featuredList = document.querySelector<HTMLDivElement>('#featured-list');
+  if (featuredList && indexItems.length) {
+    const picks = [...indexItems]
+      .sort(() => Math.random() - 0.5)
+      .slice(0, Math.min(3, indexItems.length));
+    featuredList.innerHTML = picks
+      .map(
+        (item) => `
+        <div class="row-with-action">
+          <div class="video-row featured-card">
+            <div class="video-text">
+              <div class="featured-field">
+                <span class="label">Title</span>
+                <strong>${item.title}</strong>
+              </div>
+              <div class="featured-field">
+                <span class="label">Summary</span>
+                <span>${item.summary}</span>
+              </div>
+            </div>
+          </div>
+          <div class="row-action">
+            <button class="btn small" data-featured="${item.id}">Open</button>
+          </div>
+        </div>`
+      )
+      .join('');
+    featuredList.querySelectorAll<HTMLButtonElement>('button[data-featured]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const pid = btn.dataset.featured;
+        if (pid) {
+          lastCategoryFrom = null;
+          sessionStorage.removeItem('procedures:lastCategory');
+          window.location.hash = `#procedure=${pid}`;
+        }
+      });
+    });
+  }
 
   window.addEventListener('hashchange', handleRoute);
   await handleRoute();
