@@ -20,7 +20,7 @@ const heroSlides: HeroSlide[] = [
   {
     title: 'Welcome to the ROV Reference App',
     subtitle: 'Read More',
-    href: buildHref('welcome'),
+    href: buildHref('about'),
     background: `url(${buildAsset('assets/images/mobile_slides/1.png')}) center/cover`,
   },
   {

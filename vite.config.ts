@@ -30,7 +30,6 @@ export default defineConfig(() => {
           atlasPartsFinder: fromRoot("apps/atlas-parts-finder.html"),
           t4Videos: fromRoot("apps/t4-videos.html"),
           globalSearch: fromRoot("apps/search.html"),
-          welcome: fromRoot("apps/welcome.html"),
         },
       },
     },
