@@ -1253,6 +1253,39 @@ p.lead {
     width: 100%;
     min-width: 0;
   }
+
+  .row-with-action {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .row-action {
+    justify-content: flex-start;
+    border: 1px solid #e2e8f0;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 0.5rem;
+    background: #fff;
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.06);
+  }
+
+  .row-action .btn {
+    width: 100%;
+    min-width: 0;
+    height: auto;
+  }
+
+  #results .row-with-action > .fit-card,
+  #results .row-with-action > .video-row {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  #featured-procedures,
+  #featured-manuals,
+  #featured-cables {
+    display: none;
+  }
 }
 
 /* Drawer menu */
