@@ -860,7 +860,7 @@ p.lead {
 }
 
 .slide-overlay {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.3) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(6, 12, 22, 0.65) 70%, rgba(6, 12, 22, 0.8) 100%);
   position: absolute;
   inset: 0;
   padding: 1rem;
@@ -873,16 +873,22 @@ p.lead {
 
 .slide-overlay h2 {
   margin: 0;
-  font-size: 1.4rem;
+  font-size: 1.45rem;
+  text-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
 }
 
 .hero-cta {
-  align-self: center;
-  padding: 0.55rem 1.1rem;
+  align-self: flex-start;
+  padding: 0.6rem 1.35rem;
   border-radius: 999px;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: rgba(11, 25, 47, 0.88);
+  color: #f8fafc;
+  border: 1px solid rgba(248, 250, 252, 0.25);
   text-shadow: none;
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
 }
 
 .hero-dots {

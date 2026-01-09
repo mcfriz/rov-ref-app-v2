@@ -21,19 +21,19 @@ const heroSlides: HeroSlide[] = [
     title: 'Welcome to the ROV Reference App',
     subtitle: 'Read More',
     href: buildHref('welcome'),
-    background: `url(${buildAsset('assets/images/tiles/welcome.png')}) center/cover`,
+    background: `url(${buildAsset('assets/images/mobile_slides/1.png')}) center/cover`,
   },
   {
     title: 'Global Search',
     subtitle: 'Search',
     href: buildHref('search'),
-    background: `url(${buildAsset('assets/images/tiles/global_search_portrait.png')}) center/cover`,
+    background: `url(${buildAsset('assets/images/mobile_slides/2.png')}) center/cover`,
   },
   {
     title: 'Contact & Feedback',
     subtitle: 'Contact',
     href: buildHref('contact'),
-    background: `url(${buildAsset('assets/images/tiles/contact_form.png')}) center/cover`,
+    background: `url(${buildAsset('assets/images/mobile_slides/5.png')}) center/cover`,
   },
 ];
 
