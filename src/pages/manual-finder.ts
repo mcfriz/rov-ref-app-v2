@@ -172,7 +172,7 @@ function scoreRecord(query: string, record: Manual) {
   score += tokenScore(tokens, record.title || '');
 
   if (desc.includes(qNorm)) score += 40;
-  score += tokenScore(tokens, record.description || '');
+  score += tokenScore(tokens, record.summary || '');
 
   if (category.includes(qNorm) || system.includes(qNorm)) score += 25;
   if (manufacturer.includes(qNorm) || partNo.includes(qNorm)) score += 30;
