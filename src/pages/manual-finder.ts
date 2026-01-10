@@ -1,25 +1,41 @@
 // Manual & Drawing Finder
-// Loads manual/drawing references from rov_ref_ref_files.json and ranks closest matches.
+// Loads manual/drawing references from manual.json and ranks closest matches.
 import '../style.css';
 
 type RawRecord = {
-  'Document name'?: string;
-  'Document number'?: string;
-  Description?: string;
-  Category?: string;
-  Equipment?: string;
-  'Date approved'?: string;
-  Link?: string;
+  uid?: string;
+  id?: string;
+  title?: string;
+  manufacturer?: string;
+  part_no?: string;
+  category?: string;
+  system?: string;
+  file_name?: string;
+  summary?: string;
+  notes?: string;
+  parent_uid?: string;
+  parent_uids?: string[];
+  pdf_url?: string;
+  gdrive_view_url?: string;
+  featured?: boolean;
 };
 
 type Manual = {
+  uid: string;
+  id?: string;
   title: string;
-  docNo?: string;
-  description?: string;
+  manufacturer?: string;
+  partNo?: string;
   category?: string;
-  equipment?: string;
-  date?: string;
-  link?: string;
+  system?: string;
+  fileName?: string;
+  summary?: string;
+  notes?: string;
+  parentUid?: string;
+  parentUids?: string[];
+  pdfUrl?: string;
+  gdriveUrl?: string;
+  featured?: boolean;
 };
 
 const app = document.querySelector<HTMLDivElement>('#app');
@@ -27,7 +43,8 @@ if (!app) throw new Error('Root element #app not found');
 
 const base = import.meta.env.BASE_URL ?? '/';
 const baseWithSlash = base.endsWith('/') ? base : `${base}/`;
-const dataUrl = `${baseWithSlash}data/rov_ref_ref_files.json`;
+const dataUrl = `${baseWithSlash}data/manual.json`;
+const viewerUrl = `${baseWithSlash}apps/manual-viewer.html`;
 
 const queryParams = new URLSearchParams(window.location.search);
 const initialQuery = queryParams.get('q') ?? '';
@@ -54,7 +71,7 @@ app.innerHTML = `
               autocomplete="off"
             />
           </div>
-          <p class="helper-text">External links open in a new tab.</p>
+          <p class="helper-text">Open a result to view the PDF and related entries.</p>
         </form>
         <div class="finder-action">
           <button type="submit" class="btn primary" form="finder-form">Find</button>
@@ -133,16 +150,19 @@ function scoreRecord(query: string, record: Manual) {
   const qLoose = normalizeLoose(q);
   const tokens = qNorm.split(/\s+/).filter(Boolean);
 
-  const docNo = normalize(record.docNo || '');
-  const docLoose = normalizeLoose(record.docNo || '');
+  const docNo = normalize(record.id || '');
+  const docLoose = normalizeLoose(record.id || '');
   const title = normalize(record.title || '');
-  const desc = normalize(record.description || '');
+  const desc = normalize(record.summary || '');
   const category = normalize(record.category || '');
-  const equipment = normalize(record.equipment || '');
+  const manufacturer = normalize(record.manufacturer || '');
+  const system = normalize(record.system || '');
+  const partNo = normalize(record.partNo || '');
+  const fileName = normalize(record.fileName || '');
 
   let score = 0;
 
-  if (record.docNo) {
+  if (record.id) {
     if (docLoose === qLoose) score += 140;
     else if (docLoose.includes(qLoose)) score += 90;
     else if (docNo.includes(qNorm)) score += 80;
@@ -154,9 +174,11 @@ function scoreRecord(query: string, record: Manual) {
   if (desc.includes(qNorm)) score += 40;
   score += tokenScore(tokens, record.description || '');
 
-  if (category.includes(qNorm) || equipment.includes(qNorm)) score += 25;
+  if (category.includes(qNorm) || system.includes(qNorm)) score += 25;
+  if (manufacturer.includes(qNorm) || partNo.includes(qNorm)) score += 30;
+  if (fileName.includes(qNorm)) score += 20;
 
-  const combined = `${record.title} ${record.description ?? ''} ${record.category ?? ''} ${record.equipment ?? ''}`;
+  const combined = `${record.title} ${record.summary ?? ''} ${record.category ?? ''} ${record.system ?? ''} ${record.manufacturer ?? ''} ${record.partNo ?? ''} ${record.fileName ?? ''}`;
   const combinedLoose = normalizeLoose(combined);
   if (combinedLoose && qLoose) {
     if (combinedLoose.includes(qLoose)) score += 60;
@@ -179,6 +201,16 @@ function asDisplay(value?: string) {
   return value && value.trim() ? value : 'unknown';
 }
 
+function helperText(item: Manual) {
+  const candidates = [item.summary, item.notes, item.fileName];
+  const value = candidates.find((entry) => entry && entry.trim());
+  return asDisplay(value);
+}
+
+function buildViewerUrl(item: Manual) {
+  return `${viewerUrl}?uid=${encodeURIComponent(item.uid)}`;
+}
+
 function renderResults(list: Manual[]) {
   if (!resultsContainer || !resultCount) return;
   if (!list.length) {
@@ -191,77 +223,50 @@ function renderResults(list: Manual[]) {
   const top = list.slice(0, limit);
   resultCount.textContent = `${top.length} shown (best match first)`;
 
-  if (usingDesktop) {
-    resultsContainer.innerHTML = top
-      .map(
-        (item, index) => `
+  const rows = top
+    .map(
+      (item, index) => `
         <div class="row-with-action">
           <article class="fit-card manual-card ${index === 0 ? 'highlight' : ''}">
+            <div class="manual-field">
+              <span class="label">ID</span>
+              <span>${asDisplay(item.id)}</span>
+            </div>
             <div class="manual-field">
               <span class="label">Title</span>
               <strong>${asDisplay(item.title)}</strong>
             </div>
             <div class="manual-field">
-              <span class="label">Doc #</span>
-              <span>${asDisplay(item.docNo)}</span>
+              <span class="label">Manufacturer</span>
+              <span>${asDisplay(item.manufacturer)}</span>
+            </div>
+            <div class="manual-field">
+              <span class="label">Part No</span>
+              <span>${asDisplay(item.partNo)}</span>
             </div>
             <div class="manual-field">
               <span class="label">Category</span>
               <span>${asDisplay(item.category)}</span>
             </div>
             <div class="manual-field">
-              <span class="label">Date</span>
-              <span>${asDisplay(item.date)}</span>
+              <span class="label">System</span>
+              <span>${asDisplay(item.system)}</span>
             </div>
-            <p class="helper-text">${asDisplay(item.description)}</p>
+            <div class="manual-field">
+              <span class="label">File Name</span>
+              <span>${asDisplay(item.fileName)}</span>
+            </div>
+            <p class="helper-text">${helperText(item)}</p>
           </article>
           <div class="row-action">
-            ${
-              item.link
-                ? `<a class="btn small" href="${item.link}" target="_blank" rel="noopener noreferrer">Open</a>`
-                : ''
-            }
+            <a class="btn small" href="${buildViewerUrl(item)}">Open</a>
           </div>
         </div>
       `
-      )
-      .join('');
-  } else {
-    resultsContainer.innerHTML = top
-      .map(
-        (item, index) => `
-        <div class="row-with-action">
-          <article class="fit-card manual-card ${index === 0 ? 'highlight' : ''}">
-            <div class="manual-field">
-              <span class="label">Title</span>
-              <strong>${asDisplay(item.title)}</strong>
-            </div>
-            <div class="manual-field">
-              <span class="label">Doc #</span>
-              <span>${asDisplay(item.docNo)}</span>
-            </div>
-            <div class="manual-field">
-              <span class="label">Category</span>
-              <span>${asDisplay(item.category)}</span>
-            </div>
-            <div class="manual-field">
-              <span class="label">Date</span>
-              <span>${asDisplay(item.date)}</span>
-            </div>
-            <p class="helper-text">${asDisplay(item.description)}</p>
-          </article>
-          <div class="row-action">
-            ${
-              item.link
-                ? `<a class="btn small" href="${item.link}" target="_blank" rel="noopener noreferrer">Open</a>`
-                : ''
-            }
-          </div>
-        </div>
-      `
-      )
-      .join('');
-  }
+    )
+    .join('');
+
+  resultsContainer.innerHTML = rows;
 
 }
 
@@ -273,19 +278,28 @@ async function loadData() {
     const json = await res.json();
     const list: RawRecord[] = Array.isArray(json) ? json : [];
     manuals = list.map((item) => ({
-      title: item['Document name'] || 'Untitled',
-      docNo: item['Document number'],
-      description: item.Description,
-      category: item.Category,
-      equipment: item.Equipment,
-      date: item['Date approved'],
-      link: item.Link,
+      uid: item.uid || item.id || item.title || 'unknown',
+      id: item.id,
+      title: item.title || 'Untitled',
+      manufacturer: item.manufacturer,
+      partNo: item.part_no,
+      category: item.category,
+      system: item.system,
+      fileName: item.file_name,
+      summary: item.summary,
+      notes: item.notes,
+      parentUid: item.parent_uid,
+      parentUids: item.parent_uids ?? [],
+      pdfUrl: item.pdf_url,
+      gdriveUrl: item.gdrive_view_url,
+      featured: item.featured === true,
     }));
 
     if (featuredList && manuals.length) {
-      const picks = [...manuals]
+      const featuredOnly = manuals.filter((item) => item.featured);
+      const picks = [...featuredOnly]
         .sort(() => Math.random() - 0.5)
-        .slice(0, Math.min(3, manuals.length));
+        .slice(0, Math.min(3, featuredOnly.length));
       featuredList.innerHTML = picks
         .map(
           (item) => `
@@ -297,17 +311,13 @@ async function loadData() {
                   <strong>${asDisplay(item.title)}</strong>
                 </div>
                 <div class="featured-field">
-                  <span class="label">Description</span>
-                  <span>${asDisplay(item.description)}</span>
+                  <span class="label">File Name</span>
+                  <span>${asDisplay(item.fileName)}</span>
                 </div>
               </div>
             </div>
             <div class="row-action">
-              ${
-                item.link
-                  ? `<a class="btn small" href="${item.link}" target="_blank" rel="noopener noreferrer">Open</a>`
-                  : ''
-              }
+              <a class="btn small" href="${buildViewerUrl(item)}">Open</a>
             </div>
           </div>`
         )

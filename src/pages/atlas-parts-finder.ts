@@ -1,6 +1,7 @@
 // Atlas Parts Finder page logic.
 // Uses a single search box to rank closest matches by part number, description, and expanded details.
 import '../style.css';
+import { initSpecsModal } from '../ui/specs-modal';
 
 type Part = {
   partNumber: string;
@@ -61,6 +62,18 @@ app.innerHTML = `
       <p class="lead">Search part numbers and keywords, see the closest matches fast.</p>
     </header>
 
+    <section class="card">
+      <h2>Atlas Quick Nav</h2>
+      <div class="quick-nav">
+        <div class="nav-buttons">
+          <a class="nav-btn" href="atlas-cheat-sheet.html">Atlas Cheat Sheet</a>
+          <a class="nav-btn" href="atlas-hose-list.html">Atlas Valve Package Hose List</a>
+          <a class="nav-btn active" href="atlas-parts-finder.html">Atlas Parts Finder</a>
+          <button class="nav-btn" type="button" id="atlas-specs-open">Atlas 7F Specs</button>
+        </div>
+      </div>
+    </section>
+
     <section class="card finder-card">
       <div class="finder-row">
         <form id="finder-form" class="finder-form">
@@ -111,6 +124,18 @@ app.innerHTML = `
       </details>
     </section>
   </main>
+
+  <div class="specs-modal" id="atlas-specs-modal" role="dialog" aria-modal="true" aria-labelledby="atlas-specs-title" hidden>
+    <div class="specs-card">
+      <header>
+        <h3 id="atlas-specs-title">Atlas Specs</h3>
+        <button class="btn small" type="button" id="atlas-specs-close">Close</button>
+      </header>
+      <table class="specs-table">
+        <tbody id="atlas-specs-body"></tbody>
+      </table>
+    </div>
+  </div>
 `;
 
 const form = document.querySelector<HTMLFormElement>('#finder-form');
@@ -179,6 +204,15 @@ function buildFileUrl(part: Part) {
   if (part.fileName) return `${baseWithSlash}assets/pdfs/${part.fileName}`;
   return '';
 }
+
+initSpecsModal({
+  openButtonId: 'atlas-specs-open',
+  modalId: 'atlas-specs-modal',
+  titleId: 'atlas-specs-title',
+  closeButtonId: 'atlas-specs-close',
+  tableBodyId: 'atlas-specs-body',
+  dataUrl: `${baseWithSlash}data/atlas_specs.json`,
+});
 
 function renderResults(results: RankedPart[]) {
   if (!resultsContainer || !resultCount) return;

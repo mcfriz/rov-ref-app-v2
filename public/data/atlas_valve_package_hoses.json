@@ -1,0 +1,29 @@
+{
+  "title": "Atlas → Valve Package Hose List",
+  "subtitle": "Sleeve-to-sleeve lengths, fittings, and hose markings.",
+  "units": {
+    "length": "cm"
+  },
+  "sections": [
+    {
+      "name": "Synflex 500 bar hoses",
+      "items": [
+        { "marking": "C",  "qty": 1, "length_cm": 34.0, "description": "Jic 4 straight - Jic 4 90°" },
+        { "marking": "A0", "qty": 1, "length_cm": 38.0, "description": "Jic 4 straight - Jic 4 Straight" },
+        { "marking": "B0", "qty": 1, "length_cm": 38.5, "description": "Jic 4 straight - Jic 4 Straight" },
+        { "marking": "A1", "qty": 1, "length_cm": 32.5, "description": "Jic 4 straight - Jic 4 Straight" },
+        { "marking": "B1", "qty": 1, "length_cm": 34.0, "description": "Jic 4 straight - Jic 4 Straight" },
+        { "marking": "A2", "qty": 1, "length_cm": 30.5, "description": "Jic 4 straight - Jic 4 Straight" },
+        { "marking": "B2", "qty": 1, "length_cm": 31.5, "description": "Jic 4 straight - Jic 4 Straight" },
+        { "marking": "A3", "qty": 1, "length_cm": 25.0, "description": "Jic 4 straight - Jic 4 Straight" },
+        { "marking": "B3", "qty": 1, "length_cm": 27.0, "description": "Jic 4 straight - Jic 4 Straight" },
+        { "marking": "A4", "qty": 1, "length_cm": 22.5, "description": "Jic 4 straight - Jic 4 Straight" },
+        { "marking": "B4", "qty": 1, "length_cm": 25.5, "description": "Jic 4 straight - Jic 4 Straight" },
+        { "marking": "A5", "qty": 1, "length_cm": 21.0, "description": "Jic 4 straight - Jic 4 Straight" },
+        { "marking": "B5", "qty": 1, "length_cm": 24.0, "description": "Jic 4 straight - Jic 4 Straight" },
+        { "marking": "A6", "qty": 1, "length_cm": 21.5, "description": "Jic 4 straight - Jic 4 Straight" },
+        { "marking": "B6", "qty": 1, "length_cm": 23.5, "description": "Jic 4 straight - Jic 4 Straight" }
+      ]
+    }
+  ]
+}

@@ -96,7 +96,13 @@ const tiles: ImgTile[] = [
     title: 'Atlas Parts Finder',
     subtitle: 'Search Atlas manipulator parts and descriptions.',
     href: buildHref('atlas-parts-finder'),
-    img: buildAsset('assets/images/tiles/T4-parts.png'),
+    img: buildAsset('assets/images/tiles/atlas-parts.png'),
+  },
+  {
+    title: 'Atlas Cheat Sheet',
+    subtitle: 'Atlas PDF plus expandable valve package hose list.',
+    href: buildHref('atlas-cheat-sheet'),
+    img: buildAsset('assets/images/tiles/atlas-cheatsheet.png'),
   },
   {
     title: 'T4 Videos',

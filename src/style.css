@@ -498,9 +498,115 @@ p.lead {
   border-bottom: 1px solid #e2e8f0;
 }
 
+.row-toggle {
+  background: none;
+  border: 0;
+  padding: 0.4rem 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 44px;
+}
+
+.hose-detail-row td {
+  padding: 0;
+  background: #f8fafc;
+}
+
+.hose-detail {
+  padding: 0.7rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.hose-detail p {
+  margin: 0;
+}
+
+.hose-detail .detail-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hose-card .hose-detail {
+  border-top: 1px solid #e2e8f0;
+  margin-top: 0.4rem;
+}
+
 .result-table tr.highlight {
   background: #fff7ed;
   font-weight: 700;
+}
+
+.specs-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(15, 23, 42, 0.6);
+  z-index: 40;
+}
+
+.specs-modal[hidden] {
+  display: none;
+}
+
+.specs-card {
+  width: min(640px, 92vw);
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.35);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.specs-card header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.specs-card h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-family: inherit;
+  font-weight: 700;
+}
+
+.specs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.specs-table th,
+.specs-table td {
+  text-align: left;
+  padding: 0.5rem 0.4rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.specs-table th {
+  width: 55%;
+  font-weight: 600;
+}
+
+.specs-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.8rem;
 }
 
 .fit-card {
@@ -1203,6 +1309,8 @@ p.lead {
   background: #f8fafc;
   color: #0f172a;
   font-weight: 600;
+  font-family: inherit;
+  font-size: 1rem;
   text-decoration: none;
   display: inline-flex;
   align-items: center;

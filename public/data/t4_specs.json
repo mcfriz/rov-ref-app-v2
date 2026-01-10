@@ -1,0 +1,13 @@
+{
+  "title": "T4 specs",
+  "rows": [
+    { "label": "Grip Force", "value": "4092 Nm (207 bar)" },
+    { "label": "Grip Capacity", "value": "16 cm (Dia 22 cm)" },
+    { "label": "Length", "value": "192 cm" },
+    { "label": "Lift Capacity (Extended)", "value": "122 kg" },
+    { "label": "Lift Capacity (Max)", "value": "454 kg" },
+    { "label": "Weight in Air", "value": "100 kg" },
+    { "label": "Wrist Force", "value": "170 Nm (207 bar)" },
+    { "label": "Practical Reach Below Skid", "value": "80 cm" }
+  ]
+}

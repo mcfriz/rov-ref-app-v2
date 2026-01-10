@@ -1,4 +1,5 @@
 import '../style.css';
+import { initSpecsModal } from '../ui/specs-modal';
 
 const app = document.querySelector<HTMLDivElement>('#app');
 if (!app) throw new Error('Root element #app not found');
@@ -23,6 +24,8 @@ app.innerHTML = `
           <a class="nav-btn" href="t4-torque.html">T4 Torque</a>
           <a class="nav-btn active" href="t4-slave-arm-drawing.html">T4 Slave Arm Drawing</a>
           <a class="nav-btn" href="t4-videos.html">T4 Videos</a>
+          <a class="nav-btn" href="t4-parts-finder.html">T4 Parts Finder</a>
+          <button class="nav-btn" type="button" id="t4-specs-open">T4 Specs</button>
         </div>
       </div>
     </section>
@@ -46,4 +49,24 @@ app.innerHTML = `
       ></iframe>
     </section>
   </main>
+
+  <div class="specs-modal" id="t4-specs-modal" role="dialog" aria-modal="true" aria-labelledby="t4-specs-title" hidden>
+    <div class="specs-card">
+      <header>
+        <h3 id="t4-specs-title">T4 Specs</h3>
+        <button class="btn small" type="button" id="t4-specs-close">Close</button>
+      </header>
+      <table class="specs-table">
+        <tbody id="t4-specs-body"></tbody>
+      </table>
+    </div>
+  </div>
 `;
+initSpecsModal({
+  openButtonId: 't4-specs-open',
+  modalId: 't4-specs-modal',
+  titleId: 't4-specs-title',
+  closeButtonId: 't4-specs-close',
+  tableBodyId: 't4-specs-body',
+  dataUrl: `${baseWithSlash}data/t4_specs.json`,
+});

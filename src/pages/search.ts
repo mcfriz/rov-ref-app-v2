@@ -25,23 +25,32 @@ type VideoItem = { label: string; url: string };
 type VideoGroup = { name: string; videos: VideoItem[] };
 
 type ManualRaw = {
-  'Document name'?: string;
-  'Document number'?: string;
-  Description?: string;
-  Category?: string;
-  Equipment?: string;
-  'Date approved'?: string;
-  Link?: string;
+  uid?: string;
+  id?: string;
+  title?: string;
+  manufacturer?: string;
+  part_no?: string;
+  category?: string;
+  system?: string;
+  file_name?: string;
+  summary?: string;
+  notes?: string;
+  parent_uid?: string;
+  parent_uids?: string[];
+  pdf_url?: string;
+  gdrive_view_url?: string;
 };
 
 type Manual = {
+  uid: string;
+  id?: string;
   title: string;
-  docNo?: string;
-  description?: string;
+  manufacturer?: string;
+  partNo?: string;
   category?: string;
-  equipment?: string;
-  date?: string;
-  link?: string;
+  system?: string;
+  fileName?: string;
+  summary?: string;
 };
 
 const app = document.querySelector<HTMLDivElement>('#app');
@@ -59,10 +68,11 @@ const endpoints = {
   atlasParts: `${baseWithSlash}data/atlas_parts_finder.json`,
   fittings: `${baseWithSlash}data/fittings.json`,
   videos: `${baseWithSlash}data/t4_videos.json`,
-  manuals: `${baseWithSlash}data/rov_ref_ref_files.json`,
+  manuals: `${baseWithSlash}data/manual.json`,
 };
 
 const manualFinderUrl = `${baseWithSlash}apps/manual-finder.html`;
+const manualViewerUrl = `${baseWithSlash}apps/manual-viewer.html`;
 const miniApps = [
   {
     title: 'Fitting Finder',
@@ -100,9 +110,17 @@ const miniApps = [
     title: 'Atlas Parts Finder',
     subtitle: 'Atlas manipulator parts',
     href: buildHref('atlas-parts-finder'),
-    img: buildAsset('assets/images/tiles/T4-parts.png'),
+    img: buildAsset('assets/images/tiles/atlas-parts.png'),
     keywords: ['atlas', 'manipulator', 'part', 'spare', 'bom', 'assy', '008-0216', 'gamma'],
     slug: 'atlas-parts-finder',
+  },
+  {
+    title: 'Atlas Cheat Sheet',
+    subtitle: 'Atlas PDF + valve package hose list',
+    href: buildHref('atlas-cheat-sheet'),
+    img: buildAsset('assets/images/tiles/atlas-cheatsheet.png'),
+    keywords: ['atlas', 'cheat sheet', 'hose', 'valve package', 'pdf', 'quick ref'],
+    slug: 'atlas-cheat-sheet',
   },
   {
     title: 'ROV Cheatsheets',
@@ -321,23 +339,28 @@ function mapVideos(data: any): Result[] {
 }
 
 function mapManuals(data: any): Result[] {
-  const list: Manual[] = (Array.isArray(data) ? data : []).map((raw: ManualRaw) => ({
-    title: raw['Document name'] || 'Untitled',
-    docNo: raw['Document number'],
-    description: raw.Description,
-    category: raw.Category,
-    equipment: raw.Equipment,
-    date: raw['Date approved'],
-    link: raw.Link,
-  }));
+  const list: Manual[] = (Array.isArray(data) ? data : []).map((raw: ManualRaw) => {
+    const uid = raw.uid || raw.id || raw.title || 'unknown';
+    return {
+      uid,
+      id: raw.id,
+      title: raw.title || 'Untitled',
+      manufacturer: raw.manufacturer,
+      partNo: raw.part_no,
+      category: raw.category,
+      system: raw.system,
+      fileName: raw.file_name,
+      summary: raw.summary,
+    };
+  });
 
   return list.map((item) => ({
     title: item.title,
-    detail: [item.docNo, item.category, item.description, item.equipment, item.date].filter(Boolean).join(' | '),
+    detail: [item.id, item.manufacturer, item.partNo, item.category, item.system, item.fileName, item.summary].filter(Boolean).join(' | '),
     source: 'Manual & Drawing Finder',
     kind: 'manual',
-    url: item.link,
-    docNo: item.docNo,
+    url: `${manualViewerUrl}?uid=${encodeURIComponent(item.uid)}`,
+    docNo: item.id,
     score: 0,
   }));
 }
@@ -531,6 +554,15 @@ function search(event?: Event) {
     };
 
     scored.splice(insertIndex, 0, miniIsWeak ? contactFallback : bestMini);
+  }
+
+  if (filter === 'all' || filter === 'manual') {
+    const bestManualIndex = scored.findIndex((entry) => entry.kind === 'manual');
+    if (bestManualIndex >= 0) {
+      const bestManual = scored.splice(bestManualIndex, 1)[0];
+      const targetIndex = Math.min(4, scored.length);
+      scored.splice(targetIndex, 0, bestManual);
+    }
   }
 
   if (filter === 'all' || filter === 'manual') {

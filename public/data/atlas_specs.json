@@ -1,0 +1,12 @@
+{
+  "title": "Atlas specs",
+  "rows": [
+    { "label": "Grip Force", "value": "4448 N (207 bar)" },
+    { "label": "Grip Capacity", "value": "20.0 cm" },
+    { "label": "Length Retracted", "value": "N/A" },
+    { "label": "Length Extended", "value": "1.67 m" },
+    { "label": "Lift Capacity Retracted", "value": "500 kg (207 bar)" },
+    { "label": "Lift Capacity Extended", "value": "250 kg (207 bar)" },
+    { "label": "Weight in Air", "value": "73 kg" }
+  ]
+}
